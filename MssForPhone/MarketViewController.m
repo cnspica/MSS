@@ -13,6 +13,7 @@
 #import "MovieorPictureViewController.h"
 #import "API.h"
 #import "ASIHTTPRequest.h"
+#import "UIImageView+WebCache.h"
 
 #define mywidth self.view.bounds.size.width
 #define myheight self.view.bounds.size.height
@@ -37,13 +38,19 @@ BOOL zhankai;
     NSDictionary *marketlistdic;
     NSString *apistring;
     NSString *api_language;
-
+    NSDictionary *marketinfodic;
+    NSString *marketid;
+    NSInteger picturenumber;
+    NSInteger applicationumber;
+    NSInteger productsnumber;
+    
+    BOOL marketlist_finished;
+    BOOL marketinfo_finished;
 }
 @end
 
 @implementation MarketViewController
 @synthesize myscroller;
-@synthesize normal,normal2;
 @synthesize markettable;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -85,12 +92,19 @@ BOOL zhankai;
     [requestmarketlist setDidFailSelector:@selector(requestFailed:)];
     [requestmarketlist startAsynchronous];
 
-    marketlist=[[NSMutableArray alloc]init];
+    marketid=@"1";
+    apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%@",HTTP_marketinfo,api_language,marketid];
+    requestmarketlist=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
+    requestmarketlist.tag=2;
+    [requestmarketlist setDelegate:self];
+    [requestmarketlist setTimeOutSeconds:60];
+    [requestmarketlist setDidFinishSelector:@selector(requestFinished:)];
+    [requestmarketlist setDidFailSelector:@selector(requestFailed:)];
+    [requestmarketlist startAsynchronous];
+    
    
-    
-    
-    myscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, mywidth,myheight-64)];
-    myscroller.contentSize=CGSizeMake(mywidth, 1000);
+    marketlist=[[NSMutableArray alloc]init];
+    myscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, mywidth,myheight-64-49)];
     myscroller.backgroundColor=[UIColor groupTableViewBackgroundColor];
     myscroller.userInteractionEnabled=YES;
     myscroller.delegate=self;
@@ -105,28 +119,6 @@ BOOL zhankai;
     [selectview addSubview:pickerScroll];
     pickerScroll.showsHorizontalScrollIndicator=NO;
     
-    picturescroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-64-49)];
-    picturescroll.backgroundColor=[UIColor clearColor];
-    picturescroll.contentSize=CGSizeMake(mywidth*2,myheight-64-49);
-    [myscroller addSubview:picturescroll];
-    
-    normal=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-64-49)];
-    normal.image=[UIImage imageNamed:@"page_01.jpg"];
-    normal.userInteractionEnabled=YES;
-    [picturescroll addSubview:normal];
-    
-    
-    normal2=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth, 0, mywidth, myheight-64-49)];
-    normal2.image=[UIImage imageNamed:@"page_02.jpg"];
-    normal2.userInteractionEnabled=YES;
-    [picturescroll addSubview:normal2];
-    
-    markettable=[[UITableView alloc]initWithFrame:CGRectMake(0, myheight-49-64, mywidth, 400) style:UITableViewStyleGrouped];
-    markettable.backgroundColor=[UIColor clearColor];
-    markettable.delegate=self;
-    markettable.dataSource=self;
-    markettable.scrollEnabled=NO;
-    [myscroller addSubview:markettable];
     
     navcenter=[[UIView alloc]initWithFrame:CGRectMake(0,0,160, 44)];
     navcenter.backgroundColor=[UIColor clearColor];
@@ -166,13 +158,55 @@ BOOL zhankai;
         NSLog(@"%@",marketlistdic);
        
         for (int i=0; i<[[marketlistdic objectForKey:@"data"] count]; i++) {
-            [marketlist addObject:[[[marketlistdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"title"]];
+            [marketlist addObject:[[[marketlistdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"market"]];
         }
         pickerScroll.contentSize=CGSizeMake(80*[marketlist count],50);
         [self initpickerscroll];
-        [myactivityindicator stopAnimating];
+        marketlist_finished=YES;
     }
     
+    if (request.tag==2) {
+        response=[request responseString];
+        
+        [self jsonStringToObject];
+        marketinfodic=object;
+        NSLog(@"%@",marketinfodic);
+        picturenumber=[[[marketinfodic objectForKey:@"data"] objectForKey:@"top_images"]
+                       count];
+        NSLog(@"top picture数量＝%li张",(long)picturenumber);
+        
+        picturescroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-64-49)];
+        picturescroll.pagingEnabled=YES;
+        picturescroll.backgroundColor=[UIColor clearColor];
+        picturescroll.contentSize=CGSizeMake(mywidth*picturenumber,myheight-64-49);
+        [myscroller addSubview:picturescroll];
+
+        for (int i=0; i<picturenumber; i++) {
+            UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth*i, 0, mywidth, myheight-64-49)];
+            [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[[marketinfodic objectForKey:@"data"] objectForKey:@"top_images"] objectAtIndex:i] objectForKey:@"file"]]]];
+            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[[marketinfodic objectForKey:@"data"] objectForKey:@"top_images"] objectAtIndex:i] objectForKey:@"file"]]);
+            [picturescroll addSubview:imageview];
+        }
+        
+        applicationumber=[[[marketinfodic objectForKey:@"data"] objectForKey:@"application"]
+                          count];
+        productsnumber=[[[marketinfodic objectForKey:@"data"] objectForKey:@"products"]
+                        count];
+        
+        myscroller.contentSize=CGSizeMake(mywidth, myheight-64-49+64*2+44*(applicationumber+productsnumber));
+
+        markettable=[[UITableView alloc]initWithFrame:CGRectMake(0, myheight-49-64, mywidth, 64*2+44*(applicationumber+productsnumber)) style:UITableViewStyleGrouped];
+        markettable.backgroundColor=[UIColor clearColor];
+        markettable.delegate=self;
+        markettable.dataSource=self;
+        markettable.scrollEnabled=NO;
+        [myscroller addSubview:markettable];
+        marketinfo_finished=YES;
+    }
+
+    if (marketlist_finished&&marketinfo_finished) {
+        [myactivityindicator stopAnimating];
+    }
     
 }
 
@@ -228,7 +262,7 @@ BOOL zhankai;
 {
     
     [UIView animateWithDuration:0.2 animations:^{
-        selectview.frame=CGRectMake(0, 0, 320, 64);
+        selectview.frame=CGRectMake(0, 0, mywidth, 64);
     }];
     zhankai=NO;
     jiantou.image=[UIImage imageNamed:@"down.png"];
@@ -238,57 +272,12 @@ BOOL zhankai;
 -(void)click:(UIButton *)sender
 {
     UIButton *bt=sender;
-    switch (sender.tag) {
-        case 1:
-            bt.showsTouchWhenHighlighted=YES;
-            break;
-            
-        case 2:
-            bt.showsTouchWhenHighlighted=YES;
-
-            break;
-            
-        case 3:
-            bt.showsTouchWhenHighlighted=YES;
-
-            break;
-            
-        case 4:
-            bt.showsTouchWhenHighlighted=YES;
-
-            break;
-            
-        case 5:
-            bt.showsTouchWhenHighlighted=YES;
-
-            break;
-            
-        case 6:
-            bt.showsTouchWhenHighlighted=YES;
-
-            break;
-            
-        case 7:
-            bt.showsTouchWhenHighlighted=YES;
-
-            break;
-            
-        case 8:
-            bt.showsTouchWhenHighlighted=YES;
-            
-        case 9:
-            bt.showsTouchWhenHighlighted=YES;
-
-            break;
-            
-        default:
-            break;
-    }
+    bt.showsTouchWhenHighlighted=YES;
     
     NSLog(@"%@",[marketlist objectAtIndex:sender.tag-1]);
     myselectlabel.text=[marketlist objectAtIndex:sender.tag-1];
     [UIView animateWithDuration:0.2 animations:^{
-        selectview.frame=CGRectMake(0, 0, 320, 64);
+        selectview.frame=CGRectMake(0, 0, mywidth, 64);
     }];
     zhankai=NO;
     jiantou.image=[UIImage imageNamed:@"down.png"];
@@ -299,7 +288,7 @@ BOOL zhankai;
 {
     if (zhankai==NO) {
         [UIView animateWithDuration:0.2 animations:^{
-            selectview.frame=CGRectMake(0, 64, 320, 64);
+            selectview.frame=CGRectMake(0, 64, mywidth, 64);
         }];
         zhankai=YES;
         jiantou.image=[UIImage imageNamed:@"up"];
@@ -308,7 +297,7 @@ BOOL zhankai;
     }else if(zhankai==YES)
     {
         [UIView animateWithDuration:0.2 animations:^{
-            selectview.frame=CGRectMake(0, 0, 320, 64);
+            selectview.frame=CGRectMake(0, 0, mywidth, 64);
         }];
         zhankai=NO;
         jiantou.image=[UIImage imageNamed:@"down.png"];
@@ -320,7 +309,13 @@ BOOL zhankai;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
-    return 3;
+    if (section==0) {
+        return productsnumber;
+    }else if(section==1)
+    {
+        return applicationumber;
+    }
+    return 0;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
 {
@@ -357,30 +352,17 @@ BOOL zhankai;
     [tableView registerNib:nib forCellReuseIdentifier:cellIdentifier];
     Cell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
-    if (indexPath.section==0&&indexPath.row==0) {
-        cell.mylabel.text=@"TINA AM";
-       
+    for (int i=0; i<productsnumber; i++) {
+        if (indexPath.section==0&&indexPath.row==i) {
+            cell.mylabel.text=[[[[marketinfodic objectForKey:@"data"] objectForKey:@"products"]objectAtIndex:i] objectForKey:@"product"];
+        }
+
     }
-    if (indexPath.section==0&&indexPath.row==1) {
-        cell.mylabel.text=@"TINA EP";
-        
-    }
-    if (indexPath.section==0&&indexPath.row==2) {
-        cell.mylabel.text=@"TINA GP";
-        
-    }
-    if (indexPath.section==1&&indexPath.row==0) {
-        cell.mylabel.text=@"后盖";
-        
-        
-    }
-    if (indexPath.section==1&&indexPath.row==1) {
-        cell.mylabel.text=@"上盖";
-        
-    }
-    if (indexPath.section==1&&indexPath.row==2) {
-        cell.mylabel.text=@"键盘";
-        
+    for (int j=0; j<applicationumber; j++) {
+        if (indexPath.section==1&&indexPath.row==j) {
+             cell.mylabel.text=[[[[marketinfodic objectForKey:@"data"] objectForKey:@"application"]objectAtIndex:j]objectForKey:@"app"];
+        }
+
     }
     
     cell.backgroundColor=[UIColor whiteColor];
@@ -397,44 +379,7 @@ BOOL zhankai;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section==0&&indexPath.row==0) {
-        NSLog(@"1");
-        ProductsDetailViewController *productsdetailvc=[[ProductsDetailViewController alloc]initWithNibName:@"ProductsDetailViewController" bundle:nil];
-        [self.navigationController pushViewController:productsdetailvc animated:YES];
-
-    }
-    if (indexPath.section==0&&indexPath.row==1) {
-        NSLog(@"2");
-        ProductsDetailViewController *productsdetailvc=[[ProductsDetailViewController alloc]initWithNibName:@"ProductsDetailViewController" bundle:nil];
-        [self.navigationController pushViewController:productsdetailvc animated:YES];
-
-    }
-    if (indexPath.section==0&&indexPath.row==2) {
-        NSLog(@"3");
-        ProductsDetailViewController *productsdetailvc=[[ProductsDetailViewController alloc]initWithNibName:@"ProductsDetailViewController" bundle:nil];
-        [self.navigationController pushViewController:productsdetailvc animated:YES];
-
-    }
-    if (indexPath.section==1&&indexPath.row==0) {
-        NSLog(@"4");
-        MovieorPictureViewController *mpvc=[[MovieorPictureViewController alloc]initWithNibName:@"MovieorPictureViewController" bundle:nil];
-        [self.navigationController pushViewController:mpvc animated:YES];
-    }
-    if (indexPath.section==1&&indexPath.row==1) {
-        NSLog(@"5");
-        MovieorPictureViewController *mpvc=[[MovieorPictureViewController alloc]initWithNibName:@"MovieorPictureViewController" bundle:nil];
-        [self.navigationController pushViewController:mpvc animated:YES];
-
         
-    }
-    if (indexPath.section==1&&indexPath.row==2) {
-        NSLog(@"6");
-        MovieorPictureViewController *mpvc=[[MovieorPictureViewController alloc]initWithNibName:@"MovieorPictureViewController" bundle:nil];
-        [self.navigationController pushViewController:mpvc animated:YES];
-
-        
-    }
-    
 }
 
 - (void)didReceiveMemoryWarning {

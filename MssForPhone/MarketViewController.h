@@ -10,8 +10,6 @@
 
 @interface MarketViewController : UIViewController<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,retain)IBOutlet UIScrollView *myscroller;
-@property(nonatomic,retain)UIImageView *normal;
-@property(nonatomic,retain)UIImageView *normal2;
 @property(nonatomic,retain)UITableView *markettable;
 
 @end

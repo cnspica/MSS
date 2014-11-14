@@ -107,6 +107,7 @@
         for (int i=0; i<pagenumber; i++) {
             UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth*i, 0, mywidth, myheight-100)];
             [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[productdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]]];
+            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[productdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]);
             [subscroller addSubview:imageview];
         }
         [myactivityindicator stopAnimating];

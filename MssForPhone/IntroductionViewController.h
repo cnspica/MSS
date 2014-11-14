@@ -11,11 +11,11 @@
 #import <CoreLocation/CoreLocation.h>
 #import "CustomAnnotation.h"
 
-@interface IntroductionViewController : UIViewController<MKMapViewDelegate,CLLocationManagerDelegate,UIAlertViewDelegate,UIApplicationDelegate>
+@interface IntroductionViewController : UIViewController<MKMapViewDelegate,CLLocationManagerDelegate,UIAlertViewDelegate,UIApplicationDelegate,UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,retain)IBOutlet UIScrollView *myscroller;
 @property(nonatomic,retain) UIImageView *myimageview1;
 
 @property(nonatomic,retain) MKMapView *myMapview;
 @property (nonatomic, strong) CLLocationManager *myLocationManager;
-
+@property(nonatomic,retain)UITableView *yudotable;
 @end
