@@ -64,7 +64,7 @@
     [super viewDidLoad];
     api_language=@"cn";
     
-    apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_getproducts,api_language];
+    apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_productslist,api_language];
     requestproducts=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestproducts.tag=1;
     [requestproducts setDelegate:self];
@@ -200,6 +200,7 @@
     ProductsDetailViewController *productsdetailvc=[[ProductsDetailViewController alloc]initWithNibName:@"ProductsDetailViewController" bundle:nil];
     productsdetailvc.idstring=[NSString stringWithFormat:@"%@",[[[productsdic objectForKey:@"data"]objectAtIndex:(sender.tag-1)] objectForKey:@"id"]];
     NSLog(@"ProductsDetailViewController id=%@",productsdetailvc.idstring);
+    productsdetailvc.navtitle=[NSString stringWithFormat:@"%@",[[[productsdic objectForKey:@"data"]objectAtIndex:(sender.tag-1)] objectForKey:@"product"]];
     [self.navigationController pushViewController:productsdetailvc animated:YES];
 }
 

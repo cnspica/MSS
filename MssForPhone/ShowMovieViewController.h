@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ShowMovieViewController : UIViewController
-
+@property(nonatomic,retain)NSString *videourl;
+@property(nonatomic,retain)NSString *navtitle;
 @end

@@ -11,8 +11,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import "CustomAnnotation.h"
 
-@interface IntroductionViewController : UIViewController<MKMapViewDelegate,CLLocationManagerDelegate,UIAlertViewDelegate,UIApplicationDelegate,UITableViewDataSource,UITableViewDelegate>
-@property(nonatomic,retain)IBOutlet UIScrollView *myscroller;
+@interface IntroductionViewController : UIViewController<UIAlertViewDelegate,UIApplicationDelegate,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
+@property(nonatomic,retain) UIScrollView *myscroller;
 @property(nonatomic,retain) UIImageView *myimageview1;
 
 @property(nonatomic,retain) MKMapView *myMapview;

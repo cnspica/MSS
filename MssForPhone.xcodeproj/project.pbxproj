@@ -46,6 +46,8 @@
 		AC3B0DB41A088343000D886E /* ShowMovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3B0DB21A088343000D886E /* ShowMovieViewController.m */; };
 		AC3B0DB51A088343000D886E /* ShowMovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC3B0DB31A088343000D886E /* ShowMovieViewController.xib */; };
 		AC3B0DB71A08AC1B000D886E /* BackCover.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = AC3B0DB61A08AC1B000D886E /* BackCover.mp4 */; };
+		AC54F9E21A15D0160036A696 /* CNdetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC54F9E01A15D0160036A696 /* CNdetailViewController.m */; };
+		AC54F9E31A15D0160036A696 /* CNdetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC54F9E11A15D0160036A696 /* CNdetailViewController.xib */; };
 		AC666EC01A0DBF2600961E78 /* 分流板系统.png in Resources */ = {isa = PBXBuildFile; fileRef = AC666EBA1A0DBF2600961E78 /* 分流板系统.png */; };
 		AC666EC11A0DBF2600961E78 /* 模组系统.png in Resources */ = {isa = PBXBuildFile; fileRef = AC666EBB1A0DBF2600961E78 /* 模组系统.png */; };
 		AC666EC21A0DBF2600961E78 /* CW662.png in Resources */ = {isa = PBXBuildFile; fileRef = AC666EBC1A0DBF2600961E78 /* CW662.png */; };
@@ -178,6 +180,9 @@
 		AC3B0DB21A088343000D886E /* ShowMovieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowMovieViewController.m; sourceTree = "<group>"; };
 		AC3B0DB31A088343000D886E /* ShowMovieViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowMovieViewController.xib; sourceTree = "<group>"; };
 		AC3B0DB61A08AC1B000D886E /* BackCover.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = BackCover.mp4; sourceTree = "<group>"; };
+		AC54F9DF1A15D0160036A696 /* CNdetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNdetailViewController.h; sourceTree = "<group>"; };
+		AC54F9E01A15D0160036A696 /* CNdetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNdetailViewController.m; sourceTree = "<group>"; };
+		AC54F9E11A15D0160036A696 /* CNdetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNdetailViewController.xib; sourceTree = "<group>"; };
 		AC666EBA1A0DBF2600961E78 /* 分流板系统.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分流板系统.png"; sourceTree = "<group>"; };
 		AC666EBB1A0DBF2600961E78 /* 模组系统.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "模组系统.png"; sourceTree = "<group>"; };
 		AC666EBC1A0DBF2600961E78 /* CW662.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CW662.png; sourceTree = "<group>"; };
@@ -496,6 +501,9 @@
 				ACE186791A0468AF00B24ACA /* IntroductionViewController.h */,
 				ACE1867A1A0468AF00B24ACA /* IntroductionViewController.m */,
 				ACE1867B1A0468AF00B24ACA /* IntroductionViewController.xib */,
+				AC54F9DF1A15D0160036A696 /* CNdetailViewController.h */,
+				AC54F9E01A15D0160036A696 /* CNdetailViewController.m */,
+				AC54F9E11A15D0160036A696 /* CNdetailViewController.xib */,
 				ACC04B001A104D4400AE4F0E /* CustomAnnotation.h */,
 				ACC04B011A104D4400AE4F0E /* CustomAnnotation.m */,
 				ACE1867E1A0468D700B24ACA /* ProductsViewController.h */,
@@ -650,6 +658,7 @@
 				AC666EC51A0DBF2600961E78 /* TW700.png in Resources */,
 				ACC66FB51A0CA77D00D4DD1D /* MovieorPictureViewController.xib in Resources */,
 				AC3B0DA81A0870E4000D886E /* 换色注塑.png in Resources */,
+				AC54F9E31A15D0160036A696 /* CNdetailViewController.xib in Resources */,
 				AC666EC41A0DBF2600961E78 /* TW600.png in Resources */,
 				AC2724EF1A071942007E5E91 /* TINA MC.png in Resources */,
 				ACE186961A046F4900B24ACA /* product@2x.png in Resources */,
@@ -714,6 +723,7 @@
 				AC3B0ACC1A1199C700A11681 /* UIImage+GIF.m in Sources */,
 				AC3B0AC71A1199C700A11681 /* SDWebImageDownloader.m in Sources */,
 				DA10DA7B1A0463FA000A2EFA /* AppDelegate.m in Sources */,
+				AC54F9E21A15D0160036A696 /* CNdetailViewController.m in Sources */,
 				AC3B0AD01A1199C700A11681 /* UIImageView+WebCache.m in Sources */,
 				AC3B0ACB1A1199C700A11681 /* UIButton+WebCache.m in Sources */,
 				ACE186861A0468E700B24ACA /* MarketViewController.m in Sources */,

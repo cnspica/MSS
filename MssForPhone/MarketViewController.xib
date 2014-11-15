@@ -7,7 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MarketViewController">
             <connections>
-                <outlet property="myscroller" destination="ugv-t4-Ifw" id="nin-Xj-bqX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,19 +15,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ugv-t4-Ifw">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PB3-Vf-Pon">
                     <rect key="frame" x="0.0" y="64" width="320" height="455"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="NR3-S8-2KN"/>
-                    </connections>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="ugv-t4-Ifw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AWk-kY-uO8"/>
-                <constraint firstItem="ugv-t4-Ifw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="QR3-px-A8b"/>
-                <constraint firstAttribute="trailing" secondItem="ugv-t4-Ifw" secondAttribute="trailing" id="Xib-fe-u3m"/>
-                <constraint firstAttribute="bottom" secondItem="ugv-t4-Ifw" secondAttribute="bottom" constant="49" id="zNH-Gq-ACw"/>
+                <constraint firstAttribute="bottom" secondItem="PB3-Vf-Pon" secondAttribute="bottom" constant="49" id="7YU-l7-qiN"/>
+                <constraint firstItem="PB3-Vf-Pon" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="EQl-wg-4F6"/>
+                <constraint firstAttribute="trailing" secondItem="PB3-Vf-Pon" secondAttribute="trailing" id="Qvi-as-mZV"/>
+                <constraint firstItem="PB3-Vf-Pon" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vbB-Hv-r1D"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

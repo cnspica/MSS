@@ -9,6 +9,8 @@
 #import "ShowMovieViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "AppDelegate.h"
+#import "ASIHTTPRequest.h"
+#import <CommonCrypto/CommonDigest.h>
 
 #define mywidth     320
 #define myheight    568
@@ -20,6 +22,8 @@
 @end
 
 @implementation ShowMovieViewController
+@synthesize videourl;
+@synthesize navtitle;
 
 - (void)viewDidAppear:(BOOL)animated {
     // Do any additional setup after loading the view from its nib.
@@ -46,7 +50,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.title=@"时间控制注塑";
+    self.title=navtitle;
     AppDelegate *delegate=[[UIApplication sharedApplication]delegate];
     delegate.Orientations=YES;    
 }
@@ -54,17 +58,74 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-//    moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:@"http://192.168.158.234/yudo/video/002_MC_Cap.mp4"]];
-    
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"BackCover" ofType:@"mp4"];
-    NSURL *url=[[NSURL alloc] initFileURLWithPath:path];
-    moviePlayer=[[MPMoviePlayerController alloc]initWithContentURL:url];
-    moviePlayer.scalingMode = MPMovieScalingModeAspectFit;;
-    [moviePlayer.view setFrame:CGRectMake(0, 0, mywidth, myheight)];
-    [moviePlayer.view setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:moviePlayer.view];
-    [moviePlayer play];
 
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:videourl]];
+    //获取全局变量
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    //设置缓存方式
+    [request setDownloadCache:appDelegate.myCache];
+    //设置缓存数据存储策略，这里采取的是如果无更新或无法联网就读取缓存数据
+    [request setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
+    [request setDidFinishSelector:@selector(requestFinished:)];
+    request.delegate = self;
+    request.tag=1;
+    [request startAsynchronous];
+    
+}
+
+//md5加密
+- (NSString *)md5:(NSString *)str
+{
+    const char *cStr = [str UTF8String];
+    unsigned char result[16];
+    CC_MD5(cStr, (int)strlen(cStr), result); // This is the md5 call
+    return [NSString stringWithFormat:
+            @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
+            result[0], result[1], result[2], result[3],
+            result[4], result[5], result[6], result[7],
+            result[8], result[9], result[10], result[11],
+            result[12], result[13], result[14], result[15]
+            ]; 
+}
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    if(request.tag==1)
+    {
+        NSLog(@"movie");
+        //取得当前应用的主目录
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+        NSString *videopath = [paths objectAtIndex:0];
+        NSLog(@"%@",videopath);
+        NSString *temp1=[self md5:[NSString stringWithFormat:@"%@",videourl]];
+                //取得当前应用主目录数据库文件存储路径
+        
+        NSArray *stringarray=[videourl componentsSeparatedByString:@"."];
+        NSString *temp2=[stringarray objectAtIndex:([stringarray count]-1)];
+        
+        NSString *dbFile=[videopath stringByAppendingPathComponent:[NSString stringWithFormat:@"Caches/PermanentStore/%@.%@",temp1,temp2]];
+        NSFileManager *fileManager=[NSFileManager defaultManager];
+        BOOL find=[fileManager fileExistsAtPath:dbFile];
+        
+
+        if (find) {
+            NSLog(@"来自缓存");
+            NSString *str=[NSString stringWithFormat:@"%@",dbFile];
+            NSLog(@"%@",str);
+            moviePlayer = [[MPMoviePlayerController alloc]initWithContentURL:[NSURL fileURLWithPath:str]];
+            moviePlayer.scalingMode = MPMovieScalingModeAspectFit;;
+            [moviePlayer.view setFrame:CGRectMake(0, 0, mywidth, myheight)];
+            [moviePlayer.view setBackgroundColor:[UIColor clearColor]];
+            [self.view addSubview:moviePlayer.view];
+            [moviePlayer play];
+            
+            
+        }else
+        {
+            NSLog(@"来自网络");
+        }
+        
+    }
+    
 }
 
 - (void)orientationChanged:(NSNotification *)note  {

@@ -9,20 +9,31 @@
 #import "TechnologyViewController.h"
 #import "ShowMovieViewController.h"
 #import "AppDelegate.h"
+#import "ASIHTTPRequest.h"
+#import "API.h"
+#import "UIImageView+WebCache.h"
 
 #define mywidth self.view.bounds.size.width
 #define myheight self.view.bounds.size.height
+#define jianju 10
 
 @interface TechnologyViewController ()
-
+{
+    ASIHTTPRequest *requesttechnology;
+    NSString *response;
+    id object;
+    NSDictionary *technologydic;
+    NSString *apistring;
+    NSString *api_language;
+    NSInteger tempheight;
+    float scale;//比例系数
+    UIActivityIndicatorView *activityindicator;
+    UIView *navcenter;
+}
 @end
 
 @implementation TechnologyViewController
 @synthesize myscroller;
-@synthesize myimageview1;
-@synthesize myimageview2;
-@synthesize myimageview3;
-@synthesize myimageview4;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,9 +49,8 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.tabBarController.title=@"技术";
     self.navigationController.navigationBar.hidden=NO;
-    self.tabBarController.navigationItem.titleView=nil;
+    self.tabBarController.navigationItem.titleView=navcenter;
 
     AppDelegate *delegate=[[UIApplication sharedApplication]delegate];
     delegate.Orientations=NO;
@@ -50,33 +60,101 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    tempheight=0;
+    api_language=@"cn";
+    apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_technologyinfo,api_language];
+    requesttechnology=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
+    requesttechnology.tag=1;
+    [requesttechnology setDelegate:self];
+    [requesttechnology setTimeOutSeconds:60];
+    [requesttechnology setDidFinishSelector:@selector(requestFinished:)];
+    [requesttechnology setDidFailSelector:@selector(requestFailed:)];
+    [requesttechnology startAsynchronous];
+
     myscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, mywidth, myheight-64-49)];
-    myscroller.contentSize=CGSizeMake(mywidth, 1560/2+10+1511/2+10+2523/2+10+1196/2);
     myscroller.backgroundColor=[UIColor groupTableViewBackgroundColor];
     myscroller.userInteractionEnabled=YES;
     [self.view addSubview:myscroller];
     
-    myimageview1=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, mywidth, 1560/2)];
-    myimageview1.image=[UIImage imageNamed:@"叠模注塑.png"];
-    [myscroller addSubview:myimageview1];
-    
-    myimageview2=[[UIImageView alloc]initWithFrame:CGRectMake(0, 1560/2+10, mywidth, 1511/2)];
-    myimageview2.image=[UIImage imageNamed:@"换色注塑.png"];
-    [myscroller addSubview:myimageview2];
-    
-    myimageview3=[[UIImageView alloc]initWithFrame:CGRectMake(0, 1560/2+10+1511/2+10, mywidth, 2523/2)];
-    myimageview3.image=[UIImage imageNamed:@"硅橡胶注塑.png"];
-    [myscroller addSubview:myimageview3];
-    
-    myimageview4=[[UIImageView alloc]initWithFrame:CGRectMake(0, 1560/2+10+1511/2+10+2523/2+10, mywidth, 1196/2)];
-    myimageview4.image=[UIImage imageNamed:@"时间控制注塑.png"];
-    [myscroller addSubview:myimageview4];
     
     UIButton *timerbutton=[[UIButton alloc]initWithFrame:CGRectMake(0, 1560/2+10+1511/2+10+2523/2+150, mywidth, 200)];
     timerbutton.backgroundColor=[UIColor clearColor];
     [timerbutton addTarget:self action:@selector(timermovie) forControlEvents:UIControlEventTouchUpInside];
     [myscroller addSubview:timerbutton];
     
+    navcenter=[[UIView alloc]initWithFrame:CGRectMake(0,0,160, 44)];
+    navcenter.backgroundColor=[UIColor clearColor];
+    UILabel *mylabel=[[UILabel alloc]initWithFrame:CGRectMake(40, 0, 80, 44)];
+    mylabel.text=@"技术";
+    mylabel.textAlignment=YES;
+    mylabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:16];
+    mylabel.backgroundColor=[UIColor clearColor];
+    [navcenter addSubview:mylabel];
+    
+    activityindicator=[[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(30,12,20, 20)];
+    activityindicator.color=[UIColor blackColor];
+    [navcenter addSubview:activityindicator];
+    [activityindicator startAnimating];
+    activityindicator.hidesWhenStopped=YES;
+
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    if (request.tag==1) {
+        response=[request responseString];
+        
+        [self jsonStringToObject];
+        technologydic=object;
+        NSLog(@"%@",technologydic);
+        
+        for (int i=0; i<[[[technologydic objectForKey:@"data"] objectForKey:@"images"] count]; i++)
+        {
+            scale=[[[[[technologydic objectForKey:@"data"] objectForKey:@"images"] objectAtIndex:i] objectForKey:@"width"] floatValue]/320;
+            NSLog(@"比例系数＝%f",scale);
+            UIImageView *myimageview=[[UIImageView alloc]initWithFrame:CGRectZero];
+            NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[[technologydic objectForKey:@"data"] objectForKey:@"images"] objectAtIndex:i] objectForKey:@"file"]]];
+            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[[technologydic objectForKey:@"data"] objectForKey:@"images"] objectAtIndex:i] objectForKey:@"file"]]);
+            [myimageview sd_setImageWithURL:url];
+            
+            [myimageview setFrame:CGRectMake(0, tempheight, [[[[[technologydic objectForKey:@"data"] objectForKey:@"images"] objectAtIndex:i] objectForKey:@"width"] floatValue]/scale,[[[[[technologydic objectForKey:@"data"] objectForKey:@"images"] objectAtIndex:i] objectForKey:@"height"] floatValue]/scale)];
+            
+            NSLog(@"%f",[[[[[technologydic objectForKey:@"data"] objectForKey:@"images"] objectAtIndex:i] objectForKey:@"height"] floatValue]/scale);
+            tempheight=jianju+tempheight+[[[[[technologydic objectForKey:@"data"] objectForKey:@"images"] objectAtIndex:i]objectForKey:@"height"] floatValue]/scale;
+            [myscroller addSubview:myimageview];
+        }
+        myscroller.contentSize=CGSizeMake(mywidth,tempheight-jianju);
+        [activityindicator stopAnimating];
+
+    }
+    
+    
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    NSError *error=[request error];
+    NSLog(@"%@",error);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+
+-(id)jsonStringToObject
+{
+    NSData *data = [response dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSError *error;
+    
+    object = [NSJSONSerialization JSONObjectWithData:data
+              
+                                             options:NSJSONReadingAllowFragments
+              
+                                               error:&error];
+    
+    return object;
 }
 
 -(void)timermovie

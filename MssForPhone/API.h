@@ -11,10 +11,12 @@
 @interface API : NSObject
 extern NSString *HTTP_getlanguages;
 extern NSString *HTTP_yudoinfo;
-extern NSString *HTTP_getproducts;
-extern NSString *HTTP_getproductimages;
+extern NSString *HTTP_productslist;
+extern NSString *HTTP_productinfo;
 extern NSString *HTTP_marketlist;
 extern NSString *HTTP_marketinfo;
-
+extern NSString *HTTP_companyinfo;
+extern NSString *HTTP_netinfo;
+extern NSString *HTTP_technologyinfo;
 
 @end

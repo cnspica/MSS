@@ -36,10 +36,9 @@
     self.myCache = cache;
     
     //设置缓存路径
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDirectory = [paths objectAtIndex:0];
-    NSLog(@"%@",documentDirectory);
-    [self.myCache setStoragePath:[documentDirectory stringByAppendingPathComponent:@"resource"]];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths objectAtIndex:0];
+    [self.myCache setStoragePath:[path stringByAppendingPathComponent:@"Caches"]];
     [self.myCache setDefaultCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
 
     

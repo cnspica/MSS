@@ -33,19 +33,25 @@ BOOL zhankai;
     UIView *navcenter;
     
     ASIHTTPRequest *requestmarketlist;
+    ASIHTTPRequest *requestmarketinfo;
+    ASIHTTPRequest *requestmarketinfo_re;
+
+
     NSString *response;
     id object;
     NSDictionary *marketlistdic;
     NSString *apistring;
     NSString *api_language;
     NSDictionary *marketinfodic;
-    NSString *marketid;
+    NSInteger marketid;
     NSInteger picturenumber;
     NSInteger applicationumber;
     NSInteger productsnumber;
     
     BOOL marketlist_finished;
     BOOL marketinfo_finished;
+    BOOL marketinfo_re_finished;
+
 }
 @end
 
@@ -92,24 +98,24 @@ BOOL zhankai;
     [requestmarketlist setDidFailSelector:@selector(requestFailed:)];
     [requestmarketlist startAsynchronous];
 
-    marketid=@"1";
-    apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%@",HTTP_marketinfo,api_language,marketid];
-    requestmarketlist=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
-    requestmarketlist.tag=2;
-    [requestmarketlist setDelegate:self];
-    [requestmarketlist setTimeOutSeconds:60];
-    [requestmarketlist setDidFinishSelector:@selector(requestFinished:)];
-    [requestmarketlist setDidFailSelector:@selector(requestFailed:)];
-    [requestmarketlist startAsynchronous];
+    marketid=1;
+    apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%li",HTTP_marketinfo,api_language,(long)marketid];
+    requestmarketinfo=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
+    requestmarketinfo.tag=2;
+    [requestmarketinfo setDelegate:self];
+    [requestmarketinfo setTimeOutSeconds:60];
+    [requestmarketinfo setDidFinishSelector:@selector(requestFinished:)];
+    [requestmarketinfo setDidFailSelector:@selector(requestFailed:)];
+    [requestmarketinfo startAsynchronous];
     
    
     marketlist=[[NSMutableArray alloc]init];
-    myscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, mywidth,myheight-64-49)];
+    
+    myscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, mywidth, myheight-64-49)];
     myscroller.backgroundColor=[UIColor groupTableViewBackgroundColor];
     myscroller.userInteractionEnabled=YES;
-    myscroller.delegate=self;
     [self.view addSubview:myscroller];
-    
+
     selectview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, mywidth, 50)];
     selectview.backgroundColor=[UIColor clearColor];
     [self.view addSubview:selectview];
@@ -203,8 +209,46 @@ BOOL zhankai;
         [myscroller addSubview:markettable];
         marketinfo_finished=YES;
     }
+    if (request.tag==3) {
+        response=[request responseString];
+        
+        [self jsonStringToObject];
+        marketinfodic=object;
+        NSLog(@"%@",marketinfodic);
+        picturenumber=[[[marketinfodic objectForKey:@"data"] objectForKey:@"top_images"]
+                       count];
+        NSLog(@"top picture数量＝%li张",(long)picturenumber);
+        
+        
+       [picturescroll removeFromSuperview];
+        picturescroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-64-49)];
+        picturescroll.pagingEnabled=YES;
+        picturescroll.backgroundColor=[UIColor clearColor];
+        picturescroll.contentSize=CGSizeMake(mywidth*picturenumber,myheight-64-49);
+        [myscroller addSubview:picturescroll];
+        
+        for (int i=0; i<picturenumber; i++) {
+            UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth*i, 0, mywidth, myheight-64-49)];
+            [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[[marketinfodic objectForKey:@"data"] objectForKey:@"top_images"] objectAtIndex:i] objectForKey:@"file"]]]];
+            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[[marketinfodic objectForKey:@"data"] objectForKey:@"top_images"] objectAtIndex:i] objectForKey:@"file"]]);
+            [picturescroll addSubview:imageview];
+        }
+        
+        applicationumber=[[[marketinfodic objectForKey:@"data"] objectForKey:@"application"]
+                          count];
+        productsnumber=[[[marketinfodic objectForKey:@"data"] objectForKey:@"products"]
+                        count];
+        
+        myscroller.contentSize=CGSizeMake(mywidth, myheight-64-49+64*2+44*(applicationumber+productsnumber));
+
+        [markettable reloadData];
+        marketinfo_re_finished=YES;
+    }
 
     if (marketlist_finished&&marketinfo_finished) {
+        [myactivityindicator stopAnimating];
+    }
+    if (marketinfo_re_finished) {
         [myactivityindicator stopAnimating];
     }
     
@@ -281,6 +325,23 @@ BOOL zhankai;
     }];
     zhankai=NO;
     jiantou.image=[UIImage imageNamed:@"down.png"];
+    marketid=bt.tag;
+    [self changemarket];
+    [myactivityindicator startAnimating];
+
+}
+
+//再次请求并刷新列表
+-(void)changemarket
+{
+    apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%ld",HTTP_marketinfo,api_language,(long)marketid];
+    requestmarketinfo_re=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
+    requestmarketinfo_re.tag=3;
+    [requestmarketinfo_re setDelegate:self];
+    [requestmarketinfo_re setTimeOutSeconds:60];
+    [requestmarketinfo_re setDidFinishSelector:@selector(requestFinished:)];
+    [requestmarketinfo_re setDidFailSelector:@selector(requestFailed:)];
+    [requestmarketinfo_re startAsynchronous];
 
 }
 
@@ -379,7 +440,15 @@ BOOL zhankai;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    for (int m=0; m<productsnumber; m++) {
+        if (indexPath.section==0&&indexPath.row==m) {
+            ProductsDetailViewController *productdetailvc=[[ProductsDetailViewController alloc]initWithNibName:@"ProductsDetailViewController" bundle:nil];
+            productdetailvc.idstring=[[[[marketinfodic objectForKey:@"data"] objectForKey:@"products"] objectAtIndex:m] objectForKey:@"id"];
+            productdetailvc.navtitle=[[[[marketinfodic objectForKey:@"data"] objectForKey:@"products"] objectAtIndex:m] objectForKey:@"product"];
+            [self.navigationController pushViewController:productdetailvc animated:YES];
+        }
         
+    }
 }
 
 - (void)didReceiveMemoryWarning {

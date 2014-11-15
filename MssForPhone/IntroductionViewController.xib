@@ -14,18 +14,7 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S0Z-EQ-Xo3">
-                    <rect key="frame" x="0.0" y="64" width="320" height="455"/>
-                </scrollView>
-            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="bottom" secondItem="S0Z-EQ-Xo3" secondAttribute="bottom" constant="49" id="PGg-Fd-bfc"/>
-                <constraint firstItem="S0Z-EQ-Xo3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="Q62-JW-juu"/>
-                <constraint firstItem="S0Z-EQ-Xo3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RjJ-co-CPf"/>
-                <constraint firstAttribute="trailing" secondItem="S0Z-EQ-Xo3" secondAttribute="trailing" id="uzL-ZC-Sl9"/>
-            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>

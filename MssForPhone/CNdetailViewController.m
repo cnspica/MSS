@@ -1,12 +1,12 @@
 //
-//  ProductsDetailViewController.m
+//  CNdetailViewController.m
 //  MssForPhone
 //
-//  Created by it-mobile on 14/11/3.
+//  Created by it-mobile on 14/11/14.
 //  Copyright (c) 2014年 Paul. All rights reserved.
 //
 
-#import "ProductsDetailViewController.h"
+#import "CNdetailViewController.h"
 #import "AppDelegate.h"
 #import "ASIHTTPRequest.h"
 #import "API.h"
@@ -14,8 +14,7 @@
 
 #define mywidth  self.view.bounds.size.width
 #define myheight  self.view.bounds.size.height
-
-@interface ProductsDetailViewController ()
+@interface CNdetailViewController ()
 {
     NSInteger page;
     ASIHTTPRequest *requestpictures;
@@ -23,19 +22,20 @@
     NSString *api_language;
     NSString *response;
     id object;
-    NSDictionary *productdic;
+    NSDictionary *cndic;
     NSInteger pagenumber;
 }
 
 @end
 
-@implementation ProductsDetailViewController
+@implementation CNdetailViewController
 @synthesize myscroller;
 @synthesize subscroller;
 @synthesize pagecontrol;
 @synthesize idstring;
 @synthesize myactivityindicator;
 @synthesize navtitle;
+@synthesize tag;
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -43,13 +43,21 @@
     self.navigationController.navigationBar.hidden=NO;
     AppDelegate *delegate=[[UIApplication sharedApplication]delegate];
     delegate.Orientations=NO;
-
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     api_language=@"cn";
-    apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%@",HTTP_productinfo,api_language,idstring];
+    if (tag==1) {
+        apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%@",HTTP_companyinfo,api_language,idstring];
+        
+    }else if(tag==2)
+    {
+        apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%@",HTTP_netinfo,api_language,idstring];
+
+    }
+    
     requestpictures=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestpictures.tag=1;
     [requestpictures setDelegate:self];
@@ -83,8 +91,8 @@
     [self.view addSubview:myactivityindicator];
     [myactivityindicator startAnimating];
     myactivityindicator.hidesWhenStopped=YES;
-
-
+    
+    
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -95,9 +103,9 @@
         response=[request responseString];
         
         [self jsonStringToObject];
-        productdic=object;
-        NSLog(@"%@",productdic);
-        pagecontrol.numberOfPages=[[productdic objectForKey:@"data"] count];
+        cndic=object;
+        NSLog(@"%@",cndic);
+        pagecontrol.numberOfPages=[[cndic objectForKey:@"data"] count];
         pagenumber=pagecontrol.numberOfPages;
         NSLog(@"共有%li页",(long)pagenumber);
         subscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-100)];
@@ -109,8 +117,8 @@
         
         for (int i=0; i<pagenumber; i++) {
             UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth*i, 0, mywidth, myheight-100)];
-            [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[productdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]]];
-            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[productdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]);
+            [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[cndic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]]];
+            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[cndic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]);
             [subscroller addSubview:imageview];
         }
         [myactivityindicator stopAnimating];
@@ -158,7 +166,7 @@
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
 {
-//    NSLog(@"结束缩放 - %f", scale);
+    //    NSLog(@"结束缩放 - %f", scale);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -185,10 +193,8 @@
         myscroller.zoomScale=2.5;
         
     }];
-
+    
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

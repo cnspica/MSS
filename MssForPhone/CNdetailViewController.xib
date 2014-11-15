@@ -5,9 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TechnologyViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CNdetailViewController">
             <connections>
-                <outlet property="myscroller" destination="qjI-As-t0U" id="8KA-Tt-zik"/>
+                <outlet property="pagecontrol" destination="zbY-WT-pMC" id="5hX-30-RlI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,19 +16,19 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qjI-As-t0U">
-                    <rect key="frame" x="0.0" y="64" width="320" height="455"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="gFH-Le-hvA"/>
-                    </connections>
-                </scrollView>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="1" translatesAutoresizingMaskIntoConstraints="NO" id="zbY-WT-pMC">
+                    <rect key="frame" x="141" y="536" width="39" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="39" id="iac-Bt-pWD"/>
+                    </constraints>
+                    <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="currentPageIndicatorTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </pageControl>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="qjI-As-t0U" secondAttribute="trailing" id="0PY-Az-aYL"/>
-                <constraint firstItem="qjI-As-t0U" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="hqf-V9-q39"/>
-                <constraint firstAttribute="bottom" secondItem="qjI-As-t0U" secondAttribute="bottom" constant="49" id="ymf-Hg-tg1"/>
-                <constraint firstItem="qjI-As-t0U" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="z71-KR-eut"/>
+                <constraint firstItem="zbY-WT-pMC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="akn-kk-ahR"/>
+                <constraint firstAttribute="bottom" secondItem="zbY-WT-pMC" secondAttribute="bottom" constant="-5" id="bnF-5i-2Mw"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
