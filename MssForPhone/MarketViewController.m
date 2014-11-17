@@ -73,22 +73,35 @@ BOOL zhankai;
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    self.tabBarController.title=@"市场";
     self.tabBarController.navigationItem.titleView=navcenter;
     self.navigationController.navigationBar.hidden=NO;
+    self.tabBarController.navigationItem.rightBarButtonItem=nil;
+
     AppDelegate *delegate=[[UIApplication sharedApplication]delegate];
     delegate.Orientations=NO;
-    self.tabBarController.navigationItem.rightBarButtonItem=nil;
+    
+    [pickerScroll setContentOffset:CGPointMake(0, 0)];
+    selectview.frame=CGRectMake(0, 0, mywidth, 50);
+    zhankai=NO;
+    jiantou.image=[UIImage imageNamed:@"down.png"];
+
+    api_language=@"cn";
+    apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%li",HTTP_marketinfo,api_language,(long)marketid];
+    requestmarketinfo=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
+    requestmarketinfo.tag=2;
+    [requestmarketinfo setDelegate:self];
+    [requestmarketinfo setTimeOutSeconds:60];
+    [requestmarketinfo setDidFinishSelector:@selector(requestFinished:)];
+    [requestmarketinfo setDidFailSelector:@selector(requestFailed:)];
+    [requestmarketinfo startAsynchronous];
 
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    }
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     api_language=@"cn";
+    marketid=1;
     apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_marketlist,api_language];
     requestmarketlist=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestmarketlist.tag=1;
@@ -98,24 +111,27 @@ BOOL zhankai;
     [requestmarketlist setDidFailSelector:@selector(requestFailed:)];
     [requestmarketlist startAsynchronous];
 
-    marketid=1;
-    apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%li",HTTP_marketinfo,api_language,(long)marketid];
-    requestmarketinfo=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
-    requestmarketinfo.tag=2;
-    [requestmarketinfo setDelegate:self];
-    [requestmarketinfo setTimeOutSeconds:60];
-    [requestmarketinfo setDidFinishSelector:@selector(requestFinished:)];
-    [requestmarketinfo setDidFailSelector:@selector(requestFailed:)];
-    [requestmarketinfo startAsynchronous];
-    
-   
     marketlist=[[NSMutableArray alloc]init];
     
     myscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, mywidth, myheight-64-49)];
     myscroller.backgroundColor=[UIColor groupTableViewBackgroundColor];
     myscroller.userInteractionEnabled=YES;
+    myscroller.delegate=self;
     [self.view addSubview:myscroller];
 
+    picturescroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-64-49)];
+    picturescroll.pagingEnabled=YES;
+    picturescroll.backgroundColor=[UIColor clearColor];
+    [myscroller addSubview:picturescroll];
+    
+    markettable=[[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    markettable.backgroundColor=[UIColor clearColor];
+    markettable.delegate=self;
+    markettable.dataSource=self;
+    markettable.scrollEnabled=NO;
+    [myscroller addSubview:markettable];
+
+    
     selectview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, mywidth, 50)];
     selectview.backgroundColor=[UIColor clearColor];
     [self.view addSubview:selectview];
@@ -181,11 +197,8 @@ BOOL zhankai;
                        count];
         NSLog(@"top picture数量＝%li张",(long)picturenumber);
         
-        picturescroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-64-49)];
-        picturescroll.pagingEnabled=YES;
-        picturescroll.backgroundColor=[UIColor clearColor];
         picturescroll.contentSize=CGSizeMake(mywidth*picturenumber,myheight-64-49);
-        [myscroller addSubview:picturescroll];
+
 
         for (int i=0; i<picturenumber; i++) {
             UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth*i, 0, mywidth, myheight-64-49)];
@@ -200,13 +213,10 @@ BOOL zhankai;
                         count];
         
         myscroller.contentSize=CGSizeMake(mywidth, myheight-64-49+64*2+44*(applicationumber+productsnumber));
+        
+        [markettable setFrame:CGRectMake(0, myheight-49-64, mywidth, 64*2+44*(applicationumber+productsnumber))];
 
-        markettable=[[UITableView alloc]initWithFrame:CGRectMake(0, myheight-49-64, mywidth, 64*2+44*(applicationumber+productsnumber)) style:UITableViewStyleGrouped];
-        markettable.backgroundColor=[UIColor clearColor];
-        markettable.delegate=self;
-        markettable.dataSource=self;
-        markettable.scrollEnabled=NO;
-        [myscroller addSubview:markettable];
+        [markettable reloadData];
         marketinfo_finished=YES;
     }
     if (request.tag==3) {
@@ -240,7 +250,9 @@ BOOL zhankai;
                         count];
         
         myscroller.contentSize=CGSizeMake(mywidth, myheight-64-49+64*2+44*(applicationumber+productsnumber));
-
+        
+        [markettable setFrame:CGRectMake(0, myheight-49-64, mywidth, 64*2+44*(applicationumber+productsnumber))];
+        
         [markettable reloadData];
         marketinfo_re_finished=YES;
     }
@@ -306,7 +318,7 @@ BOOL zhankai;
 {
     
     [UIView animateWithDuration:0.2 animations:^{
-        selectview.frame=CGRectMake(0, 0, mywidth, 64);
+        selectview.frame=CGRectMake(0, 0, mywidth, 50);
     }];
     zhankai=NO;
     jiantou.image=[UIImage imageNamed:@"down.png"];
@@ -321,11 +333,11 @@ BOOL zhankai;
     NSLog(@"%@",[marketlist objectAtIndex:sender.tag-1]);
     myselectlabel.text=[marketlist objectAtIndex:sender.tag-1];
     [UIView animateWithDuration:0.2 animations:^{
-        selectview.frame=CGRectMake(0, 0, mywidth, 64);
+        selectview.frame=CGRectMake(0, 0, mywidth, 50);
     }];
     zhankai=NO;
     jiantou.image=[UIImage imageNamed:@"down.png"];
-    marketid=bt.tag;
+    marketid=[[[[marketlistdic objectForKey:@"data"] objectAtIndex:(bt.tag-1)] objectForKey:@"id"]integerValue];
     [self changemarket];
     [myactivityindicator startAnimating];
 
@@ -349,7 +361,7 @@ BOOL zhankai;
 {
     if (zhankai==NO) {
         [UIView animateWithDuration:0.2 animations:^{
-            selectview.frame=CGRectMake(0, 64, mywidth, 64);
+            selectview.frame=CGRectMake(0, 64, mywidth, 50);
         }];
         zhankai=YES;
         jiantou.image=[UIImage imageNamed:@"up"];
@@ -358,7 +370,7 @@ BOOL zhankai;
     }else if(zhankai==YES)
     {
         [UIView animateWithDuration:0.2 animations:^{
-            selectview.frame=CGRectMake(0, 0, mywidth, 64);
+            selectview.frame=CGRectMake(0, 0, mywidth, 50);
         }];
         zhankai=NO;
         jiantou.image=[UIImage imageNamed:@"down.png"];
@@ -445,10 +457,21 @@ BOOL zhankai;
             ProductsDetailViewController *productdetailvc=[[ProductsDetailViewController alloc]initWithNibName:@"ProductsDetailViewController" bundle:nil];
             productdetailvc.idstring=[[[[marketinfodic objectForKey:@"data"] objectForKey:@"products"] objectAtIndex:m] objectForKey:@"id"];
             productdetailvc.navtitle=[[[[marketinfodic objectForKey:@"data"] objectForKey:@"products"] objectAtIndex:m] objectForKey:@"product"];
+            productdetailvc.api_language=api_language;
             [self.navigationController pushViewController:productdetailvc animated:YES];
         }
         
     }
+    for (int n=0; n<applicationumber; n++) {
+        if (indexPath.section==1&&indexPath.row==n) {
+            MovieorPictureViewController *mpvc=[[MovieorPictureViewController alloc]initWithNibName:@"MovieorPictureViewController" bundle:nil];
+            mpvc.api_language=api_language;
+            mpvc.idstring=[[[[marketinfodic objectForKey:@"data"] objectForKey:@"application"] objectAtIndex:n] objectForKey:@"id"];
+            [self.navigationController pushViewController:mpvc animated:YES];
+        }
+        
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {

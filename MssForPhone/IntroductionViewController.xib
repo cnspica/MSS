@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroductionViewController">
             <connections>
+                <outlet property="myscroller" destination="Xri-UF-xvv" id="UwT-O0-ntD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -14,7 +15,22 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xri-UF-xvv">
+                    <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="gKn-ip-9ol"/>
+                    </connections>
+                </scrollView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Xri-UF-xvv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="3PL-0b-Ofu"/>
+                <constraint firstAttribute="bottom" secondItem="Xri-UF-xvv" secondAttribute="bottom" constant="49" id="Dq9-BT-BNh"/>
+                <constraint firstItem="Xri-UF-xvv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZCH-nH-pLK"/>
+                <constraint firstAttribute="trailing" secondItem="Xri-UF-xvv" secondAttribute="trailing" id="ehO-te-JnU"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>

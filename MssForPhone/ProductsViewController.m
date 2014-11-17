@@ -57,13 +57,7 @@
     AppDelegate *delegate=[[UIApplication sharedApplication]delegate];
     delegate.Orientations=NO;
 
-}
-
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
     api_language=@"cn";
-    
     apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_productslist,api_language];
     requestproducts=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestproducts.tag=1;
@@ -72,6 +66,12 @@
     [requestproducts setDidFinishSelector:@selector(requestFinished:)];
     [requestproducts setDidFailSelector:@selector(requestFailed:)];
     [requestproducts startAsynchronous];
+
+}
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
     self.view.backgroundColor=[UIColor groupTableViewBackgroundColor];
     
@@ -201,6 +201,7 @@
     productsdetailvc.idstring=[NSString stringWithFormat:@"%@",[[[productsdic objectForKey:@"data"]objectAtIndex:(sender.tag-1)] objectForKey:@"id"]];
     NSLog(@"ProductsDetailViewController id=%@",productsdetailvc.idstring);
     productsdetailvc.navtitle=[NSString stringWithFormat:@"%@",[[[productsdic objectForKey:@"data"]objectAtIndex:(sender.tag-1)] objectForKey:@"product"]];
+    productsdetailvc.api_language=api_language;
     [self.navigationController pushViewController:productsdetailvc animated:YES];
 }
 

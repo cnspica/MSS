@@ -17,4 +17,6 @@
 @property(nonatomic,retain)UIActivityIndicatorView *myactivityindicator;
 @property(nonatomic,retain)NSString *navtitle;
 @property(nonatomic,assign)NSInteger tag;
+@property(nonatomic,retain)NSString *api_language;
+
 @end

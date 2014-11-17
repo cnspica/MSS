@@ -9,6 +9,9 @@
 #import "MovieorPictureViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "AppDelegate.h"
+#import "ASIHTTPRequest.h"
+#import "API.h"
+#import "UIImageView+WebCache.h"
 
 #define mywidth  self.view.bounds.size.width
 #define myheight  self.view.bounds.size.height
@@ -17,7 +20,13 @@
 {
     MPMoviePlayerController *moviePlayer;
     NSInteger page;
-
+    ASIHTTPRequest *requestpictures;
+    NSString *apistring;
+    NSString *response;
+    id object;
+    NSDictionary *applicationdic;
+    NSInteger pagenumber;
+    AppDelegate *delegate;
 }
 
 @end
@@ -27,10 +36,32 @@
 @synthesize myscroller;
 @synthesize subscroller;
 @synthesize pagecontrol;
-@synthesize normal,normal2;
+@synthesize api_language;
+@synthesize idstring;
+@synthesize myactivityindicator;
 
-- (void)viewDidLoad {
+-(void)viewWillAppear:(BOOL)animated
+{
+    delegate=[[UIApplication sharedApplication]delegate];
+    delegate.Orientations=NO;
+
+}
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%@",HTTP_applicationinfo,api_language,idstring];
+    requestpictures=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
+    requestpictures.tag=1;
+    [requestpictures setDelegate:self];
+    [requestpictures setTimeOutSeconds:60];
+    [requestpictures setDidFinishSelector:@selector(requestFinished:)];
+    [requestpictures setDidFailSelector:@selector(requestFailed:)];
+    [requestpictures startAsynchronous];
+
+    videoview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight)];
+    [self.view addSubview:videoview];
+    videoview.hidden=YES;
+    
     UISegmentedControl * mySegment;
     mySegment = [[UISegmentedControl alloc]
                  initWithFrame:CGRectMake(0,0,150,29)];
@@ -44,21 +75,19 @@
     [segmentview addSubview:mySegment];
     self.navigationItem.titleView=segmentview;
     
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"BackCover" ofType:@"mp4"];
-    NSURL *url=[[NSURL alloc] initFileURLWithPath:path];
+//    NSString *path=[[NSBundle mainBundle] pathForResource:@"BackCover" ofType:@"mp4"];
+    NSURL *url=[NSURL URLWithString:@"http://192.168.158.234/minimss/resource/yudo.mp4"];
     moviePlayer=[[MPMoviePlayerController alloc]initWithContentURL:url];
     moviePlayer.scalingMode = MPMovieScalingModeAspectFit;;
     [moviePlayer.view setFrame:CGRectMake(0, 0, mywidth, myheight)];
     [moviePlayer.view setBackgroundColor:[UIColor clearColor]];
     [videoview addSubview:moviePlayer.view];
     
-    
-    
     [pagecontrol setCurrentPage:0];
     pagecontrol.currentPageIndicatorTintColor=[UIColor blackColor];
     pagecontrol.pageIndicatorTintColor=[UIColor grayColor];
     
-    myscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-100)];
+    myscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 164, mywidth, myheight-360)];
     myscroller.backgroundColor=[UIColor groupTableViewBackgroundColor];
     myscroller.userInteractionEnabled=YES;
     myscroller.maximumZoomScale=2.5;
@@ -74,31 +103,79 @@
     doubletap.numberOfTapsRequired=2;
     [myscroller addGestureRecognizer:doubletap];
     
-    subscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-100)];
-    subscroller.contentSize=CGSizeMake(mywidth*2, myheight-100);
-    subscroller.pagingEnabled=YES;
-    subscroller.delegate=self;
-    subscroller.tag=1;
-    [myscroller addSubview:subscroller];
-    
-    normal=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-100)];
-    normal.image=[UIImage imageNamed:@"page_01.jpg"];
-    normal.userInteractionEnabled=YES;
-    [subscroller addSubview:normal];
-    
-    
-    normal2=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth, 0, mywidth, myheight-100)];
-    normal2.image=[UIImage imageNamed:@"page_02.jpg"];
-    normal2.userInteractionEnabled=YES;
-    [subscroller addSubview:normal2];
+    myactivityindicator=[[UIActivityIndicatorView alloc]initWithFrame:CGRectMake((mywidth-20)/2, (myheight-20)/2, 20, 20)];
+    myactivityindicator.color=[UIColor blackColor];
+    [self.view addSubview:myactivityindicator];
+    [myactivityindicator startAnimating];
+    myactivityindicator.hidesWhenStopped=YES;
 
+    
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    if (request.tag==1) {
+        response=[request responseString];
+        
+        [self jsonStringToObject];
+        applicationdic=object;
+        NSLog(@"%@",applicationdic);
+        pagecontrol.numberOfPages=[[applicationdic objectForKey:@"data"] count];
+        pagenumber=pagecontrol.numberOfPages;
+        NSLog(@"共有%li页",(long)pagenumber);
+        subscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-360)];
+        subscroller.contentSize=CGSizeMake(mywidth*pagenumber, myheight-360);
+        subscroller.pagingEnabled=YES;
+        subscroller.delegate=self;
+        subscroller.tag=1;
+        [myscroller addSubview:subscroller];
+        
+        for (int i=0; i<pagenumber; i++) {
+            UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth*i, 0, mywidth, myheight-360)];
+            [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[applicationdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]]];
+            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[applicationdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]);
+            [subscroller addSubview:imageview];
+        }
+        [myactivityindicator stopAnimating];
+    }
+    
+    
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    NSError *error=[request error];
+    NSLog(@"%@",error);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+
+-(id)jsonStringToObject
+{
+    NSData *data = [response dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSError *error;
+    
+    object = [NSJSONSerialization JSONObjectWithData:data
+              
+                                             options:NSJSONReadingAllowFragments
+              
+                                               error:&error];
+    
+    return object;
 }
 
 -(void)segAction:(UISegmentedControl *)seg
 {
-    switch (seg.selectedSegmentIndex) {
+       switch (seg.selectedSegmentIndex) {
         case 0:
             NSLog(@"PDF");
+            delegate.Orientations=NO;
             videoview.hidden=YES;
             pdfview.hidden=NO;
             [moviePlayer pause];
@@ -107,6 +184,7 @@
             
         case 1:
             NSLog(@"Video");
+            delegate.Orientations=YES;
             pdfview.hidden=YES;
             videoview.hidden=NO;
             [moviePlayer play];
@@ -116,6 +194,7 @@
         default:
             break;
     }
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -138,12 +217,6 @@
     UIDevice *device = [UIDevice currentDevice]; //Get the device object
     [nc removeObserver:self name:UIDeviceOrientationDidChangeNotification object:device];
     
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    AppDelegate *delegate=[[UIApplication sharedApplication]delegate];
-    delegate.Orientations=YES;
 }
 
 - (void)orientationChanged:(NSNotification *)note  {

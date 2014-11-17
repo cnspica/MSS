@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MarketViewController : UIViewController<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,retain)UIScrollView *myscroller;
+@property(nonatomic,retain)IBOutlet UIScrollView *myscroller;
 @property(nonatomic,retain)UITableView *markettable;
 
 @end

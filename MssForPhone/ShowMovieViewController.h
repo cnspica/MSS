@@ -11,4 +11,7 @@
 @interface ShowMovieViewController : UIViewController
 @property(nonatomic,retain)NSString *videourl;
 @property(nonatomic,retain)NSString *navtitle;
+@property(nonatomic,retain)IBOutlet UILabel *cachelabel;
+@property(nonatomic,retain)IBOutlet UIActivityIndicatorView *myactivityindicator;
+
 @end

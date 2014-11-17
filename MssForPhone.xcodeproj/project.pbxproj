@@ -20,6 +20,7 @@
 		AC2724FA1A07343B007E5E91 /* ProductsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC2724F81A07343B007E5E91 /* ProductsDetailViewController.xib */; };
 		AC27251F1A074B15007E5E91 /* page_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AC27251D1A074B15007E5E91 /* page_01.jpg */; };
 		AC2725201A074B15007E5E91 /* page_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AC27251E1A074B15007E5E91 /* page_02.jpg */; };
+		AC38701B1A19E26B004723B1 /* introduction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC38701A1A19E26B004723B1 /* introduction@2x.png */; };
 		AC3B0A9F1A1192A000A11681 /* API.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3B0A9E1A1192A000A11681 /* API.m */; };
 		AC3B0AC21A1199C700A11681 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3B0AA21A1199C700A11681 /* MKAnnotationView+WebCache.m */; };
 		AC3B0AC31A1199C700A11681 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3B0AA41A1199C700A11681 /* NSData+ImageContentType.m */; };
@@ -89,7 +90,6 @@
 		ACE1868B1A0468FC00B24ACA /* TechnologyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE186891A0468FC00B24ACA /* TechnologyViewController.m */; };
 		ACE1868C1A0468FC00B24ACA /* TechnologyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACE1868A1A0468FC00B24ACA /* TechnologyViewController.xib */; };
 		ACE186901A046BC600B24ACA /* introduction.png in Resources */ = {isa = PBXBuildFile; fileRef = ACE1868F1A046BC600B24ACA /* introduction.png */; };
-		ACE186921A046D2200B24ACA /* introduction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ACE186911A046D2200B24ACA /* introduction@2x.png */; };
 		ACE186951A046F4900B24ACA /* product.png in Resources */ = {isa = PBXBuildFile; fileRef = ACE186931A046F4900B24ACA /* product.png */; };
 		ACE186961A046F4900B24ACA /* product@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ACE186941A046F4900B24ACA /* product@2x.png */; };
 		ACE1869D1A046FA000B24ACA /* technology.png in Resources */ = {isa = PBXBuildFile; fileRef = ACE1869B1A046FA000B24ACA /* technology.png */; };
@@ -135,6 +135,7 @@
 		AC2724F81A07343B007E5E91 /* ProductsDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductsDetailViewController.xib; sourceTree = "<group>"; };
 		AC27251D1A074B15007E5E91 /* page_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = page_01.jpg; sourceTree = "<group>"; };
 		AC27251E1A074B15007E5E91 /* page_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = page_02.jpg; sourceTree = "<group>"; };
+		AC38701A1A19E26B004723B1 /* introduction@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "introduction@2x.png"; sourceTree = "<group>"; };
 		AC3B0A9D1A1192A000A11681 /* API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = API.h; sourceTree = "<group>"; };
 		AC3B0A9E1A1192A000A11681 /* API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = API.m; sourceTree = "<group>"; };
 		AC3B0AA11A1199C700A11681 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -244,7 +245,6 @@
 		ACE186891A0468FC00B24ACA /* TechnologyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TechnologyViewController.m; sourceTree = "<group>"; };
 		ACE1868A1A0468FC00B24ACA /* TechnologyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TechnologyViewController.xib; sourceTree = "<group>"; };
 		ACE1868F1A046BC600B24ACA /* introduction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = introduction.png; sourceTree = "<group>"; };
-		ACE186911A046D2200B24ACA /* introduction@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "introduction@2x.png"; sourceTree = "<group>"; };
 		ACE186931A046F4900B24ACA /* product.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = product.png; sourceTree = "<group>"; };
 		ACE186941A046F4900B24ACA /* product@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "product@2x.png"; sourceTree = "<group>"; };
 		ACE1869B1A046FA000B24ACA /* technology.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = technology.png; sourceTree = "<group>"; };
@@ -425,7 +425,7 @@
 				ACE186931A046F4900B24ACA /* product.png */,
 				ACE186941A046F4900B24ACA /* product@2x.png */,
 				ACE1868F1A046BC600B24ACA /* introduction.png */,
-				ACE186911A046D2200B24ACA /* introduction@2x.png */,
+				AC38701A1A19E26B004723B1 /* introduction@2x.png */,
 			);
 			name = tabbar;
 			sourceTree = "<group>";
@@ -665,7 +665,6 @@
 				AC2725201A074B15007E5E91 /* page_02.jpg in Resources */,
 				AC666EC21A0DBF2600961E78 /* CW662.png in Resources */,
 				ACE186A11A04720200B24ACA /* marker.png in Resources */,
-				ACE186921A046D2200B24ACA /* introduction@2x.png in Resources */,
 				AC27251F1A074B15007E5E91 /* page_01.jpg in Resources */,
 				AC3B0DAE1A087B14000D886E /* 时间控制注塑.png in Resources */,
 				AC2724ED1A071942007E5E91 /* TINA EP.png in Resources */,
@@ -679,6 +678,7 @@
 				ACC04B041A1054C900AE4F0E /* 公司视频.png in Resources */,
 				ACE1869E1A046FA000B24ACA /* technology@2x.png in Resources */,
 				ACC04B8B1A10661900AE4F0E /* 收缩.png in Resources */,
+				AC38701B1A19E26B004723B1 /* introduction@2x.png in Resources */,
 				ACC04B8D1A10682F00AE4F0E /* 展开.png in Resources */,
 				DA10DA7D1A0463FA000A2EFA /* Images.xcassets in Resources */,
 				ACE1869D1A046FA000B24ACA /* technology.png in Resources */,

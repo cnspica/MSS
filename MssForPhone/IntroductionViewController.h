@@ -12,7 +12,7 @@
 #import "CustomAnnotation.h"
 
 @interface IntroductionViewController : UIViewController<UIAlertViewDelegate,UIApplicationDelegate,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
-@property(nonatomic,retain) UIScrollView *myscroller;
+@property(nonatomic,retain)IBOutlet UIScrollView *myscroller;
 @property(nonatomic,retain) UIImageView *myimageview1;
 
 @property(nonatomic,retain) MKMapView *myMapview;

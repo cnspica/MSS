@@ -20,7 +20,6 @@
     NSInteger page;
     ASIHTTPRequest *requestpictures;
     NSString *apistring;
-    NSString *api_language;
     NSString *response;
     id object;
     NSDictionary *productdic;
@@ -36,6 +35,7 @@
 @synthesize idstring;
 @synthesize myactivityindicator;
 @synthesize navtitle;
+@synthesize api_language;
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -48,7 +48,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    api_language=@"cn";
     apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%@",HTTP_productinfo,api_language,idstring];
     requestpictures=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestpictures.tag=1;

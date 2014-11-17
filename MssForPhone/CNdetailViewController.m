@@ -19,7 +19,6 @@
     NSInteger page;
     ASIHTTPRequest *requestpictures;
     NSString *apistring;
-    NSString *api_language;
     NSString *response;
     id object;
     NSDictionary *cndic;
@@ -36,6 +35,7 @@
 @synthesize myactivityindicator;
 @synthesize navtitle;
 @synthesize tag;
+@synthesize api_language;
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -48,7 +48,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    api_language=@"cn";
     if (tag==1) {
         apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%@",HTTP_companyinfo,api_language,idstring];
         

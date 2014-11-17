@@ -24,6 +24,9 @@
 @implementation ShowMovieViewController
 @synthesize videourl;
 @synthesize navtitle;
+@synthesize myactivityindicator;
+@synthesize cachelabel;
+
 
 - (void)viewDidAppear:(BOOL)animated {
     // Do any additional setup after loading the view from its nib.
@@ -57,8 +60,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-
+    [myactivityindicator startAnimating];
+    myactivityindicator.hidesWhenStopped=YES;
+    
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:videourl]];
     //获取全局变量
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -117,11 +121,15 @@
             [moviePlayer.view setBackgroundColor:[UIColor clearColor]];
             [self.view addSubview:moviePlayer.view];
             [moviePlayer play];
-            
+            [myactivityindicator stopAnimating];
+            cachelabel.hidden=YES;
             
         }else
         {
             NSLog(@"来自网络");
+            [myactivityindicator stopAnimating];
+            cachelabel.hidden=YES;
+
         }
         
     }

@@ -18,5 +18,6 @@ NSString *HTTP_marketinfo=@"http://192.168.158.234/minimss/api/marketinfo";
 NSString *HTTP_companyinfo=@"http://192.168.158.234/minimss/api/companyinfo";
 NSString *HTTP_netinfo=@"http://192.168.158.234/minimss/api/netinfo";
 NSString *HTTP_technologyinfo=@"http://192.168.158.234/minimss/api/technologyinfo";
+NSString *HTTP_applicationinfo=@"http://192.168.158.234/minimss/api/applicationinfo";
 
 @end

@@ -29,6 +29,7 @@
     float scale;//比例系数
     UIActivityIndicatorView *activityindicator;
     UIView *navcenter;
+    UIButton *timerbutton;
 }
 @end
 
@@ -49,18 +50,16 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    self.tabBarController.title=@"技术";
     self.navigationController.navigationBar.hidden=NO;
     self.tabBarController.navigationItem.titleView=navcenter;
 
     AppDelegate *delegate=[[UIApplication sharedApplication]delegate];
     delegate.Orientations=NO;
     self.tabBarController.navigationItem.rightBarButtonItem=nil;
-
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
+    
     tempheight=0;
+
     api_language=@"cn";
     apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_technologyinfo,api_language];
     requesttechnology=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
@@ -71,16 +70,16 @@
     [requesttechnology setDidFailSelector:@selector(requestFailed:)];
     [requesttechnology startAsynchronous];
 
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
     myscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, mywidth, myheight-64-49)];
     myscroller.backgroundColor=[UIColor groupTableViewBackgroundColor];
     myscroller.userInteractionEnabled=YES;
     [self.view addSubview:myscroller];
     
-    
-    UIButton *timerbutton=[[UIButton alloc]initWithFrame:CGRectMake(0, 1560/2+10+1511/2+10+2523/2+150, mywidth, 200)];
-    timerbutton.backgroundColor=[UIColor clearColor];
-    [timerbutton addTarget:self action:@selector(timermovie) forControlEvents:UIControlEventTouchUpInside];
-    [myscroller addSubview:timerbutton];
     
     navcenter=[[UIView alloc]initWithFrame:CGRectMake(0,0,160, 44)];
     navcenter.backgroundColor=[UIColor clearColor];
@@ -96,6 +95,12 @@
     [navcenter addSubview:activityindicator];
     [activityindicator startAnimating];
     activityindicator.hidesWhenStopped=YES;
+    
+    timerbutton=[[UIButton alloc]initWithFrame:CGRectZero];
+    timerbutton.backgroundColor=[UIColor clearColor];
+    [timerbutton addTarget:self action:@selector(timermovie) forControlEvents:UIControlEventTouchUpInside];
+    [myscroller addSubview:timerbutton];
+
 
 }
 
@@ -112,7 +117,9 @@
         {
             scale=[[[[[technologydic objectForKey:@"data"] objectForKey:@"images"] objectAtIndex:i] objectForKey:@"width"] floatValue]/320;
             NSLog(@"比例系数＝%f",scale);
+            
             UIImageView *myimageview=[[UIImageView alloc]initWithFrame:CGRectZero];
+
             NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[[technologydic objectForKey:@"data"] objectForKey:@"images"] objectAtIndex:i] objectForKey:@"file"]]];
             NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[[technologydic objectForKey:@"data"] objectForKey:@"images"] objectAtIndex:i] objectForKey:@"file"]]);
             [myimageview sd_setImageWithURL:url];
@@ -125,7 +132,9 @@
         }
         myscroller.contentSize=CGSizeMake(mywidth,tempheight-jianju);
         [activityindicator stopAnimating];
-
+        
+        [timerbutton setFrame:CGRectMake(0, tempheight-500, mywidth, 200)];
+        
     }
     
     
@@ -161,6 +170,7 @@
 {
     ShowMovieViewController *showmoviewvc=[[ShowMovieViewController alloc]initWithNibName:@"ShowMovieViewController" bundle:nil];
     showmoviewvc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
+    showmoviewvc.navtitle=@"时间控制注塑";
     [self.navigationController pushViewController:showmoviewvc animated:NO];
     
 }

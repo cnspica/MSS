@@ -60,16 +60,16 @@ BOOL isopen;
         // Custom initialization
         [self.tabBarItem setImage:[UIImage imageNamed:@"introduction.png"]];
         self.tabBarItem.title=@"介绍";
-        isopen=NO;
     }
     return self;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    self.tabBarController.title=@"介绍";
     self.tabBarController.navigationItem.titleView=navcenter;
     self.navigationController.navigationBar.hidden=NO;
-    self.tabBarController.navigationItem.rightBarButtonItem=nil;
+    
     //----- SETUP DEVICE ORIENTATION CHANGE NOTIFICATION -----
     UIDevice *device = [UIDevice currentDevice]; //Get the device object
     [device beginGeneratingDeviceOrientationNotifications]; //Tell it to start monitoring the accelerometer for orientation
@@ -79,11 +79,24 @@ BOOL isopen;
     AppDelegate *delegate=[[UIApplication sharedApplication]delegate];
     delegate.Orientations=YES;
     
+    //---------------------------------------------------------------------------
     UIButton *languagebt = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
     [languagebt addTarget:self action:@selector(selectlanguage) forControlEvents:UIControlEventTouchUpInside];
     [languagebt setBackgroundImage:[UIImage imageNamed:@"语言.png"] forState:UIControlStateNormal];
     UIBarButtonItem *leftbt = [[UIBarButtonItem alloc]initWithCustomView:languagebt];
     self.tabBarController.navigationItem.rightBarButtonItem=leftbt;
+    //---------------------------------------------------------------------------
+
+   
+    api_language=@"cn";
+    apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_yudoinfo,api_language];
+    requestinfo=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
+    requestinfo.tag=2;
+    [requestinfo setDelegate:self];
+    [requestinfo setTimeOutSeconds:60];
+    [requestinfo setDidFinishSelector:@selector(requestFinished:)];
+    [requestinfo setDidFailSelector:@selector(requestFailed:)];
+    [requestinfo startAsynchronous];
 
 }
 
@@ -91,7 +104,6 @@ BOOL isopen;
 {
     [super viewDidAppear:animated];
     
-   
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -106,9 +118,17 @@ BOOL isopen;
     [super viewDidLoad];
     languagelist_country=[[NSMutableArray alloc]init];
     languagelist_lang=[[NSMutableArray alloc]init];
-    api_language=@"cn";
+
+    requestlanguages=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:HTTP_getlanguages]];
+    requestlanguages.tag=1;
+    [requestlanguages setDelegate:self];
+    [requestlanguages setTimeOutSeconds:60];
+    [requestlanguages setDidFinishSelector:@selector(requestFinished:)];
+    [requestlanguages setDidFailSelector:@selector(requestFailed:)];
+    [requestlanguages startAsynchronous];
+
     
-    myscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-49)];
+    myscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, mywidth, myheight-49-64)];
     myscroller.backgroundColor=[UIColor groupTableViewBackgroundColor];
     myscroller.userInteractionEnabled=YES;
     myscroller.delegate=self;
@@ -139,24 +159,7 @@ BOOL isopen;
     [historyimage setFrame:CGRectMake(0, 0, myheight, 2290/2)];
     [history addSubview:historyimage];
     
-    requestlanguages=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:HTTP_getlanguages]];
-    requestlanguages.tag=1;
-    [requestlanguages setDelegate:self];
-    [requestlanguages setTimeOutSeconds:60];
-    [requestlanguages setDidFinishSelector:@selector(requestFinished:)];
-    [requestlanguages setDidFailSelector:@selector(requestFailed:)];
-    [requestlanguages startAsynchronous];
-    
-    apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_yudoinfo,api_language];
-    NSLog(@"%@",apistring);
-    requestinfo=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
-    requestinfo.tag=2;
-    [requestinfo setDelegate:self];
-    [requestinfo setTimeOutSeconds:60];
-    [requestinfo setDidFinishSelector:@selector(requestFinished:)];
-    [requestinfo setDidFailSelector:@selector(requestFailed:)];
-    [requestinfo startAsynchronous];
-    
+
     navcenter=[[UIView alloc]initWithFrame:CGRectMake(0,0,160, 44)];
     navcenter.backgroundColor=[UIColor clearColor];
     UILabel *mylabel=[[UILabel alloc]initWithFrame:CGRectMake(40, 0, 80, 44)];
@@ -171,6 +174,12 @@ BOOL isopen;
     [navcenter addSubview:activityindicator];
     [activityindicator startAnimating];
     activityindicator.hidesWhenStopped=YES;
+    
+    languageview=[[UIView alloc]initWithFrame:CGRectZero];
+    languageview.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    languageview.alpha=0;
+    [self.view addSubview:languageview];
+
 
 }
 
@@ -190,10 +199,7 @@ BOOL isopen;
             [languagelist_lang addObject:[[[languagesdic objectForKey:@"data"] objectAtIndex:i]objectForKey:@"lang"]];
         }
         
-        languageview=[[UIView alloc]initWithFrame:CGRectMake(mywidth, 64, 80, 40*number)];
-        languageview.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
-        languageview.alpha=0;
-        [self.view addSubview:languageview];
+        languageview.frame=CGRectMake(mywidth, 64, 80, 40*number);
 
         for (int i=0; i<=number-1; i++) {
             UIButton *lbt=[[UIButton alloc]initWithFrame:CGRectMake(0, 40*i, 80, 40)];
@@ -427,6 +433,7 @@ BOOL isopen;
             cnvc.navtitle=[[[[infodic objectForKey:@"data"] objectForKey:@"companies"] objectAtIndex:indexPath.row]objectForKey:@"company"];
             NSLog(@"CNdetailViewController id=%@",cnvc.idstring);
             cnvc.tag=1;
+            cnvc.api_language=api_language;
             [self.navigationController pushViewController:cnvc animated:YES];
         }
     }
@@ -437,6 +444,7 @@ BOOL isopen;
             cnvc.navtitle=[[[[infodic objectForKey:@"data"] objectForKey:@"net"] objectAtIndex:indexPath.row]objectForKey:@"net"];
             NSLog(@"CNdetailViewController id=%@",cnvc.idstring);
             cnvc.tag=2;
+            cnvc.api_language=api_language;
             [self.navigationController pushViewController:cnvc animated:YES];
         }
     }
