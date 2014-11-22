@@ -1,12 +1,12 @@
 //
-//  CNdetailViewController.m
+//  DataDetailViewController.m
 //  MssForPhone
 //
-//  Created by it-mobile on 14/11/14.
+//  Created by it-mobile on 14/11/20.
 //  Copyright (c) 2014年 Paul. All rights reserved.
 //
 
-#import "CNdetailViewController.h"
+#import "DataDetailViewController.h"
 #import "AppDelegate.h"
 #import "ASIHTTPRequest.h"
 #import "API.h"
@@ -14,27 +14,27 @@
 
 #define mywidth  self.view.bounds.size.width
 #define myheight  self.view.bounds.size.height
-@interface CNdetailViewController ()
+
+@interface DataDetailViewController ()
 {
     NSInteger page;
     ASIHTTPRequest *requestpictures;
     NSString *apistring;
     NSString *response;
     id object;
-    NSDictionary *cndic;
+    NSDictionary *datasdic;
     NSInteger pagenumber;
 }
 
 @end
 
-@implementation CNdetailViewController
+@implementation DataDetailViewController
 @synthesize myscroller;
 @synthesize subscroller;
 @synthesize pagecontrol;
 @synthesize idstring;
 @synthesize myactivityindicator;
 @synthesize navtitle;
-@synthesize tag;
 @synthesize api_language;
 
 -(void)viewWillAppear:(BOOL)animated
@@ -46,17 +46,15 @@
     
 }
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [requestpictures cancel];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (tag==1) {
-        apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%@",HTTP_companyinfo,api_language,idstring];
-        
-    }else if(tag==2)
-    {
-        apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%@",HTTP_netinfo,api_language,idstring];
-
-    }
-    
+    apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%@",HTTP_technologyinfo,api_language,idstring];
     requestpictures=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestpictures.tag=1;
     [requestpictures setDelegate:self];
@@ -68,11 +66,12 @@
     [pagecontrol setCurrentPage:0];
     pagecontrol.currentPageIndicatorTintColor=[UIColor blackColor];
     pagecontrol.pageIndicatorTintColor=[UIColor grayColor];
+    pagecontrol.hidden=YES;//点太多先隐藏
     
-    myscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 164, mywidth, myheight-360)];
+    myscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, mywidth, myheight-100)];
     myscroller.backgroundColor=[UIColor groupTableViewBackgroundColor];
     myscroller.userInteractionEnabled=YES;
-    myscroller.maximumZoomScale=4;
+    myscroller.maximumZoomScale=2.5;
     myscroller.minimumZoomScale=1;
     myscroller.delegate=self;
     [self.view addSubview:myscroller];
@@ -102,22 +101,22 @@
         response=[request responseString];
         
         [self jsonStringToObject];
-        cndic=object;
-        NSLog(@"%@",cndic);
-        pagecontrol.numberOfPages=[[cndic objectForKey:@"data"] count];
+        datasdic=object;
+        NSLog(@"%@",datasdic);
+        pagecontrol.numberOfPages=[[datasdic objectForKey:@"data"] count];
         pagenumber=pagecontrol.numberOfPages;
         NSLog(@"共有%li页",(long)pagenumber);
-        subscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-360)];
-        subscroller.contentSize=CGSizeMake(mywidth*pagenumber, myheight-360);
+        subscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-100)];
+        subscroller.contentSize=CGSizeMake(mywidth*pagenumber, myheight-100);
         subscroller.pagingEnabled=YES;
         subscroller.delegate=self;
         subscroller.tag=1;
         [myscroller addSubview:subscroller];
         
         for (int i=0; i<pagenumber; i++) {
-            UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth*i, 0, mywidth, myheight-360)];
-            [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[cndic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]]];
-            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[cndic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]);
+            UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth*i, 0, mywidth, myheight-100)];
+            [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[datasdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]]];
+            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[datasdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]);
             [subscroller addSubview:imageview];
         }
         [myactivityindicator stopAnimating];
@@ -189,11 +188,13 @@
 -(void)fangda
 {
     [UIView animateWithDuration:0.3 animations:^{
-        myscroller.zoomScale=3;
+        myscroller.zoomScale=2.5;
         
     }];
     
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

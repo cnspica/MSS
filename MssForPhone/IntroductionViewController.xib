@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -18,6 +18,7 @@
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xri-UF-xvv">
                     <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="gKn-ip-9ol"/>
                     </connections>
@@ -25,10 +26,10 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Xri-UF-xvv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="3PL-0b-Ofu"/>
-                <constraint firstAttribute="bottom" secondItem="Xri-UF-xvv" secondAttribute="bottom" constant="49" id="Dq9-BT-BNh"/>
-                <constraint firstItem="Xri-UF-xvv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZCH-nH-pLK"/>
-                <constraint firstAttribute="trailing" secondItem="Xri-UF-xvv" secondAttribute="trailing" id="ehO-te-JnU"/>
+                <constraint firstItem="Xri-UF-xvv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JJE-mO-NzZ"/>
+                <constraint firstItem="Xri-UF-xvv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="MqA-Wg-VMv"/>
+                <constraint firstAttribute="bottom" secondItem="Xri-UF-xvv" secondAttribute="bottom" constant="49" id="bhw-bA-RMH"/>
+                <constraint firstAttribute="trailing" secondItem="Xri-UF-xvv" secondAttribute="trailing" id="jQ3-RJ-ep6"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

@@ -18,6 +18,7 @@
 @interface ShowMovieViewController ()
 {
     MPMoviePlayerController *moviePlayer;
+    ASIHTTPRequest *requestmovie;
 }
 @end
 
@@ -48,7 +49,8 @@
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     UIDevice *device = [UIDevice currentDevice]; //Get the device object
     [nc removeObserver:self name:UIDeviceOrientationDidChangeNotification object:device];
-    
+    [requestmovie cancel];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -63,17 +65,17 @@
     [myactivityindicator startAnimating];
     myactivityindicator.hidesWhenStopped=YES;
     
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:videourl]];
+    requestmovie = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:videourl]];
     //获取全局变量
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     //设置缓存方式
-    [request setDownloadCache:appDelegate.myCache];
+    [requestmovie setDownloadCache:appDelegate.myCache];
     //设置缓存数据存储策略，这里采取的是如果无更新或无法联网就读取缓存数据
-    [request setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
-    [request setDidFinishSelector:@selector(requestFinished:)];
-    request.delegate = self;
-    request.tag=1;
-    [request startAsynchronous];
+    [requestmovie setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
+    [requestmovie setDidFinishSelector:@selector(requestFinished:)];
+    requestmovie.delegate = self;
+    requestmovie.tag=1;
+    [requestmovie startAsynchronous];
     
 }
 

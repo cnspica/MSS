@@ -26,6 +26,7 @@ BOOL isopen;
 {
     UIView *longpicture;
     UIView *languageview;
+    UIImageView *historyimage;
     NSMutableArray *languagelist_country;
     NSMutableArray *languagelist_lang;
     ASIHTTPRequest *requestlanguages;
@@ -82,7 +83,7 @@ BOOL isopen;
     //---------------------------------------------------------------------------
     UIButton *languagebt = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
     [languagebt addTarget:self action:@selector(selectlanguage) forControlEvents:UIControlEventTouchUpInside];
-    [languagebt setBackgroundImage:[UIImage imageNamed:@"语言.png"] forState:UIControlStateNormal];
+    [languagebt setBackgroundImage:[UIImage imageNamed:@"语言2.png"] forState:UIControlStateNormal];
     UIBarButtonItem *leftbt = [[UIBarButtonItem alloc]initWithCustomView:languagebt];
     self.tabBarController.navigationItem.rightBarButtonItem=leftbt;
     //---------------------------------------------------------------------------
@@ -116,6 +117,7 @@ BOOL isopen;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     languagelist_country=[[NSMutableArray alloc]init];
     languagelist_lang=[[NSMutableArray alloc]init];
 
@@ -146,6 +148,13 @@ BOOL isopen;
     [myscroller addSubview:infolabel];
 
 
+    yudotable=[[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    yudotable.backgroundColor=[UIColor clearColor];
+    yudotable.delegate=self;
+    yudotable.dataSource=self;
+    yudotable.scrollEnabled=NO;
+    [myscroller addSubview:yudotable];
+    
     longpicture=[[UIView alloc]initWithFrame:CGRectMake(0, 0, myheight, mywidth)];
     longpicture.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:longpicture];
@@ -155,8 +164,7 @@ BOOL isopen;
     history.contentSize=CGSizeMake(mywidth, 2290/2);
     [longpicture addSubview:history];
     
-    UIImageView *historyimage=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"历史里程碑.png"]];
-    [historyimage setFrame:CGRectMake(0, 0, myheight, 2290/2)];
+    historyimage=[[UIImageView alloc]init];
     [history addSubview:historyimage];
     
 
@@ -179,8 +187,7 @@ BOOL isopen;
     languageview.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
     languageview.alpha=0;
     [self.view addSubview:languageview];
-
-
+    
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -224,14 +231,20 @@ BOOL isopen;
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[[infodic objectForKey:@"data"]objectForKey:@"top_images"] objectAtIndex:0]objectForKey:@"file"]]];
         [myimageview1 sd_setImageWithURL:url];
         
+        
+        float scale=[[NSString stringWithFormat:@"%@",[[[[infodic objectForKey:@"data"]objectForKey:@"top_images"] objectAtIndex:1]objectForKey:@"width"]] floatValue]/myheight;
+        float imageheight=[[NSString stringWithFormat:@"%@",[[[[infodic objectForKey:@"data"]objectForKey:@"top_images"] objectAtIndex:1]objectForKey:@"height"]] floatValue];
+        float imagewidth=[[NSString stringWithFormat:@"%@",[[[[infodic objectForKey:@"data"]objectForKey:@"top_images"] objectAtIndex:1]objectForKey:@"width"]] floatValue];
+        
+        [historyimage setFrame:CGRectMake(0, 0, imagewidth/scale, imageheight/scale)];
+         NSURL *url_history=[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[[infodic objectForKey:@"data"]objectForKey:@"top_images"] objectAtIndex:1]objectForKey:@"file"]]];
+        [historyimage sd_setImageWithURL:url_history];
+        
         companynumber=[[[infodic objectForKey:@"data"] objectForKey:@"companies"]count];
         networknumber=[[[infodic objectForKey:@"data"] objectForKey:@"net"]count];
-        yudotable=[[UITableView alloc]initWithFrame:CGRectMake(0, 910/2+49, mywidth, 56*3+44*7) style:UITableViewStyleGrouped];
-        yudotable.backgroundColor=[UIColor clearColor];
-        yudotable.delegate=self;
-        yudotable.dataSource=self;
-        yudotable.scrollEnabled=NO;
-        [myscroller addSubview:yudotable];
+        
+        [yudotable setFrame:CGRectMake(0, 910/2+49, mywidth, 56*3+44*7)];
+        
         url_buttomvideo=[[[[infodic objectForKey:@"data"] objectForKey:@"bottom_video"]objectAtIndex:0] objectForKey:@"file"];
         infodic_finished=YES;
 

@@ -53,10 +53,10 @@
     self.tabBarController.title=@"技术";
     self.navigationController.navigationBar.hidden=NO;
     self.tabBarController.navigationItem.titleView=navcenter;
+    self.tabBarController.navigationItem.rightBarButtonItem=nil;
 
     AppDelegate *delegate=[[UIApplication sharedApplication]delegate];
     delegate.Orientations=NO;
-    self.tabBarController.navigationItem.rightBarButtonItem=nil;
     
     tempheight=0;
 
@@ -78,6 +78,7 @@
     myscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, mywidth, myheight-64-49)];
     myscroller.backgroundColor=[UIColor groupTableViewBackgroundColor];
     myscroller.userInteractionEnabled=YES;
+    myscroller.delegate=self;
     [self.view addSubview:myscroller];
     
     

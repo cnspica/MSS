@@ -46,9 +46,16 @@
 
 }
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [requestpictures cancel];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%@",HTTP_productinfo,api_language,idstring];
+    NSLog(@"%@",apistring);
     requestpictures=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestpictures.tag=1;
     [requestpictures setDelegate:self];

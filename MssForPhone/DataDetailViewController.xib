@@ -5,9 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MarketViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DataDetailViewController">
             <connections>
-                <outlet property="myscroller" destination="PB3-Vf-Pon" id="y9L-vt-A2m"/>
+                <outlet property="pagecontrol" destination="UDk-3I-SK4" id="woQ-u4-Xiz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,19 +16,19 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PB3-Vf-Pon">
-                    <rect key="frame" x="0.0" y="64" width="320" height="455"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="9AA-N1-kbh"/>
-                    </connections>
-                </scrollView>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="1" translatesAutoresizingMaskIntoConstraints="NO" id="UDk-3I-SK4">
+                    <rect key="frame" x="141" y="531" width="39" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="39" id="yAH-Tb-SWK"/>
+                    </constraints>
+                    <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="currentPageIndicatorTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </pageControl>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="PB3-Vf-Pon" secondAttribute="bottom" constant="49" id="7YU-l7-qiN"/>
-                <constraint firstItem="PB3-Vf-Pon" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="EQl-wg-4F6"/>
-                <constraint firstAttribute="trailing" secondItem="PB3-Vf-Pon" secondAttribute="trailing" id="Qvi-as-mZV"/>
-                <constraint firstItem="PB3-Vf-Pon" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vbB-Hv-r1D"/>
+                <constraint firstItem="UDk-3I-SK4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="cbx-Qb-Os9"/>
+                <constraint firstAttribute="bottom" secondItem="UDk-3I-SK4" secondAttribute="bottom" id="qTr-gC-CAG"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

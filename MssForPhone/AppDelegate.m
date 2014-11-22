@@ -11,6 +11,7 @@
 #import "ProductsViewController.h"
 #import "MarketViewController.h"
 #import "TechnologyViewController.h"
+#import "DataViewController.h"
 
 @implementation AppDelegate
 @synthesize tarbarcontroller;
@@ -19,18 +20,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    sleep(2);
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
     IntroductionViewController *introductionvc=[[IntroductionViewController alloc]initWithNibName:@"IntroductionViewController" bundle:nil];
     ProductsViewController *productsvc=[[ProductsViewController alloc]initWithNibName:@"ProductsViewController" bundle:nil];
     MarketViewController *marketvc=[[MarketViewController alloc]initWithNibName:@"MarketViewController" bundle:nil];
-    TechnologyViewController *technologyvc=[[TechnologyViewController alloc]initWithNibName:@"TechnologyViewController" bundle:nil];
+//    TechnologyViewController *technologyvc=[[TechnologyViewController alloc]initWithNibName:@"TechnologyViewController" bundle:nil];
+    DataViewController *datavc=[[DataViewController alloc]initWithNibName:@"DataViewController" bundle:nil];
+    
     tarbarcontroller=[[UITabBarController alloc]init];
-    tarbarcontroller.viewControllers=@[introductionvc,productsvc,marketvc,technologyvc];
+    tarbarcontroller.viewControllers=@[introductionvc,productsvc,marketvc,datavc];
     UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:tarbarcontroller];
     self.window.rootViewController=nav;
-    
     
     ASIDownloadCache *cache = [[ASIDownloadCache alloc] init];
     self.myCache = cache;
@@ -38,10 +41,9 @@
     //设置缓存路径
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     NSString *path = [paths objectAtIndex:0];
+    NSLog(@"%@",path);
     [self.myCache setStoragePath:[path stringByAppendingPathComponent:@"Caches"]];
     [self.myCache setDefaultCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
-
-    
     [self.window makeKeyAndVisible];
     return YES;
 }

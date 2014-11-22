@@ -27,6 +27,7 @@
     NSDictionary *applicationdic;
     NSInteger pagenumber;
     AppDelegate *delegate;
+    NSString *urlstring;
 }
 
 @end
@@ -46,6 +47,13 @@
     delegate.Orientations=NO;
 
 }
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [requestpictures cancel];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -76,8 +84,7 @@
     self.navigationItem.titleView=segmentview;
     
 //    NSString *path=[[NSBundle mainBundle] pathForResource:@"BackCover" ofType:@"mp4"];
-    NSURL *url=[NSURL URLWithString:@"http://192.168.158.234/minimss/resource/yudo.mp4"];
-    moviePlayer=[[MPMoviePlayerController alloc]initWithContentURL:url];
+    moviePlayer=[[MPMoviePlayerController alloc]init];
     moviePlayer.scalingMode = MPMovieScalingModeAspectFit;;
     [moviePlayer.view setFrame:CGRectMake(0, 0, mywidth, myheight)];
     [moviePlayer.view setBackgroundColor:[UIColor clearColor]];
@@ -87,7 +94,7 @@
     pagecontrol.currentPageIndicatorTintColor=[UIColor blackColor];
     pagecontrol.pageIndicatorTintColor=[UIColor grayColor];
     
-    myscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 164, mywidth, myheight-360)];
+    myscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 180, mywidth, myheight-360)];
     myscroller.backgroundColor=[UIColor groupTableViewBackgroundColor];
     myscroller.userInteractionEnabled=YES;
     myscroller.maximumZoomScale=2.5;
@@ -122,7 +129,8 @@
         [self jsonStringToObject];
         applicationdic=object;
         NSLog(@"%@",applicationdic);
-        pagecontrol.numberOfPages=[[applicationdic objectForKey:@"data"] count];
+        pagecontrol.numberOfPages=[[[applicationdic objectForKey:@"data"] objectForKey:@"images"] count];
+        NSLog(@"%ld",(long)pagecontrol.numberOfPages);
         pagenumber=pagecontrol.numberOfPages;
         NSLog(@"共有%li页",(long)pagenumber);
         subscroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-360)];
@@ -134,8 +142,8 @@
         
         for (int i=0; i<pagenumber; i++) {
             UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth*i, 0, mywidth, myheight-360)];
-            [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[applicationdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]]];
-            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[applicationdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]);
+            [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[[applicationdic objectForKey:@"data"] objectForKey:@"images"] objectAtIndex:i] objectForKey:@"file"]]]];
+            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[[applicationdic objectForKey:@"data"]objectForKey:@"images"]objectAtIndex:i] objectForKey:@"file"]]);
             [subscroller addSubview:imageview];
         }
         [myactivityindicator stopAnimating];
@@ -178,7 +186,7 @@
             delegate.Orientations=NO;
             videoview.hidden=YES;
             pdfview.hidden=NO;
-            [moviePlayer pause];
+            [moviePlayer stop];
 
             break;
             
@@ -187,6 +195,18 @@
             delegate.Orientations=YES;
             pdfview.hidden=YES;
             videoview.hidden=NO;
+            NSLog(@"%ld",(long)pagecontrol.currentPage);
+               
+              
+            if ([[[applicationdic objectForKey:@"data"] objectForKey:@"video"] count]==0) {
+                
+                NSLog(@"无资源");
+                
+            }else
+            {
+                urlstring=[NSString stringWithFormat:@"%@",[[[[applicationdic objectForKey:@"data"] objectForKey:@"video"] objectAtIndex:pagecontrol.currentPage] objectForKey:@"file"]];
+            }
+            moviePlayer.contentURL=[NSURL URLWithString:urlstring];
             [moviePlayer play];
 
             break;
