@@ -17,10 +17,15 @@
 @synthesize tarbarcontroller;
 @synthesize Orientations;
 @synthesize myCache;
+@synthesize selectlanguage;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     sleep(2);
+    selectlanguage=@"cn";
+    [[NSUserDefaults standardUserDefaults]setObject:selectlanguage forKey:@"lan"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     

@@ -86,7 +86,8 @@ BOOL zhankai;
     zhankai=NO;
     jiantou.image=[UIImage imageNamed:@"down.png"];
 
-    api_language=@"cn";
+    api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
+    NSLog(@"%@",api_language);
     apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%li",HTTP_marketinfo,api_language,(long)marketid];
     requestmarketinfo=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestmarketinfo.tag=2;
@@ -100,8 +101,8 @@ BOOL zhankai;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    api_language=@"cn";
     marketid=1;
+    api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
     apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_marketlist,api_language];
     requestmarketlist=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestmarketlist.tag=1;
@@ -177,7 +178,7 @@ BOOL zhankai;
         
         [self jsonStringToObject];
         marketlistdic=object;
-        NSLog(@"%@",marketlistdic);
+//        NSLog(@"%@",marketlistdic);
        
         for (int i=0; i<[[marketlistdic objectForKey:@"data"] count]; i++) {
             [marketlist addObject:[[[marketlistdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"market"]];
@@ -197,9 +198,13 @@ BOOL zhankai;
                        count];
         NSLog(@"top picture数量＝%li张",(long)picturenumber);
         
+        [picturescroll removeFromSuperview];
+        picturescroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-64-49)];
+        picturescroll.pagingEnabled=YES;
+        picturescroll.backgroundColor=[UIColor clearColor];
         picturescroll.contentSize=CGSizeMake(mywidth*picturenumber,myheight-64-49);
-
-
+        [myscroller addSubview:picturescroll];
+        
         for (int i=0; i<picturenumber; i++) {
             UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth*i, 0, mywidth, myheight-64-49)];
             [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[[marketinfodic objectForKey:@"data"] objectForKey:@"top_images"] objectAtIndex:i] objectForKey:@"file"]]]];
@@ -224,7 +229,7 @@ BOOL zhankai;
         
         [self jsonStringToObject];
         marketinfodic=object;
-        NSLog(@"%@",marketinfodic);
+//        NSLog(@"%@",marketinfodic);
         picturenumber=[[[marketinfodic objectForKey:@"data"] objectForKey:@"top_images"]
                        count];
         NSLog(@"top picture数量＝%li张",(long)picturenumber);
@@ -240,7 +245,7 @@ BOOL zhankai;
         for (int i=0; i<picturenumber; i++) {
             UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth*i, 0, mywidth, myheight-64-49)];
             [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[[marketinfodic objectForKey:@"data"] objectForKey:@"top_images"] objectAtIndex:i] objectForKey:@"file"]]]];
-            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[[marketinfodic objectForKey:@"data"] objectForKey:@"top_images"] objectAtIndex:i] objectForKey:@"file"]]);
+//            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[[marketinfodic objectForKey:@"data"] objectForKey:@"top_images"] objectAtIndex:i] objectForKey:@"file"]]);
             [picturescroll addSubview:imageview];
         }
         
@@ -346,6 +351,7 @@ BOOL zhankai;
 //再次请求并刷新列表
 -(void)changemarket
 {
+    api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
     apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%ld",HTTP_marketinfo,api_language,(long)marketid];
     requestmarketinfo_re=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestmarketinfo_re.tag=3;

@@ -15,5 +15,6 @@
 @property(nonatomic,retain)UITabBarController *tarbarcontroller;
 @property(nonatomic,assign)BOOL Orientations;
 @property (nonatomic,retain) ASIDownloadCache *myCache;
+@property(nonatomic,retain)NSString *selectlanguage;
 
 @end

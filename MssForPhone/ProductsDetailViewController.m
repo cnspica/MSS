@@ -54,6 +54,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
     apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%@",HTTP_productinfo,api_language,idstring];
     NSLog(@"%@",apistring);
     requestpictures=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];

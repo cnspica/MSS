@@ -60,7 +60,7 @@
     
     tempheight=0;
 
-    api_language=@"cn";
+    api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
     apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_technologyinfo,api_language];
     requesttechnology=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requesttechnology.tag=1;

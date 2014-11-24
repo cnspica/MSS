@@ -44,6 +44,7 @@ BOOL isopen;
     BOOL languagedic_finished;
     BOOL infodic_finished;
     NSString *url_buttomvideo;
+    
 }
 @end
 
@@ -88,8 +89,8 @@ BOOL isopen;
     self.tabBarController.navigationItem.rightBarButtonItem=leftbt;
     //---------------------------------------------------------------------------
 
-   
-    api_language=@"cn";
+    api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
+    NSLog(@"%@",api_language);
     apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_yudoinfo,api_language];
     requestinfo=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestinfo.tag=2;
@@ -190,6 +191,8 @@ BOOL isopen;
     
 }
 
+
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
 - (void)requestFinished:(ASIHTTPRequest *)request
@@ -199,17 +202,17 @@ BOOL isopen;
         
         [self jsonStringToObject];
         languagesdic=object;
-        NSLog(@"%@",languagesdic);
+//        NSLog(@"%@",languagesdic);
         
         for (int i=0; i<[[languagesdic objectForKey:@"data"]count]; i++) {
             [languagelist_country addObject:[[[languagesdic objectForKey:@"data"] objectAtIndex:i]objectForKey:@"lang_title"]];
             [languagelist_lang addObject:[[[languagesdic objectForKey:@"data"] objectAtIndex:i]objectForKey:@"lang"]];
         }
         
-        languageview.frame=CGRectMake(mywidth, 64, 80, 40*number);
+        languageview.frame=CGRectMake(mywidth, 64, 90, 40*number);
 
         for (int i=0; i<=number-1; i++) {
-            UIButton *lbt=[[UIButton alloc]initWithFrame:CGRectMake(0, 40*i, 80, 40)];
+            UIButton *lbt=[[UIButton alloc]initWithFrame:CGRectMake(0, 40*i, 90, 40)];
             [lbt setTitle:[NSString stringWithFormat:@"%@",[languagelist_country objectAtIndex:i]] forState:UIControlStateNormal];
             [lbt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             lbt.titleLabel.font=[UIFont systemFontOfSize:15];
@@ -247,7 +250,8 @@ BOOL isopen;
         
         url_buttomvideo=[[[[infodic objectForKey:@"data"] objectForKey:@"bottom_video"]objectAtIndex:0] objectForKey:@"file"];
         infodic_finished=YES;
-
+        
+        [yudotable reloadData];
     }
 
     if (languagedic_finished&&infodic_finished) {
@@ -285,26 +289,40 @@ BOOL isopen;
 -(void)confirm:(UIButton *)sender
 {
     api_language=[languagelist_lang objectAtIndex:sender.tag];
-    NSLog(@"%@",api_language);
+    [[NSUserDefaults standardUserDefaults]setObject:api_language forKey:@"lan"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]);
     [UIView animateWithDuration:0.3 animations:^{
-        [languageview setFrame:CGRectMake(mywidth, 64, 80, 40*number)];
+        [languageview setFrame:CGRectMake(mywidth, 64, 90, 40*number)];
         languageview.alpha=0;
     }];
     isopen=NO;
+    
+    api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
+    NSLog(@"%@",api_language);
+    apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_yudoinfo,api_language];
+    requestinfo=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
+    requestinfo.tag=2;
+    [requestinfo setDelegate:self];
+    [requestinfo setTimeOutSeconds:60];
+    [requestinfo setDidFinishSelector:@selector(requestFinished:)];
+    [requestinfo setDidFailSelector:@selector(requestFailed:)];
+    [requestinfo startAsynchronous];
+
 }
 
 -(void)selectlanguage
 {
     if (isopen==NO) {
         [UIView animateWithDuration:0.3 animations:^{
-            [languageview setFrame:CGRectMake(240, 64, 80, 40*number)];
+            [languageview setFrame:CGRectMake(mywidth-90, 64, 90, 40*number)];
             languageview.alpha=1;
         }];
         isopen=YES;
     }else if(isopen==YES)
     {
         [UIView animateWithDuration:0.3 animations:^{
-            [languageview setFrame:CGRectMake(mywidth, 64, 80, 40*number)];
+            [languageview setFrame:CGRectMake(mywidth, 64, 90, 40*number)];
             languageview.alpha=0;
         }];
         isopen=NO;

@@ -48,6 +48,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
     if (tag==1) {
         apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%@",HTTP_companyinfo,api_language,idstring];
         

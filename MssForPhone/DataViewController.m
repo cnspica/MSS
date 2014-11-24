@@ -58,7 +58,8 @@
     AppDelegate *delegate=[[UIApplication sharedApplication]delegate];
     delegate.Orientations=NO;
     
-    api_language=@"cn";
+    api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
+    NSLog(@"%@",api_language);
     apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_technologieslist,api_language];
     requestdatas=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestdatas.tag=1;
@@ -98,10 +99,10 @@
         
         [self jsonStringToObject];
         datadic=object;
-        NSLog(@"%@",datadic);
+//        NSLog(@"%@",datadic);
         
         numbers=(int)[[datadic objectForKey:@"data"]count];
-        NSLog(@"%d",numbers);
+//        NSLog(@"%d",numbers);
         
         productscroller.backgroundColor=[UIColor clearColor];
         if (numbers%2==0) {
@@ -193,7 +194,7 @@
 -(void)initscrollerpicture:(UIImageView *)ptimage
 {
     NSURL *url=[[NSURL alloc]initWithString:[NSString stringWithFormat:@"%@",[[[datadic objectForKey:@"data"]objectAtIndex:(ptimage.tag-1)] objectForKey:@"ico"]]];
-    NSLog(@"%@",url);
+//    NSLog(@"%@",url);
     [ptimage sd_setImageWithURL:url];
     
 }
