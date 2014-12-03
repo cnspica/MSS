@@ -28,6 +28,8 @@
     NSString *apistring;
     NSString *api_language;
     int numbers;
+    
+    NSString *product;
 }
 @end
 
@@ -41,15 +43,25 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self initlabel];
         [self.tabBarItem setImage:[UIImage imageNamed:@"product.png"]];
-        self.tabBarItem.title=@"产品";
+        self.tabBarItem.title=product;
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeitem) name:@"ChangeBaritemNotificaton" object:nil];
     }
     return self;
+}
+-(void)changeitem
+{
+    [self initlabel];
+    self.tabBarItem.title=product;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.tabBarController.title=@"产品";
+    [self initlabel];
+    self.tabBarItem.title=product;
+
+    self.tabBarController.title=product;
     self.navigationController.navigationBar.hidden=YES;
     self.tabBarController.navigationItem.titleView=nil;
     self.tabBarController.navigationItem.rightBarButtonItem=nil;
@@ -58,7 +70,7 @@
     delegate.Orientations=NO;
 
     api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
-    NSLog(@"%@",api_language);
+//    NSLog(@"%@",api_language);
     apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_productslist,api_language];
     requestproducts=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestproducts.tag=1;
@@ -86,6 +98,17 @@
     [alphaview addGestureRecognizer:hideGesture];
     
     
+    
+}
+
+-(void)initlabel
+{
+    NSBundle *bundle=[NSBundle mainBundle];
+    NSURL *plistURL=[bundle URLForResource:@"Localization" withExtension:@"plist"];
+    NSDictionary *root=[[NSDictionary alloc]initWithContentsOfURL:plistURL];
+//    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]);
+    NSDictionary *dic=[root objectForKey:[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
+    product=[dic objectForKey:@"product"];
     
 }
 

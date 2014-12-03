@@ -23,6 +23,8 @@
     id object;
     NSDictionary *cndic;
     NSInteger pagenumber;
+    UIView *fullview;
+    UIScrollView *areascroller;
 }
 
 @end
@@ -39,10 +41,17 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    //----- SETUP DEVICE ORIENTATION CHANGE NOTIFICATION -----
+    UIDevice *device = [UIDevice currentDevice]; //Get the device object
+    [device beginGeneratingDeviceOrientationNotifications]; //Tell it to start monitoring the accelerometer for orientation
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter]; //Get the notification centre for the app
+    [nc addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification  object:device];
+    
+    AppDelegate *delegate=[[UIApplication sharedApplication]delegate];
+    delegate.Orientations=YES;
+
     self.title=navtitle;
     self.navigationController.navigationBar.hidden=NO;
-    AppDelegate *delegate=[[UIApplication sharedApplication]delegate];
-    delegate.Orientations=NO;
     
 }
 
@@ -92,6 +101,10 @@
     [myactivityindicator startAnimating];
     myactivityindicator.hidesWhenStopped=YES;
     
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, myheight, mywidth)];
+    fullview.backgroundColor=[UIColor whiteColor];
+    [self.view addSubview:fullview];
+    fullview.alpha=0;
     
 }
 
@@ -104,7 +117,7 @@
         
         [self jsonStringToObject];
         cndic=object;
-        NSLog(@"%@",cndic);
+//        NSLog(@"%@",cndic);
         pagecontrol.numberOfPages=[[cndic objectForKey:@"data"] count];
         pagenumber=pagecontrol.numberOfPages;
         NSLog(@"共有%li页",(long)pagenumber);
@@ -118,13 +131,33 @@
         for (int i=0; i<pagenumber; i++) {
             UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth*i, 0, mywidth, myheight-360)];
             [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[cndic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]]];
-            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[cndic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]);
+//            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[cndic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]);
             [subscroller addSubview:imageview];
+
         }
         [myactivityindicator stopAnimating];
+        
+        [self performSelectorInBackground:@selector(backgroundactivity) withObject:nil];
+
     }
     
     
+}
+
+-(void)backgroundactivity
+{
+    areascroller=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, myheight, mywidth)];
+    areascroller.contentSize=CGSizeMake(myheight*pagenumber, mywidth);
+    areascroller.pagingEnabled=YES;
+    [fullview addSubview:areascroller];
+    
+    for (int j=0; j<pagenumber; j++) {
+        UIImageView *imageview2=[[UIImageView alloc]initWithFrame:CGRectMake(myheight*j, 0, myheight, mywidth)];
+        [imageview2 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[cndic objectForKey:@"data"] objectAtIndex:j] objectForKey:@"file"]]]];
+        
+        [areascroller addSubview:imageview2];
+    }
+
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -161,7 +194,7 @@
             return v;
         }
     }
-    return nil;
+        return nil;
 }
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
@@ -191,16 +224,57 @@
 {
     [UIView animateWithDuration:0.3 animations:^{
         myscroller.zoomScale=3;
-        
     }];
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+
+- (void)orientationChanged:(NSNotification *)note  {
+    UIDeviceOrientation o = [[UIDevice currentDevice] orientation];
+    
+    
+    switch (o) {
+        case UIDeviceOrientationPortrait:            // Device oriented vertically, home button on the bottom
+            self.navigationController.navigationBarHidden=NO;
+            fullview.alpha=0;
+            
+            break;
+        case UIDeviceOrientationPortraitUpsideDown:  // Device oriented vertically, home button on the top
+            self.navigationController.navigationBarHidden=YES;
+            fullview.alpha=1;
+
+            
+            break;
+        case UIDeviceOrientationLandscapeLeft:      // Device oriented horizontally, home button on the right
+            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:YES];
+            self.navigationController.navigationBarHidden=YES;
+            fullview.alpha=1;
+
+            
+            
+            break;
+        case UIDeviceOrientationLandscapeRight:      // Device oriented horizontally, home button on the left
+            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:YES];
+            self.navigationController.navigationBarHidden=YES;
+            fullview.alpha=1;
+
+            break;
+            
+        default:
+            break;
+    }
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // 操作
+    return YES;  // YES为允许横屏，否则不允许横屏
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
 /*
 #pragma mark - Navigation
 

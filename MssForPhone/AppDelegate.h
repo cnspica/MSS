@@ -17,4 +17,8 @@
 @property (nonatomic,retain) ASIDownloadCache *myCache;
 @property(nonatomic,retain)NSString *selectlanguage;
 
+@property(nonatomic,retain)NSString *serviceuuid;
+@property(nonatomic,retain)NSString *getuuid;
+@property(nonatomic,retain)NSString *state;
+
 @end

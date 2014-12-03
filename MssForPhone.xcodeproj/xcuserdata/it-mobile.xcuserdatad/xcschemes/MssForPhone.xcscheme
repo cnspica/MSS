@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DA10DA661A0463FA000A2EFA"
-               BuildableName = "MssForPhone.app"
+               BuildableName = "Mss.app"
                BlueprintName = "MssForPhone"
                ReferencedContainer = "container:MssForPhone.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DA10DA661A0463FA000A2EFA"
-            BuildableName = "MssForPhone.app"
+            BuildableName = "Mss.app"
             BlueprintName = "MssForPhone"
             ReferencedContainer = "container:MssForPhone.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DA10DA661A0463FA000A2EFA"
-            BuildableName = "MssForPhone.app"
+            BuildableName = "Mss.app"
             BlueprintName = "MssForPhone"
             ReferencedContainer = "container:MssForPhone.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DA10DA661A0463FA000A2EFA"
-            BuildableName = "MssForPhone.app"
+            BuildableName = "Mss.app"
             BlueprintName = "MssForPhone"
             ReferencedContainer = "container:MssForPhone.xcodeproj">
          </BuildableReference>

@@ -56,7 +56,6 @@
     [super viewDidLoad];
     api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
     apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%@",HTTP_productinfo,api_language,idstring];
-    NSLog(@"%@",apistring);
     requestpictures=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestpictures.tag=1;
     [requestpictures setDelegate:self];
@@ -103,7 +102,7 @@
         
         [self jsonStringToObject];
         productdic=object;
-        NSLog(@"%@",productdic);
+//        NSLog(@"%@",productdic);
         pagecontrol.numberOfPages=[[productdic objectForKey:@"data"] count];
         pagenumber=pagecontrol.numberOfPages;
         NSLog(@"共有%li页",(long)pagenumber);
@@ -117,7 +116,7 @@
         for (int i=0; i<pagenumber; i++) {
             UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth*i, 0, mywidth, myheight-100)];
             [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[productdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]]];
-            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[productdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]);
+//            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[productdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]);
             [subscroller addSubview:imageview];
         }
         [myactivityindicator stopAnimating];

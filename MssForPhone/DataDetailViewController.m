@@ -103,7 +103,7 @@
         
         [self jsonStringToObject];
         datasdic=object;
-        NSLog(@"%@",datasdic);
+//        NSLog(@"%@",datasdic);
         pagecontrol.numberOfPages=[[datasdic objectForKey:@"data"] count];
         pagenumber=pagecontrol.numberOfPages;
         NSLog(@"共有%li页",(long)pagenumber);
@@ -117,7 +117,7 @@
         for (int i=0; i<pagenumber; i++) {
             UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth*i, 0, mywidth, myheight-100)];
             [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[datasdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]]];
-            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[datasdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]);
+//            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[datasdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"file"]]);
             [subscroller addSubview:imageview];
         }
         [myactivityindicator stopAnimating];

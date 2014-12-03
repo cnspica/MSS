@@ -52,6 +52,9 @@ BOOL zhankai;
     BOOL marketinfo_finished;
     BOOL marketinfo_re_finished;
 
+    NSString *market;
+    NSString *system;
+    NSString *application;
 }
 @end
 
@@ -64,16 +67,53 @@ BOOL zhankai;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        [self initlabel];
         [self.tabBarItem setImage:[UIImage imageNamed:@"market.png"]];
-        self.tabBarItem.title=@"市场";
+        self.tabBarItem.title=market;
         zhankai=NO;
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeitem) name:@"ChangeBaritemNotificaton" object:nil];
+
     }
     return self;
 }
 
+-(void)changeitem
+{
+    [self initlabel];
+    self.tabBarItem.title=market;
+}
+
+-(void)initlabel
+{
+    NSBundle *bundle=[NSBundle mainBundle];
+    NSURL *plistURL=[bundle URLForResource:@"Localization" withExtension:@"plist"];
+    NSDictionary *root=[[NSDictionary alloc]initWithContentsOfURL:plistURL];
+//    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]);
+    NSDictionary *dic=[root objectForKey:[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
+    market=[dic objectForKey:@"market"];
+    system=[dic objectForKey:@"system"];
+    application=[dic objectForKey:@"application"];
+    
+}
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.tabBarController.title=@"市场";
+    [self initlabel];
+    self.tabBarItem.title=market;
+    
+    api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
+    apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_marketlist,api_language];
+    requestmarketlist=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
+    requestmarketlist.tag=1;
+    [requestmarketlist setDelegate:self];
+    [requestmarketlist setTimeOutSeconds:60];
+    [requestmarketlist setDidFinishSelector:@selector(requestFinished:)];
+    [requestmarketlist setDidFailSelector:@selector(requestFailed:)];
+    [requestmarketlist startAsynchronous];
+
+    self.tabBarController.title=market;
     self.tabBarController.navigationItem.titleView=navcenter;
     self.navigationController.navigationBar.hidden=NO;
     self.tabBarController.navigationItem.rightBarButtonItem=nil;
@@ -87,7 +127,7 @@ BOOL zhankai;
     jiantou.image=[UIImage imageNamed:@"down.png"];
 
     api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
-    NSLog(@"%@",api_language);
+//    NSLog(@"%@",api_language);
     apistring=[NSString stringWithFormat:@"%@?lang=%@&id=%li",HTTP_marketinfo,api_language,(long)marketid];
     requestmarketinfo=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestmarketinfo.tag=2;
@@ -102,15 +142,6 @@ BOOL zhankai;
 - (void)viewDidLoad {
     [super viewDidLoad];
     marketid=1;
-    api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
-    apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_marketlist,api_language];
-    requestmarketlist=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
-    requestmarketlist.tag=1;
-    [requestmarketlist setDelegate:self];
-    [requestmarketlist setTimeOutSeconds:60];
-    [requestmarketlist setDidFinishSelector:@selector(requestFinished:)];
-    [requestmarketlist setDidFailSelector:@selector(requestFailed:)];
-    [requestmarketlist startAsynchronous];
 
     marketlist=[[NSMutableArray alloc]init];
     
@@ -137,28 +168,21 @@ BOOL zhankai;
     selectview.backgroundColor=[UIColor clearColor];
     [self.view addSubview:selectview];
     
-    pickerScroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, 50)];
-    pickerScroll.backgroundColor=[UIColor groupTableViewBackgroundColor];
-    [selectview addSubview:pickerScroll];
-    pickerScroll.showsHorizontalScrollIndicator=NO;
-    
-    
     navcenter=[[UIView alloc]initWithFrame:CGRectMake(0,0,160, 44)];
     navcenter.backgroundColor=[UIColor clearColor];
     myselectlabel=[[UILabel alloc]initWithFrame:CGRectMake(40, 0, 80, 44)];
-    myselectlabel.text=@"汽车";
     myselectlabel.textAlignment=YES;
     myselectlabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:16];
     myselectlabel.backgroundColor=[UIColor clearColor];
     [navcenter addSubview:myselectlabel];
     
-    myactivityindicator=[[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(20,12,20, 20)];
+    myactivityindicator=[[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(10,12,20, 20)];
     myactivityindicator.color=[UIColor blackColor];
     [navcenter addSubview:myactivityindicator];
     [myactivityindicator startAnimating];
     myactivityindicator.hidesWhenStopped=YES;
     
-    jiantou=[[UIImageView alloc]initWithFrame:CGRectMake(110, 7, 30, 30)];
+    jiantou=[[UIImageView alloc]initWithFrame:CGRectMake(125, 7, 30, 30)];
     jiantou.image=[UIImage imageNamed:@"down.png"];
     [navcenter addSubview:jiantou];
     
@@ -179,11 +203,23 @@ BOOL zhankai;
         [self jsonStringToObject];
         marketlistdic=object;
 //        NSLog(@"%@",marketlistdic);
-       
+        
+        [pickerScroll removeFromSuperview];
+        pickerScroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, 50)];
+        pickerScroll.backgroundColor=[UIColor groupTableViewBackgroundColor];
+        pickerScroll.showsHorizontalScrollIndicator=NO;
+        [selectview addSubview:pickerScroll];
+
+        
+        [marketlist removeAllObjects];
+        
         for (int i=0; i<[[marketlistdic objectForKey:@"data"] count]; i++) {
             [marketlist addObject:[[[marketlistdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"market"]];
         }
-        pickerScroll.contentSize=CGSizeMake(80*[marketlist count],50);
+
+        myselectlabel.text=[marketlist objectAtIndex:(marketid-1)];
+
+        pickerScroll.contentSize=CGSizeMake(160*[marketlist count],50);
         [self initpickerscroll];
         marketlist_finished=YES;
     }
@@ -193,10 +229,10 @@ BOOL zhankai;
         
         [self jsonStringToObject];
         marketinfodic=object;
-        NSLog(@"%@",marketinfodic);
+//        NSLog(@"%@",marketinfodic);
         picturenumber=[[[marketinfodic objectForKey:@"data"] objectForKey:@"top_images"]
                        count];
-        NSLog(@"top picture数量＝%li张",(long)picturenumber);
+//        NSLog(@"top picture数量＝%li张",(long)picturenumber);
         
         [picturescroll removeFromSuperview];
         picturescroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, myheight-64-49)];
@@ -208,7 +244,7 @@ BOOL zhankai;
         for (int i=0; i<picturenumber; i++) {
             UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth*i, 0, mywidth, myheight-64-49)];
             [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[[marketinfodic objectForKey:@"data"] objectForKey:@"top_images"] objectAtIndex:i] objectForKey:@"file"]]]];
-            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[[marketinfodic objectForKey:@"data"] objectForKey:@"top_images"] objectAtIndex:i] objectForKey:@"file"]]);
+//            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[[marketinfodic objectForKey:@"data"] objectForKey:@"top_images"] objectAtIndex:i] objectForKey:@"file"]]);
             [picturescroll addSubview:imageview];
         }
         
@@ -301,7 +337,7 @@ BOOL zhankai;
 {
     for (int i=1; i<=[marketlist count]; i++) {
         int j=i-1;
-        UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake(j*80,0,80,50)];
+        UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake(j*160,0,160,50)];
         button.tag=i;
         button.backgroundColor=[UIColor clearColor];
         [pickerScroll addSubview:button];
@@ -404,10 +440,10 @@ BOOL zhankai;
 {
         if (section==0)
         {
-            return @"系统";
+            return system;
         }else if (section==1)
         {
-            return @"应用";
+            return application;
         }else
     return nil;
 }

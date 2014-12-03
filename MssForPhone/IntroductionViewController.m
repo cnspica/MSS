@@ -15,6 +15,7 @@
 #import "UIImageView+WebCache.h"
 #import "Cell.h"
 #import "CNdetailViewController.h"
+#import "ProductsViewController.h"
 
 #define mywidth  self.view.bounds.size.width
 #define myheight  self.view.bounds.size.height
@@ -44,7 +45,15 @@ BOOL isopen;
     BOOL languagedic_finished;
     BOOL infodic_finished;
     NSString *url_buttomvideo;
+    UILabel *mylabel;//标题
+    UILabel *infolabel;//里程碑
     
+    NSString *introduction;
+    NSString *company;
+    NSString *net;
+    NSString *video;
+    NSString *companyvideo;
+    NSString *historystring;
 }
 @end
 
@@ -60,15 +69,17 @@ BOOL isopen;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self initlabel];
         [self.tabBarItem setImage:[UIImage imageNamed:@"introduction.png"]];
-        self.tabBarItem.title=@"介绍";
+        self.tabBarItem.title=introduction;
+
     }
     return self;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.tabBarController.title=@"介绍";
+    self.tabBarController.title=introduction;
     self.tabBarController.navigationItem.titleView=navcenter;
     self.navigationController.navigationBar.hidden=NO;
     
@@ -90,7 +101,6 @@ BOOL isopen;
     //---------------------------------------------------------------------------
 
     api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
-    NSLog(@"%@",api_language);
     apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_yudoinfo,api_language];
     requestinfo=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestinfo.tag=2;
@@ -141,8 +151,8 @@ BOOL isopen;
     myimageview1=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, mywidth, 910/2)];
     [myscroller addSubview:myimageview1];
     
-    UILabel *infolabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 910/2, mywidth, 49)];
-    infolabel.text=@"旋转屏幕查看公司里程碑" ;
+    infolabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 910/2, mywidth, 49)];
+    infolabel.text=historystring;
     infolabel.backgroundColor=[UIColor whiteColor];
     infolabel.font=[UIFont fontWithName:@"Heiti TC" size:15];
     infolabel.textAlignment=YES;
@@ -169,10 +179,10 @@ BOOL isopen;
     [history addSubview:historyimage];
     
 
-    navcenter=[[UIView alloc]initWithFrame:CGRectMake(0,0,160, 44)];
+    navcenter=[[UIView alloc]initWithFrame:CGRectMake(0,0,200, 44)];
     navcenter.backgroundColor=[UIColor clearColor];
-    UILabel *mylabel=[[UILabel alloc]initWithFrame:CGRectMake(40, 0, 80, 44)];
-    mylabel.text=@"介绍";
+    mylabel=[[UILabel alloc]initWithFrame:CGRectMake(30, 0, 140, 44)];
+    mylabel.text=introduction;
     mylabel.textAlignment=YES;
     mylabel.font=[UIFont fontWithName:@"Helvetica-Bold" size:16];
     mylabel.backgroundColor=[UIColor clearColor];
@@ -191,7 +201,20 @@ BOOL isopen;
     
 }
 
-
+-(void)initlabel
+{
+    NSBundle *bundle=[NSBundle mainBundle];
+    NSURL *plistURL=[bundle URLForResource:@"Localization" withExtension:@"plist"];
+    NSDictionary *root=[[NSDictionary alloc]initWithContentsOfURL:plistURL];
+//    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]);
+    NSDictionary *dic=[root objectForKey:[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
+    introduction=[dic objectForKey:@"introduction"];
+    company=[dic objectForKey:@"company"];
+    net=[dic objectForKey:@"net"];
+    video=[dic objectForKey:@"video"];
+    companyvideo=[dic objectForKey:@"companyvideo"];
+    historystring=[dic objectForKey:@"history"];
+}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -229,7 +252,7 @@ BOOL isopen;
         
         [self jsonStringToObject];
         infodic=object;
-        NSLog(@"%@",infodic);
+//        NSLog(@"%@",infodic);
 
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[[infodic objectForKey:@"data"]objectForKey:@"top_images"] objectAtIndex:0]objectForKey:@"file"]]];
         [myimageview1 sd_setImageWithURL:url];
@@ -291,7 +314,7 @@ BOOL isopen;
     api_language=[languagelist_lang objectAtIndex:sender.tag];
     [[NSUserDefaults standardUserDefaults]setObject:api_language forKey:@"lan"];
     [[NSUserDefaults standardUserDefaults]synchronize];
-    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]);
+//    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]);
     [UIView animateWithDuration:0.3 animations:^{
         [languageview setFrame:CGRectMake(mywidth, 64, 90, 40*number)];
         languageview.alpha=0;
@@ -299,7 +322,6 @@ BOOL isopen;
     isopen=NO;
     
     api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
-    NSLog(@"%@",api_language);
     apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_yudoinfo,api_language];
     requestinfo=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestinfo.tag=2;
@@ -308,6 +330,17 @@ BOOL isopen;
     [requestinfo setDidFinishSelector:@selector(requestFinished:)];
     [requestinfo setDidFailSelector:@selector(requestFailed:)];
     [requestinfo startAsynchronous];
+    
+    [self initlabel];
+    
+    self.tabBarItem.title=introduction;
+    self.tabBarController.title=introduction;
+    mylabel.text=introduction;
+    infolabel.text=historystring;
+    [yudotable reloadData];
+    
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"ChangeBaritemNotificaton" object:nil];
 
 }
 
@@ -327,6 +360,8 @@ BOOL isopen;
         }];
         isopen=NO;
     }
+    
+   
 }
 
 - (void)orientationChanged:(NSNotification *)note  {
@@ -398,13 +433,13 @@ BOOL isopen;
 {
     if (section==0)
     {
-        return @"公司";
+        return company;
     }else if (section==1)
     {
-        return @"YUDO_Network";
+        return net;
     }else if(section==2)
     {
-        return @"视频";
+        return video;
     }
         return nil;
 }
@@ -440,7 +475,7 @@ BOOL isopen;
     }
     
     if (indexPath.section==2) {
-        cell.mylabel.text=@"公司宣传视频";
+        cell.mylabel.text=companyvideo;
     }
     
     cell.backgroundColor=[UIColor whiteColor];
@@ -485,7 +520,7 @@ BOOL isopen;
         ShowMovieViewController *showmoviewvc=[[ShowMovieViewController alloc]initWithNibName:@"ShowMovieViewController" bundle:nil];
         showmoviewvc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
         showmoviewvc.videourl=url_buttomvideo;
-        showmoviewvc.navtitle=@"公司宣传视频";
+        showmoviewvc.navtitle=companyvideo;
         [self.navigationController pushViewController:showmoviewvc animated:YES];
 
     }

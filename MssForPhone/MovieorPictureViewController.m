@@ -129,7 +129,7 @@
         
         [self jsonStringToObject];
         applicationdic=object;
-        NSLog(@"%@",applicationdic);
+//        NSLog(@"%@",applicationdic);
         pagecontrol.numberOfPages=[[[applicationdic objectForKey:@"data"] objectForKey:@"images"] count];
         NSLog(@"%ld",(long)pagecontrol.numberOfPages);
         pagenumber=pagecontrol.numberOfPages;
@@ -144,7 +144,7 @@
         for (int i=0; i<pagenumber; i++) {
             UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(mywidth*i, 0, mywidth, myheight-360)];
             [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[[applicationdic objectForKey:@"data"] objectForKey:@"images"] objectAtIndex:i] objectForKey:@"file"]]]];
-            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[[applicationdic objectForKey:@"data"]objectForKey:@"images"]objectAtIndex:i] objectForKey:@"file"]]);
+//            NSLog(@"%@",[NSString stringWithFormat:@"%@",[[[[applicationdic objectForKey:@"data"]objectForKey:@"images"]objectAtIndex:i] objectForKey:@"file"]]);
             [subscroller addSubview:imageview];
         }
         [myactivityindicator stopAnimating];

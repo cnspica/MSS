@@ -12,19 +12,32 @@
 #import "MarketViewController.h"
 #import "TechnologyViewController.h"
 #import "DataViewController.h"
+#import "SDWebImageManager.h"
+#import "ASIFormDataRequest.h"
+#import "AlterViewController.h"
 
 @implementation AppDelegate
+{
+    NSDictionary *dic;
+}
 @synthesize tarbarcontroller;
 @synthesize Orientations;
 @synthesize myCache;
 @synthesize selectlanguage;
+@synthesize serviceuuid;
+@synthesize getuuid;
+@synthesize state;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     sleep(2);
-    selectlanguage=@"cn";
-    [[NSUserDefaults standardUserDefaults]setObject:selectlanguage forKey:@"lan"];
-    [[NSUserDefaults standardUserDefaults]synchronize];
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]);
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]==nil) {
+        selectlanguage=@"cn";
+        [[NSUserDefaults standardUserDefaults]setObject:selectlanguage forKey:@"lan"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
+    
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -38,7 +51,7 @@
     tarbarcontroller=[[UITabBarController alloc]init];
     tarbarcontroller.viewControllers=@[introductionvc,productsvc,marketvc,datavc];
     UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:tarbarcontroller];
-    self.window.rootViewController=nav;
+//    self.window.rootViewController=nav;
     
     ASIDownloadCache *cache = [[ASIDownloadCache alloc] init];
     self.myCache = cache;
@@ -49,8 +62,50 @@
     NSLog(@"%@",path);
     [self.myCache setStoragePath:[path stringByAppendingPathComponent:@"Caches"]];
     [self.myCache setDefaultCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
+    
+    //获取本机uuid
+    UIDevice *device = [[UIDevice alloc]init];
+    NSString *tmpudid =[NSString stringWithFormat:@"%@",device.identifierForVendor.UUIDString];
+    serviceuuid = [tmpudid stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    NSLog(@"%@",serviceuuid);
+    
+    
+    
+    //网络请求
+    ASIFormDataRequest *requestuid=[ASIFormDataRequest requestWithURL:[NSURL URLWithString:@"http://58.210.127.156/contact/api/checkUser"]];
+    [requestuid setPostValue:serviceuuid forKey:@"uid"];
+    [requestuid startSynchronous];
+    NSData *data=[requestuid responseData];
+    NSLog(@"%@",data);
+    if (data==NULL) {
+        self.window.rootViewController=nav;
+        self.window.backgroundColor = [UIColor whiteColor];
+        UIAlertView *alter=[[UIAlertView alloc]initWithTitle:@"提示" message:@"您的网络出问题了" delegate:self cancelButtonTitle:@"重试" otherButtonTitles: nil];
+        [alter show];
+        
+    }else
+    {
+        dic=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"%@",dic);
+        
+        if ([[dic objectForKey:@"status"]intValue]==1) {
+            NSLog(@"success");
+            self.window.rootViewController=nav;
+            self.window.backgroundColor = [UIColor whiteColor];
+            
+        }else
+        {
+            NSLog(@"failed");
+            AlterViewController *altervc=[[AlterViewController alloc]initWithNibName:@"AlterViewController" bundle:nil];
+            self.window.rootViewController=altervc;
+            
+        }
+        
+    }
+    
     [self.window makeKeyAndVisible];
     return YES;
+
 }
 
 
@@ -90,5 +145,11 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+//-(void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+//{
+//    SDWebImageManager *mgr=[SDWebImageManager sharedManager];
+//    [mgr cancelAll];
+//    [mgr.imageCache clearMemory];
+//}
 
 @end

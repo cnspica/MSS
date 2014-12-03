@@ -28,6 +28,8 @@
     NSString *apistring;
     NSString *api_language;
     int numbers;
+    
+    NSString *Parameters;
 }
 
 @end
@@ -42,15 +44,37 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self initlabel];
         [self.tabBarItem setImage:[UIImage imageNamed:@"technology.png"]];
-        self.tabBarItem.title=@"参数";
+        self.tabBarItem.title=Parameters;
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeitem) name:@"ChangeBaritemNotificaton" object:nil];
     }
     return self;
 }
 
+-(void)changeitem
+{
+    [self initlabel];
+    self.tabBarItem.title=Parameters;
+}
+
+-(void)initlabel
+{
+    NSBundle *bundle=[NSBundle mainBundle];
+    NSURL *plistURL=[bundle URLForResource:@"Localization" withExtension:@"plist"];
+    NSDictionary *root=[[NSDictionary alloc]initWithContentsOfURL:plistURL];
+//    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]);
+    NSDictionary *dic=[root objectForKey:[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
+    Parameters=[dic objectForKey:@"data"];
+    
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.tabBarController.title=@"参数";
+    [self initlabel];
+    self.tabBarItem.title=Parameters;
+
+    self.tabBarController.title=Parameters;
     self.navigationController.navigationBar.hidden=YES;
     self.tabBarController.navigationItem.titleView=nil;
     self.tabBarController.navigationItem.rightBarButtonItem=nil;
@@ -59,7 +83,7 @@
     delegate.Orientations=NO;
     
     api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
-    NSLog(@"%@",api_language);
+//    NSLog(@"%@",api_language);
     apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_technologieslist,api_language];
     requestdatas=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
     requestdatas.tag=1;

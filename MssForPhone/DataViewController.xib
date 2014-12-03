@@ -20,7 +20,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOy-uN-ZRL">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                     <subviews>
-                        <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="搜索" translatesAutoresizingMaskIntoConstraints="NO" id="W8j-LT-HmZ">
+                        <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="W8j-LT-HmZ">
                             <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -30,9 +30,10 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="W8j-LT-HmZ" secondAttribute="bottom" id="Fx7-e4-6Mh"/>
-                        <constraint firstItem="W8j-LT-HmZ" firstAttribute="leading" secondItem="EOy-uN-ZRL" secondAttribute="leading" id="VTL-dq-8dS"/>
-                        <constraint firstAttribute="trailing" secondItem="W8j-LT-HmZ" secondAttribute="trailing" id="hL1-0P-RyP"/>
+                        <constraint firstAttribute="bottom" secondItem="W8j-LT-HmZ" secondAttribute="bottom" id="GMn-am-Ctj"/>
+                        <constraint firstAttribute="trailing" secondItem="W8j-LT-HmZ" secondAttribute="trailing" id="dQR-Dj-mnV"/>
+                        <constraint firstItem="W8j-LT-HmZ" firstAttribute="top" secondItem="EOy-uN-ZRL" secondAttribute="top" constant="20" id="q8u-P0-oPa"/>
+                        <constraint firstItem="W8j-LT-HmZ" firstAttribute="leading" secondItem="EOy-uN-ZRL" secondAttribute="leading" id="sX3-Vs-MqG"/>
                     </constraints>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U7E-CI-7Xk">
@@ -44,14 +45,13 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="EOy-uN-ZRL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="C1M-Oa-4N4"/>
-                <constraint firstItem="EOy-uN-ZRL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EBa-fm-h3i"/>
-                <constraint firstAttribute="bottom" secondItem="U7E-CI-7Xk" secondAttribute="bottom" constant="49" id="FUr-Ss-Q7M"/>
-                <constraint firstItem="U7E-CI-7Xk" firstAttribute="top" secondItem="EOy-uN-ZRL" secondAttribute="bottom" id="b7o-fU-b3k"/>
-                <constraint firstItem="U7E-CI-7Xk" firstAttribute="leading" secondItem="EOy-uN-ZRL" secondAttribute="leading" id="jXR-P7-IqY"/>
-                <constraint firstAttribute="trailing" secondItem="EOy-uN-ZRL" secondAttribute="trailing" id="o87-Vf-ZNa"/>
-                <constraint firstAttribute="bottom" secondItem="EOy-uN-ZRL" secondAttribute="bottom" constant="504" id="yJP-aY-oi1"/>
-                <constraint firstItem="U7E-CI-7Xk" firstAttribute="trailing" secondItem="EOy-uN-ZRL" secondAttribute="trailing" id="yUz-u8-RFA"/>
+                <constraint firstItem="EOy-uN-ZRL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6ZS-56-Ume"/>
+                <constraint firstItem="U7E-CI-7Xk" firstAttribute="top" secondItem="EOy-uN-ZRL" secondAttribute="bottom" id="Osx-9L-p0r"/>
+                <constraint firstAttribute="trailing" secondItem="U7E-CI-7Xk" secondAttribute="trailing" id="SIh-cC-9Fq"/>
+                <constraint firstItem="EOy-uN-ZRL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ud9-1k-nMF"/>
+                <constraint firstAttribute="bottom" secondItem="U7E-CI-7Xk" secondAttribute="bottom" constant="49" id="alK-nM-yLT"/>
+                <constraint firstItem="EOy-uN-ZRL" firstAttribute="leading" secondItem="U7E-CI-7Xk" secondAttribute="leading" id="gik-HB-Mub"/>
+                <constraint firstItem="U7E-CI-7Xk" firstAttribute="trailing" secondItem="EOy-uN-ZRL" secondAttribute="trailing" id="ovi-3X-Vcw"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
