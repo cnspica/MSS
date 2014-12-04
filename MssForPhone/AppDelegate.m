@@ -15,6 +15,7 @@
 #import "SDWebImageManager.h"
 #import "ASIFormDataRequest.h"
 #import "AlterViewController.h"
+#import "ReferenceViewController.h"
 
 @implementation AppDelegate
 {
@@ -43,15 +44,18 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     IntroductionViewController *introductionvc=[[IntroductionViewController alloc]initWithNibName:@"IntroductionViewController" bundle:nil];
-    ProductsViewController *productsvc=[[ProductsViewController alloc]initWithNibName:@"ProductsViewController" bundle:nil];
+    
     MarketViewController *marketvc=[[MarketViewController alloc]initWithNibName:@"MarketViewController" bundle:nil];
+    ProductsViewController *productsvc=[[ProductsViewController alloc]initWithNibName:@"ProductsViewController" bundle:nil];
 //    TechnologyViewController *technologyvc=[[TechnologyViewController alloc]initWithNibName:@"TechnologyViewController" bundle:nil];
     DataViewController *datavc=[[DataViewController alloc]initWithNibName:@"DataViewController" bundle:nil];
+    ReferenceViewController *referencevc=[[ReferenceViewController alloc]initWithNibName:@"ReferenceViewController" bundle:nil];
+
+    
     
     tarbarcontroller=[[UITabBarController alloc]init];
-    tarbarcontroller.viewControllers=@[introductionvc,productsvc,marketvc,datavc];
+    tarbarcontroller.viewControllers=@[introductionvc,marketvc,productsvc,datavc,referencevc];
     UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:tarbarcontroller];
-//    self.window.rootViewController=nav;
     
     ASIDownloadCache *cache = [[ASIDownloadCache alloc] init];
     self.myCache = cache;

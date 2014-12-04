@@ -20,5 +20,6 @@ NSString *HTTP_netinfo=@"http://58.210.127.156/minimss/api/netinfo";
 NSString *HTTP_technologieslist=@"http://58.210.127.156/minimss/api/technologieslist";
 NSString *HTTP_technologyinfo=@"http://58.210.127.156/minimss/api/technologyinfo";
 NSString *HTTP_applicationinfo=@"http://58.210.127.156/minimss/api/applicationinfo";
+NSString *HTTP_preferencelist=@"http://58.210.127.156/minimss/api/preferencelist";
 
 @end

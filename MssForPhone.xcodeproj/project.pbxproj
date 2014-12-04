@@ -74,8 +74,6 @@
 		AC9B13191A1C2DFE004AD196 /* 语言2.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9B13181A1C2DFE004AD196 /* 语言2.png */; };
 		AC9B13211A1C8348004AD196 /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B131F1A1C8348004AD196 /* DataViewController.m */; };
 		AC9B13221A1C8348004AD196 /* DataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC9B13201A1C8348004AD196 /* DataViewController.xib */; };
-		AC9B13251A1C86E1004AD196 /* data.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9B13231A1C86E1004AD196 /* data.png */; };
-		AC9B13261A1C86E1004AD196 /* data@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9B13241A1C86E1004AD196 /* data@2x.png */; };
 		ACC04AFD1A10457000AE4F0E /* 公司介绍.png in Resources */ = {isa = PBXBuildFile; fileRef = ACC04AFC1A10457000AE4F0E /* 公司介绍.png */; };
 		ACC04AFF1A104D0900AE4F0E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC04AFE1A104D0900AE4F0E /* MapKit.framework */; };
 		ACC04B021A104D4400AE4F0E /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC04B011A104D4400AE4F0E /* CustomAnnotation.m */; };
@@ -98,6 +96,12 @@
 		ACC04B911A106E4300AE4F0E /* 叠模注塑.png in Resources */ = {isa = PBXBuildFile; fileRef = ACC04B901A106E4300AE4F0E /* 叠模注塑.png */; };
 		ACC04B9D1A10A9C900AE4F0E /* 历史里程碑.png in Resources */ = {isa = PBXBuildFile; fileRef = ACC04B9C1A10A9C900AE4F0E /* 历史里程碑.png */; };
 		ACC04B9F1A10B1E800AE4F0E /* 语言.png in Resources */ = {isa = PBXBuildFile; fileRef = ACC04B9E1A10B1E800AE4F0E /* 语言.png */; };
+		ACC432971A30000700CFB9E6 /* IntroductionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC432951A30000700CFB9E6 /* IntroductionCell.m */; };
+		ACC432981A30000700CFB9E6 /* IntroductionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACC432961A30000700CFB9E6 /* IntroductionCell.xib */; };
+		ACC432A11A3011BC00CFB9E6 /* ReferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC4329F1A3011BC00CFB9E6 /* ReferenceViewController.m */; };
+		ACC432A21A3011BC00CFB9E6 /* ReferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACC432A01A3011BC00CFB9E6 /* ReferenceViewController.xib */; };
+		ACC432B11A3018BB00CFB9E6 /* reference.png in Resources */ = {isa = PBXBuildFile; fileRef = ACC432AF1A3018BB00CFB9E6 /* reference.png */; };
+		ACC432B21A3018BB00CFB9E6 /* reference@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ACC432B01A3018BB00CFB9E6 /* reference@2x.png */; };
 		ACC66FAF1A0C9DE000D4DD1D /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC66FAD1A0C9DE000D4DD1D /* Cell.m */; };
 		ACC66FB01A0C9DE000D4DD1D /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACC66FAE1A0C9DE000D4DD1D /* Cell.xib */; };
 		ACC66FB41A0CA77D00D4DD1D /* MovieorPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC66FB21A0CA77D00D4DD1D /* MovieorPictureViewController.m */; };
@@ -233,8 +237,6 @@
 		AC9B131E1A1C8348004AD196 /* DataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataViewController.h; sourceTree = "<group>"; };
 		AC9B131F1A1C8348004AD196 /* DataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataViewController.m; sourceTree = "<group>"; };
 		AC9B13201A1C8348004AD196 /* DataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataViewController.xib; sourceTree = "<group>"; };
-		AC9B13231A1C86E1004AD196 /* data.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = data.png; sourceTree = "<group>"; };
-		AC9B13241A1C86E1004AD196 /* data@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "data@2x.png"; sourceTree = "<group>"; };
 		ACC04AFC1A10457000AE4F0E /* 公司介绍.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "公司介绍.png"; sourceTree = "<group>"; };
 		ACC04AFE1A104D0900AE4F0E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		ACC04B001A104D4400AE4F0E /* CustomAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotation.h; sourceTree = "<group>"; };
@@ -271,6 +273,14 @@
 		ACC04B901A106E4300AE4F0E /* 叠模注塑.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "叠模注塑.png"; sourceTree = "<group>"; };
 		ACC04B9C1A10A9C900AE4F0E /* 历史里程碑.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "历史里程碑.png"; sourceTree = "<group>"; };
 		ACC04B9E1A10B1E800AE4F0E /* 语言.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "语言.png"; sourceTree = "<group>"; };
+		ACC432941A30000700CFB9E6 /* IntroductionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionCell.h; sourceTree = "<group>"; };
+		ACC432951A30000700CFB9E6 /* IntroductionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroductionCell.m; sourceTree = "<group>"; };
+		ACC432961A30000700CFB9E6 /* IntroductionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroductionCell.xib; sourceTree = "<group>"; };
+		ACC4329E1A3011BC00CFB9E6 /* ReferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferenceViewController.h; sourceTree = "<group>"; };
+		ACC4329F1A3011BC00CFB9E6 /* ReferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferenceViewController.m; sourceTree = "<group>"; };
+		ACC432A01A3011BC00CFB9E6 /* ReferenceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReferenceViewController.xib; sourceTree = "<group>"; };
+		ACC432AF1A3018BB00CFB9E6 /* reference.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reference.png; sourceTree = "<group>"; };
+		ACC432B01A3018BB00CFB9E6 /* reference@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reference@2x.png"; sourceTree = "<group>"; };
 		ACC66FAC1A0C9DE000D4DD1D /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		ACC66FAD1A0C9DE000D4DD1D /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 		ACC66FAE1A0C9DE000D4DD1D /* Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell.xib; sourceTree = "<group>"; };
@@ -490,8 +500,8 @@
 		ACE1868E1A046BB200B24ACA /* tabbar */ = {
 			isa = PBXGroup;
 			children = (
-				AC9B13231A1C86E1004AD196 /* data.png */,
-				AC9B13241A1C86E1004AD196 /* data@2x.png */,
+				ACC432AF1A3018BB00CFB9E6 /* reference.png */,
+				ACC432B01A3018BB00CFB9E6 /* reference@2x.png */,
 				ACE1869F1A04720200B24ACA /* marker.png */,
 				ACE186A01A04720200B24ACA /* market@2x.png */,
 				ACE1869B1A046FA000B24ACA /* technology.png */,
@@ -611,6 +621,12 @@
 				AC819F151A1DD10F00F4E8DA /* DataDetailViewController.h */,
 				AC819F161A1DD10F00F4E8DA /* DataDetailViewController.m */,
 				AC819F171A1DD10F00F4E8DA /* DataDetailViewController.xib */,
+				ACC432941A30000700CFB9E6 /* IntroductionCell.h */,
+				ACC432951A30000700CFB9E6 /* IntroductionCell.m */,
+				ACC432961A30000700CFB9E6 /* IntroductionCell.xib */,
+				ACC4329E1A3011BC00CFB9E6 /* ReferenceViewController.h */,
+				ACC4329F1A3011BC00CFB9E6 /* ReferenceViewController.m */,
+				ACC432A01A3011BC00CFB9E6 /* ReferenceViewController.xib */,
 				AC3B0A9D1A1192A000A11681 /* API.h */,
 				AC3B0A9E1A1192A000A11681 /* API.m */,
 				AC22FF531A246C6D00CFA935 /* Localization.plist */,
@@ -729,13 +745,12 @@
 			files = (
 				AC9B13221A1C8348004AD196 /* DataViewController.xib in Resources */,
 				AC3870201A19F1BB004723B1 /* 开机2.png in Resources */,
-				AC9B13261A1C86E1004AD196 /* data@2x.png in Resources */,
-				AC9B13251A1C86E1004AD196 /* data.png in Resources */,
 				AC2724F41A0719F9007E5E91 /* TINA AM.png in Resources */,
 				ACC04B911A106E4300AE4F0E /* 叠模注塑.png in Resources */,
 				AC3B0DB51A088343000D886E /* ShowMovieViewController.xib in Resources */,
 				ACE186901A046BC600B24ACA /* introduction.png in Resources */,
 				AC22FF541A246C6E00CFA935 /* Localization.plist in Resources */,
+				ACC432B11A3018BB00CFB9E6 /* reference.png in Resources */,
 				AC2724EE1A071942007E5E91 /* TINA GP.png in Resources */,
 				DA10DA751A0463FA000A2EFA /* InfoPlist.strings in Resources */,
 				ACC66FB01A0C9DE000D4DD1D /* Cell.xib in Resources */,
@@ -750,6 +765,7 @@
 				AC666EC51A0DBF2600961E78 /* TW700.png in Resources */,
 				ACC66FB51A0CA77D00D4DD1D /* MovieorPictureViewController.xib in Resources */,
 				AC27B5D11A1B3B7E0024379E /* M57pt.png in Resources */,
+				ACC432981A30000700CFB9E6 /* IntroductionCell.xib in Resources */,
 				AC3B0DA81A0870E4000D886E /* 换色注塑.png in Resources */,
 				AC54F9E31A15D0160036A696 /* CNdetailViewController.xib in Resources */,
 				AC666EC41A0DBF2600961E78 /* TW600.png in Resources */,
@@ -770,7 +786,9 @@
 				ACE186871A0468E700B24ACA /* MarketViewController.xib in Resources */,
 				AC3B0AD51A11F43F00A11681 /* up.png in Resources */,
 				ACE186951A046F4900B24ACA /* product.png in Resources */,
+				ACC432A21A3011BC00CFB9E6 /* ReferenceViewController.xib in Resources */,
 				AC666EC11A0DBF2600961E78 /* 模组系统.png in Resources */,
+				ACC432B21A3018BB00CFB9E6 /* reference@2x.png in Resources */,
 				ACC04B041A1054C900AE4F0E /* 公司视频.png in Resources */,
 				ACE1869E1A046FA000B24ACA /* technology@2x.png in Resources */,
 				ACC04B8B1A10661900AE4F0E /* 收缩.png in Resources */,
@@ -821,6 +839,7 @@
 				ACC04B601A105DB600AE4F0E /* ASIFormDataRequest.m in Sources */,
 				ACC04B631A105DB600AE4F0E /* ASINetworkQueue.m in Sources */,
 				ACC66FB41A0CA77D00D4DD1D /* MovieorPictureViewController.m in Sources */,
+				ACC432971A30000700CFB9E6 /* IntroductionCell.m in Sources */,
 				AC819F181A1DD10F00F4E8DA /* DataDetailViewController.m in Sources */,
 				AC3B0AC51A1199C700A11681 /* SDWebImageCompat.m in Sources */,
 				AC3B0AC41A1199C700A11681 /* SDImageCache.m in Sources */,
@@ -839,6 +858,7 @@
 				AC3B0DB41A088343000D886E /* ShowMovieViewController.m in Sources */,
 				AC3B0A9F1A1192A000A11681 /* API.m in Sources */,
 				AC3B0AC81A1199C700A11681 /* SDWebImageDownloaderOperation.m in Sources */,
+				ACC432A11A3011BC00CFB9E6 /* ReferenceViewController.m in Sources */,
 				ACC04B5D1A105DB600AE4F0E /* ASIDataCompressor.m in Sources */,
 				DA10DA771A0463FA000A2EFA /* main.m in Sources */,
 				AC3B0ACA1A1199C700A11681 /* SDWebImagePrefetcher.m in Sources */,

@@ -4,6 +4,8 @@
 <dict>
 	<key>cn</key>
 	<dict>
+		<key>reference</key>
+		<string>相关</string>
 		<key>history</key>
 		<string>旋转屏幕查看公司里程碑</string>
 		<key>application</key>
@@ -19,16 +21,18 @@
 		<key>company</key>
 		<string>公司</string>
 		<key>data</key>
-		<string>参数</string>
+		<string>技术</string>
 		<key>market</key>
 		<string>市场</string>
 		<key>product</key>
-		<string>产品</string>
+		<string>分类</string>
 		<key>introduction</key>
 		<string>介绍</string>
 	</dict>
 	<key>en</key>
 	<dict>
+		<key>reference</key>
+		<string>reference</string>
 		<key>history</key>
 		<string>Rotary screen view milepost</string>
 		<key>application</key>
@@ -54,6 +58,8 @@
 	</dict>
 	<key>it</key>
 	<dict>
+		<key>reference</key>
+		<string>Riferimento</string>
 		<key>history</key>
 		<string>Vista la Pietra miliare di rotazione</string>
 		<key>application</key>
@@ -79,6 +85,8 @@
 	</dict>
 	<key>tur</key>
 	<dict>
+		<key>reference</key>
+		<string>Referans</string>
 		<key>history</key>
 		<string>Kilometre taşı görüntülemek için ekranı döndürün</string>
 		<key>application</key>
@@ -104,6 +112,8 @@
 	</dict>
 	<key>de</key>
 	<dict>
+		<key>reference</key>
+		<string>Referenz</string>
 		<key>history</key>
 		<string>Ein meilenstein in der rotation der bildschirm betrachten</string>
 		<key>application</key>
@@ -129,6 +139,8 @@
 	</dict>
 	<key>fr</key>
 	<dict>
+		<key>reference</key>
+		<string>Reference</string>
 		<key>history</key>
 		<string>La rotation de l&apos;écran de visualisation de jalon</string>
 		<key>application</key>
@@ -154,6 +166,8 @@
 	</dict>
 	<key>pt</key>
 	<dict>
+		<key>reference</key>
+		<string>Referencia</string>
 		<key>history</key>
 		<string>Rotary tela De Marco</string>
 		<key>application</key>
@@ -179,6 +193,8 @@
 	</dict>
 	<key>es</key>
 	<dict>
+		<key>reference</key>
+		<string>Reference</string>
 		<key>history</key>
 		<string>Gire la pantalla para ver el hito</string>
 		<key>application</key>

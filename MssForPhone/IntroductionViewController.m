@@ -13,7 +13,7 @@
 #import "ASIHTTPRequest.h"
 #import "API.h"
 #import "UIImageView+WebCache.h"
-#import "Cell.h"
+#import "IntroductionCell.h"
 #import "CNdetailViewController.h"
 #import "ProductsViewController.h"
 
@@ -252,7 +252,7 @@ BOOL isopen;
         
         [self jsonStringToObject];
         infodic=object;
-//        NSLog(@"%@",infodic);
+        NSLog(@"%@",infodic);
 
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[[infodic objectForKey:@"data"]objectForKey:@"top_images"] objectAtIndex:0]objectForKey:@"file"]]];
         [myimageview1 sd_setImageWithURL:url];
@@ -458,28 +458,36 @@ BOOL isopen;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     
-    static NSString *cellIdentifier = @"Cell";
-    UINib *nib = [UINib nibWithNibName:@"Cell" bundle:nil];
+    static NSString *cellIdentifier = @"IntroductionCell";
+    UINib *nib = [UINib nibWithNibName:@"IntroductionCell" bundle:nil];
     [tableView registerNib:nib forCellReuseIdentifier:cellIdentifier];
-    Cell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
+    IntroductionCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    cell.mylabel2.hidden=YES;
     for (int i=0; i<companynumber; i++) {
         if (indexPath.section==0&&indexPath.row==i) {
             cell.mylabel.text=[[[[infodic objectForKey:@"data"] objectForKey:@"companies"] objectAtIndex:i] objectForKey:@"company"];
+            [cell.myimageview sd_setImageWithURL:[NSURL URLWithString:[[[[infodic objectForKey:@"data"] objectForKey:@"companies"] objectAtIndex:i] objectForKey:@"ico"]]];
         }
     }
     for (int j=0; j<networknumber; j++) {
         if (indexPath.section==1&&indexPath.row==j) {
-            cell.mylabel.text=[[[[infodic objectForKey:@"data"] objectForKey:@"net"] objectAtIndex:j] objectForKey:@"net"];
+            cell.mylabel.hidden=YES;
+            cell.myimageview.hidden=YES;
+            cell.mylabel2.hidden=NO;
+            cell.mylabel2.text=[[[[infodic objectForKey:@"data"] objectForKey:@"net"] objectAtIndex:j] objectForKey:@"net"];
         }
     }
     
     if (indexPath.section==2) {
-        cell.mylabel.text=companyvideo;
+        cell.mylabel.hidden=YES;
+        cell.myimageview.hidden=YES;
+        cell.mylabel2.hidden=NO;
+        cell.mylabel2.text=companyvideo;
     }
     
     cell.backgroundColor=[UIColor whiteColor];
     cell.mylabel.font=[UIFont systemFontOfSize:15];
+    cell.mylabel2.font=[UIFont systemFontOfSize:15];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;

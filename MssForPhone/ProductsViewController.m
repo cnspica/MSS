@@ -183,11 +183,20 @@
             [productscroller addSubview:ptimage2];
             [self initscrollerpicture:ptimage2];
             
+            
+            UILabel *ptname2=[[UILabel alloc]initWithFrame:CGRectMake(0, 120, 160, 40)];
+            ptname2.textAlignment=YES;
+            ptname2.font=[UIFont systemFontOfSize:12];
+            ptname2.alpha=0.8;
+            ptname2.tag=i;
+            [ptimage2 addSubview:ptname2];
+            [self initptnamelabel:ptname2];
+
              UIButton *ptbutton2=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, width, width)];
             ptbutton2.tag=i;
             [ptimage2 addSubview:ptbutton2];
             [ptbutton2 addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
-
+            
         }
         else
         {
@@ -200,13 +209,29 @@
             [productscroller addSubview:ptimage1];
             [self initscrollerpicture:ptimage1];
             
+            
+            UILabel *ptname1=[[UILabel alloc]initWithFrame:CGRectMake(0, 120, 160, 40)];
+            ptname1.textAlignment=YES;
+            ptname1.font=[UIFont systemFontOfSize:12];
+            ptname1.alpha=0.8;
+            ptname1.tag=i;
+            [ptimage1 addSubview:ptname1];
+            [self initptnamelabel:ptname1];
+            
             UIButton *ptbutton1=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, width, width)];
             ptbutton1.tag=i;
             [ptimage1 addSubview:ptbutton1];
             [ptbutton1 addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
         }
         
+        
+        
     }
+}
+
+-(void)initptnamelabel:(UILabel *)ptname
+{
+    ptname.text=[NSString stringWithFormat:@"%@",[[[productsdic objectForKey:@"data"]objectAtIndex:ptname.tag-1] objectForKey:@"product"]];
 }
 
 //初始化图片资源
