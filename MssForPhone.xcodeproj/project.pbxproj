@@ -112,8 +112,6 @@
 		ACE186821A0468D700B24ACA /* ProductsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACE186801A0468D700B24ACA /* ProductsViewController.xib */; };
 		ACE186861A0468E700B24ACA /* MarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE186841A0468E700B24ACA /* MarketViewController.m */; };
 		ACE186871A0468E700B24ACA /* MarketViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACE186851A0468E700B24ACA /* MarketViewController.xib */; };
-		ACE1868B1A0468FC00B24ACA /* TechnologyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE186891A0468FC00B24ACA /* TechnologyViewController.m */; };
-		ACE1868C1A0468FC00B24ACA /* TechnologyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACE1868A1A0468FC00B24ACA /* TechnologyViewController.xib */; };
 		ACE186901A046BC600B24ACA /* introduction.png in Resources */ = {isa = PBXBuildFile; fileRef = ACE1868F1A046BC600B24ACA /* introduction.png */; };
 		ACE186951A046F4900B24ACA /* product.png in Resources */ = {isa = PBXBuildFile; fileRef = ACE186931A046F4900B24ACA /* product.png */; };
 		ACE186961A046F4900B24ACA /* product@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ACE186941A046F4900B24ACA /* product@2x.png */; };
@@ -296,9 +294,6 @@
 		ACE186831A0468E700B24ACA /* MarketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketViewController.h; sourceTree = "<group>"; };
 		ACE186841A0468E700B24ACA /* MarketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketViewController.m; sourceTree = "<group>"; };
 		ACE186851A0468E700B24ACA /* MarketViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketViewController.xib; sourceTree = "<group>"; };
-		ACE186881A0468FC00B24ACA /* TechnologyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TechnologyViewController.h; sourceTree = "<group>"; };
-		ACE186891A0468FC00B24ACA /* TechnologyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TechnologyViewController.m; sourceTree = "<group>"; };
-		ACE1868A1A0468FC00B24ACA /* TechnologyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TechnologyViewController.xib; sourceTree = "<group>"; };
 		ACE1868F1A046BC600B24ACA /* introduction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = introduction.png; sourceTree = "<group>"; };
 		ACE186931A046F4900B24ACA /* product.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = product.png; sourceTree = "<group>"; };
 		ACE186941A046F4900B24ACA /* product@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "product@2x.png"; sourceTree = "<group>"; };
@@ -609,9 +604,6 @@
 				ACC66FB11A0CA77D00D4DD1D /* MovieorPictureViewController.h */,
 				ACC66FB21A0CA77D00D4DD1D /* MovieorPictureViewController.m */,
 				ACC66FB31A0CA77D00D4DD1D /* MovieorPictureViewController.xib */,
-				ACE186881A0468FC00B24ACA /* TechnologyViewController.h */,
-				ACE186891A0468FC00B24ACA /* TechnologyViewController.m */,
-				ACE1868A1A0468FC00B24ACA /* TechnologyViewController.xib */,
 				AC3B0DB11A088343000D886E /* ShowMovieViewController.h */,
 				AC3B0DB21A088343000D886E /* ShowMovieViewController.m */,
 				AC3B0DB31A088343000D886E /* ShowMovieViewController.xib */,
@@ -806,7 +798,6 @@
 				AC38701F1A19F1BB004723B1 /* 开机1.png in Resources */,
 				AC3B0DB71A08AC1B000D886E /* BackCover.mp4 in Resources */,
 				AC2724E91A071942007E5E91 /* BALA.png in Resources */,
-				ACE1868C1A0468FC00B24ACA /* TechnologyViewController.xib in Resources */,
 				AC60F8801A2D93D000F5D628 /* AlterViewController.xib in Resources */,
 				AC27B5D91A1B3EB00024379E /* icon.png in Resources */,
 				ACE1867D1A0468AF00B24ACA /* IntroductionViewController.xib in Resources */,
@@ -831,7 +822,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC3B0AC61A1199C700A11681 /* SDWebImageDecoder.m in Sources */,
-				ACE1868B1A0468FC00B24ACA /* TechnologyViewController.m in Sources */,
 				AC3B0AC21A1199C700A11681 /* MKAnnotationView+WebCache.m in Sources */,
 				ACC04B5C1A105DB600AE4F0E /* ASIAuthenticationDialog.m in Sources */,
 				AC9B13211A1C8348004AD196 /* DataViewController.m in Sources */,

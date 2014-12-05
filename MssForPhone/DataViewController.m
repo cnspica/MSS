@@ -65,7 +65,7 @@
     NSDictionary *root=[[NSDictionary alloc]initWithContentsOfURL:plistURL];
 //    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]);
     NSDictionary *dic=[root objectForKey:[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
-    Parameters=[dic objectForKey:@"data"];
+    Parameters=[dic objectForKey:@"technical"];
     
 }
 
@@ -187,7 +187,7 @@
             
             UILabel *ptname2=[[UILabel alloc]initWithFrame:CGRectMake(0, 120, 160, 40)];
             ptname2.textAlignment=YES;
-            ptname2.font=[UIFont systemFontOfSize:12];
+            ptname2.font=[UIFont fontWithName:@"Heiti TC" size:12];
             ptname2.alpha=0.8;
             ptname2.tag=i;
             [ptimage2 addSubview:ptname2];
@@ -215,7 +215,7 @@
             
             UILabel *ptname1=[[UILabel alloc]initWithFrame:CGRectMake(0, 120, 160, 40)];
             ptname1.textAlignment=YES;
-            ptname1.font=[UIFont systemFontOfSize:12];
+            ptname1.font=[UIFont fontWithName:@"Heiti TC" size:12];
             ptname1.alpha=0.8;
             ptname1.tag=i;
             [ptimage1 addSubview:ptname1];

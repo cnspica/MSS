@@ -10,7 +10,6 @@
 #import "IntroductionViewController.h"
 #import "ProductsViewController.h"
 #import "MarketViewController.h"
-#import "TechnologyViewController.h"
 #import "DataViewController.h"
 #import "SDWebImageManager.h"
 #import "ASIFormDataRequest.h"
@@ -44,17 +43,15 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     IntroductionViewController *introductionvc=[[IntroductionViewController alloc]initWithNibName:@"IntroductionViewController" bundle:nil];
-    
-    MarketViewController *marketvc=[[MarketViewController alloc]initWithNibName:@"MarketViewController" bundle:nil];
     ProductsViewController *productsvc=[[ProductsViewController alloc]initWithNibName:@"ProductsViewController" bundle:nil];
-//    TechnologyViewController *technologyvc=[[TechnologyViewController alloc]initWithNibName:@"TechnologyViewController" bundle:nil];
+     MarketViewController *marketvc=[[MarketViewController alloc]initWithNibName:@"MarketViewController" bundle:nil];
     DataViewController *datavc=[[DataViewController alloc]initWithNibName:@"DataViewController" bundle:nil];
     ReferenceViewController *referencevc=[[ReferenceViewController alloc]initWithNibName:@"ReferenceViewController" bundle:nil];
 
     
     
     tarbarcontroller=[[UITabBarController alloc]init];
-    tarbarcontroller.viewControllers=@[introductionvc,marketvc,productsvc,datavc,referencevc];
+    tarbarcontroller.viewControllers=@[introductionvc,productsvc,marketvc,datavc,referencevc];
     UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:tarbarcontroller];
     
     ASIDownloadCache *cache = [[ASIDownloadCache alloc] init];

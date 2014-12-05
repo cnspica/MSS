@@ -12,6 +12,7 @@
 @interface AlterViewController ()
 {
     NSString *response;
+    NSString *model;
 }
 @end
 
@@ -39,7 +40,7 @@
     UIDevice *device = [[UIDevice alloc]init];
     NSString *tmpudid =[NSString stringWithFormat:@"%@",device.identifierForVendor.UUIDString];
     uuid= [tmpudid stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    
+    model=device.model;
     checkin.layer.masksToBounds=YES;
     checkin.layer.cornerRadius=5;
     
@@ -51,8 +52,9 @@
     NSLog(@"%@",reasontext.text);
     if (![str isEqualToString:@""]) {
         ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:[NSURL URLWithString:@"http://58.210.127.156/contact/api/setUid"]];
+        NSString *poststring=[NSString stringWithFormat:@"%@_minimss_%@",reasontext.text,model];
         [request addPostValue:uuid forKey:@"uuid"];
-        [request addPostValue:reasontext.text forKey:@"reason"];
+        [request addPostValue:poststring forKey:@"reason"];
         [request setDelegate:self];
         [request setTimeOutSeconds:10];
         [request setDidFinishSelector:@selector(requestFinished:)];

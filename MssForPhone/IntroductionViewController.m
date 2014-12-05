@@ -486,8 +486,8 @@ BOOL isopen;
     }
     
     cell.backgroundColor=[UIColor whiteColor];
-    cell.mylabel.font=[UIFont systemFontOfSize:15];
-    cell.mylabel2.font=[UIFont systemFontOfSize:15];
+    cell.mylabel.font=[UIFont fontWithName:@"Heiti TC" size:15];
+    cell.mylabel2.font=[UIFont fontWithName:@"Heiti TC" size:15];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;

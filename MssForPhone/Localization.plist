@@ -9,7 +9,7 @@
 		<key>history</key>
 		<string>旋转屏幕查看公司里程碑</string>
 		<key>application</key>
-		<string>应用</string>
+		<string>应用 / 视频</string>
 		<key>system</key>
 		<string>系统</string>
 		<key>companyvideo</key>
@@ -20,11 +20,11 @@
 		<string>YUDO_NETWORK</string>
 		<key>company</key>
 		<string>公司</string>
-		<key>data</key>
+		<key>technical</key>
 		<string>技术</string>
 		<key>market</key>
 		<string>市场</string>
-		<key>product</key>
+		<key>catalog</key>
 		<string>分类</string>
 		<key>introduction</key>
 		<string>介绍</string>
@@ -36,7 +36,7 @@
 		<key>history</key>
 		<string>Rotary screen view milepost</string>
 		<key>application</key>
-		<string>Application</string>
+		<string>Application / Video</string>
 		<key>system</key>
 		<string>System</string>
 		<key>companyvideo</key>
@@ -47,12 +47,12 @@
 		<string>YUDO_NETWORK</string>
 		<key>company</key>
 		<string>Company</string>
-		<key>data</key>
-		<string>Parameters</string>
+		<key>technical</key>
+		<string>Technical</string>
 		<key>market</key>
 		<string>Market</string>
-		<key>product</key>
-		<string>Product</string>
+		<key>catalog</key>
+		<string>Catalog</string>
 		<key>introduction</key>
 		<string>Introduction</string>
 	</dict>
@@ -63,7 +63,7 @@
 		<key>history</key>
 		<string>Vista la Pietra miliare di rotazione</string>
 		<key>application</key>
-		<string>Applicazioni</string>
+		<string>Applicazioni / Video</string>
 		<key>system</key>
 		<string>Sistema</string>
 		<key>companyvideo</key>
@@ -74,12 +74,12 @@
 		<string>YUDO_NETWORK</string>
 		<key>company</key>
 		<string>Azienda</string>
-		<key>data</key>
-		<string>Parametri</string>
+		<key>technical</key>
+		<string>Tecnologia</string>
 		<key>market</key>
 		<string>Mercato</string>
-		<key>product</key>
-		<string>Prodotti</string>
+		<key>catalog</key>
+		<string>Categoria</string>
 		<key>introduction</key>
 		<string>Introduzione</string>
 	</dict>
@@ -90,7 +90,7 @@
 		<key>history</key>
 		<string>Kilometre taşı görüntülemek için ekranı döndürün</string>
 		<key>application</key>
-		<string>Uygulama</string>
+		<string>Uygulama / Video</string>
 		<key>system</key>
 		<string>Sistem</string>
 		<key>companyvideo</key>
@@ -101,12 +101,12 @@
 		<string>YUDO_NETWORK</string>
 		<key>company</key>
 		<string>şirket</string>
-		<key>data</key>
-		<string>Parametreler</string>
+		<key>technical</key>
+		<string>Teknoloji</string>
 		<key>market</key>
 		<string>Market</string>
-		<key>product</key>
-		<string>ürün</string>
+		<key>catalog</key>
+		<string>Kategori</string>
 		<key>introduction</key>
 		<string>giriş</string>
 	</dict>
@@ -117,7 +117,7 @@
 		<key>history</key>
 		<string>Ein meilenstein in der rotation der bildschirm betrachten</string>
 		<key>application</key>
-		<string>Anwendungen</string>
+		<string>Anwendungen / Video</string>
 		<key>system</key>
 		<string>System</string>
 		<key>companyvideo</key>
@@ -128,12 +128,12 @@
 		<string>YUDO_NETWORK</string>
 		<key>company</key>
 		<string>Ltd.</string>
-		<key>data</key>
-		<string>Parameter</string>
+		<key>technical</key>
+		<string>Technologie</string>
 		<key>market</key>
 		<string>Markt</string>
-		<key>product</key>
-		<string>Produkte</string>
+		<key>catalog</key>
+		<string>Kategorie</string>
 		<key>introduction</key>
 		<string>Die</string>
 	</dict>
@@ -144,7 +144,7 @@
 		<key>history</key>
 		<string>La rotation de l&apos;écran de visualisation de jalon</string>
 		<key>application</key>
-		<string>Application</string>
+		<string>Application / Vidéo</string>
 		<key>system</key>
 		<string>System</string>
 		<key>companyvideo</key>
@@ -155,12 +155,12 @@
 		<string>YUDO_NETWORK</string>
 		<key>company</key>
 		<string>Société</string>
-		<key>data</key>
-		<string>Paramètres</string>
+		<key>technical</key>
+		<string>Technical</string>
 		<key>market</key>
 		<string>Market</string>
-		<key>product</key>
-		<string>Produit</string>
+		<key>catalog</key>
+		<string>Catalog</string>
 		<key>introduction</key>
 		<string>Introduction</string>
 	</dict>
@@ -171,7 +171,7 @@
 		<key>history</key>
 		<string>Rotary tela De Marco</string>
 		<key>application</key>
-		<string>Aplicações</string>
+		<string>Aplicações / Video</string>
 		<key>system</key>
 		<string>Sistema</string>
 		<key>companyvideo</key>
@@ -182,12 +182,12 @@
 		<string>YUDO_NETWORK</string>
 		<key>company</key>
 		<string>A empresa</string>
-		<key>data</key>
-		<string>Parâmetros</string>
+		<key>technical</key>
+		<string>Tecnologia</string>
 		<key>market</key>
 		<string>Mercado</string>
-		<key>product</key>
-		<string>Produtos</string>
+		<key>catalog</key>
+		<string>Categoria</string>
 		<key>introduction</key>
 		<string>Introdução</string>
 	</dict>
@@ -198,7 +198,7 @@
 		<key>history</key>
 		<string>Gire la pantalla para ver el hito</string>
 		<key>application</key>
-		<string>Aplicaciones</string>
+		<string>Aplicaciones / Video</string>
 		<key>system</key>
 		<string>Sistema</string>
 		<key>companyvideo</key>
@@ -209,12 +209,12 @@
 		<string>YUDO_NETWORK</string>
 		<key>company</key>
 		<string>Compañía</string>
-		<key>data</key>
-		<string>Parámetros</string>
+		<key>technical</key>
+		<string>Tecnología</string>
 		<key>market</key>
 		<string>Market</string>
-		<key>product</key>
-		<string>Productos</string>
+		<key>catalog</key>
+		<string>Categoría</string>
 		<key>introduction</key>
 		<string>Introducción</string>
 	</dict>

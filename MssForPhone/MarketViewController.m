@@ -350,7 +350,7 @@ BOOL zhankai;
 {
     NSString *mytitle=[NSString stringWithFormat:@"%@",[marketlist objectAtIndex:((int)button.tag-1)]];
     [button setTitle:mytitle forState:UIControlStateNormal];
-    button.titleLabel.font=[UIFont systemFontOfSize:15];
+    button.titleLabel.font=[UIFont fontWithName:@"Heiti TC" size:15];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -481,7 +481,7 @@ BOOL zhankai;
     }
     
     cell.backgroundColor=[UIColor whiteColor];
-    cell.mylabel.font=[UIFont systemFontOfSize:15];
+    cell.mylabel.font=[UIFont fontWithName:@"Heiti TC" size:15];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;

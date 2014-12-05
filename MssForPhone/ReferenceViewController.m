@@ -89,6 +89,7 @@
 
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     navcenter=[[UIView alloc]initWithFrame:CGRectMake(0,0,200, 44)];
@@ -175,7 +176,7 @@
     Cell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     cell.mylabel.text=[[[referencedic objectForKey:@"data"]objectAtIndex:indexPath.row]objectForKey:@"preference"];
-    cell.mylabel.font=[UIFont systemFontOfSize:15];
+    cell.mylabel.font=[UIFont fontWithName:@"Heiti TC" size:15];
     cell.backgroundColor=[UIColor whiteColor];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
