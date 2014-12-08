@@ -54,14 +54,19 @@ BOOL isopen;
     NSString *video;
     NSString *companyvideo;
     NSString *historystring;
+    
+    NSString *app_version;
+    NSString *getversion;
+    double version;
+    ASIHTTPRequest *requestversion;
+    NSDictionary *versiondic;
+
 }
 @end
 
 @implementation IntroductionViewController
 @synthesize myscroller;
 @synthesize myimageview1;
-@synthesize myMapview;
-@synthesize myLocationManager;
 @synthesize yudotable;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -199,6 +204,19 @@ BOOL isopen;
     languageview.alpha=0;
     [self.view addSubview:languageview];
     
+    NSDictionary *infodictionary=[[NSBundle mainBundle]infoDictionary];
+    app_version=[infodictionary objectForKey:@"CFBundleShortVersionString"];
+    NSLog(@"app_version=%@",app_version);
+    
+    requestversion=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:HTTP_version]];
+    requestversion.tag=3;
+    [requestversion setDelegate:self];
+    [requestversion setTimeOutSeconds:60];
+    [requestversion setDidFinishSelector:@selector(requestFinished:)];
+    [requestversion setDidFailSelector:@selector(requestFailed:)];
+    [requestversion startAsynchronous];
+
+    
 }
 
 -(void)initlabel
@@ -276,6 +294,26 @@ BOOL isopen;
         
         [yudotable reloadData];
     }
+    if (request.tag==3) {
+        response=[request responseString];
+        [self jsonStringToObject];
+        versiondic=object;
+        NSLog(@"%@",versiondic);
+        
+        getversion=[versiondic objectForKey:@"version"];
+        NSLog(@"getversion=%@",getversion);
+        version=[getversion doubleValue];
+        
+        if ([app_version doubleValue]<version) {
+            NSString *log=[NSString stringWithFormat:@"%@",[versiondic objectForKey:@"log"]];
+            UIAlertView *altervc=[[UIAlertView alloc]initWithTitle:nil message:log delegate:self cancelButtonTitle:@"更新" otherButtonTitles:@"取消",nil];
+            altervc.tag=1;
+            [altervc show];
+        }
+        
+        
+    }
+
 
     if (languagedic_finished&&infodic_finished) {
         myscroller.contentSize=CGSizeMake(mywidth, 910/2+49+56*3+44*7+20);
@@ -283,6 +321,45 @@ BOOL isopen;
     }
     
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag==1) {
+        switch (buttonIndex) {
+            case 0:
+                NSLog(@"更新");
+                [self updateSoft];
+                break;
+            case 1:
+                NSLog(@"取消");
+                
+            default:
+                break;
+        }
+        
+    }
+    
+}
+
+-(void)updateSoft
+{
+    NSLog(@"-----开始更新---下载安装包更新--");
+    NSString *HTTP_APP ;
+    
+    NSString *str1=[[UIDevice currentDevice]systemVersion];
+    NSLog(@"%@",str1);
+    NSString *str2=[str1 substringWithRange:NSMakeRange(0, 3)];
+    NSLog(@"%@",str2);
+    
+    
+    if ([str2 floatValue]<=7.0) {
+        HTTP_APP = [versiondic objectForKey:@"http_url"];
+    }else {
+        HTTP_APP = [versiondic objectForKey:@"https_url"];
+    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:HTTP_APP]];
+}
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 

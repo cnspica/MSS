@@ -15,7 +15,5 @@
 @property(nonatomic,retain)IBOutlet UIScrollView *myscroller;
 @property(nonatomic,retain) UIImageView *myimageview1;
 
-@property(nonatomic,retain) MKMapView *myMapview;
-@property (nonatomic, strong) CLLocationManager *myLocationManager;
 @property(nonatomic,retain)UITableView *yudotable;
 @end

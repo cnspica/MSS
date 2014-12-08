@@ -21,5 +21,6 @@ NSString *HTTP_technologieslist=@"http://58.210.127.156/minimss/api/technologies
 NSString *HTTP_technologyinfo=@"http://58.210.127.156/minimss/api/technologyinfo";
 NSString *HTTP_applicationinfo=@"http://58.210.127.156/minimss/api/applicationinfo";
 NSString *HTTP_preferencelist=@"http://58.210.127.156/minimss/api/preferencelist";
+NSString *HTTP_version=@"http://58.210.127.156/useradmin/api/checkUpdate?app=minimss&plantform=iphone";
 
 @end
