@@ -176,6 +176,7 @@ BOOL zhankai;
     myselectlabel.backgroundColor=[UIColor clearColor];
     [navcenter addSubview:myselectlabel];
     
+    
     myactivityindicator=[[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(10,12,20, 20)];
     myactivityindicator.color=[UIColor blackColor];
     [navcenter addSubview:myactivityindicator];
@@ -202,7 +203,7 @@ BOOL zhankai;
         
         [self jsonStringToObject];
         marketlistdic=object;
-//        NSLog(@"%@",marketlistdic);
+        NSLog(@"%@",marketlistdic);
         
         [pickerScroll removeFromSuperview];
         pickerScroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, mywidth, 50)];
@@ -216,9 +217,15 @@ BOOL zhankai;
         for (int i=0; i<[[marketlistdic objectForKey:@"data"] count]; i++) {
             [marketlist addObject:[[[marketlistdic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"market"]];
         }
-
-        myselectlabel.text=[marketlist objectAtIndex:(marketid-1)];
-
+        
+        
+        //---------------------------12.10修复顺序----------------------------
+        for (int i=0; i<[marketlist count]; i++) {
+            if ([[[[marketlistdic objectForKey:@"data"] objectAtIndex:i]objectForKey:@"id"]integerValue]==marketid) {
+                myselectlabel.text=[[[marketlistdic objectForKey:@"data"] objectAtIndex:i]objectForKey:@"market"];
+            }
+        }
+        
         pickerScroll.contentSize=CGSizeMake(160*[marketlist count],50);
         [self initpickerscroll];
         marketlist_finished=YES;

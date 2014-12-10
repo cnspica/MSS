@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC0198631A37CD19008E6C3E /* 60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC0198611A37CD19008E6C3E /* 60@2x.png */; };
+		AC0198641A37CD19008E6C3E /* 60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC0198621A37CD19008E6C3E /* 60@3x.png */; };
 		AC22FF541A246C6E00CFA935 /* Localization.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC22FF531A246C6D00CFA935 /* Localization.plist */; };
 		AC2724F91A07343B007E5E91 /* ProductsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2724F71A07343B007E5E91 /* ProductsDetailViewController.m */; };
 		AC2724FA1A07343B007E5E91 /* ProductsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC2724F81A07343B007E5E91 /* ProductsDetailViewController.xib */; };
@@ -119,6 +121,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC0198611A37CD19008E6C3E /* 60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60@2x.png"; sourceTree = "<group>"; };
+		AC0198621A37CD19008E6C3E /* 60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60@3x.png"; sourceTree = "<group>"; };
 		AC22FF531A246C6D00CFA935 /* Localization.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Localization.plist; sourceTree = "<group>"; };
 		AC2724F61A07343B007E5E91 /* ProductsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductsDetailViewController.h; sourceTree = "<group>"; };
 		AC2724F71A07343B007E5E91 /* ProductsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductsDetailViewController.m; sourceTree = "<group>"; };
@@ -316,6 +320,8 @@
 		AC27B5C71A1B3A0C0024379E /* icon */ = {
 			isa = PBXGroup;
 			children = (
+				AC0198611A37CD19008E6C3E /* 60@2x.png */,
+				AC0198621A37CD19008E6C3E /* 60@3x.png */,
 				AC27B5D81A1B3EB00024379E /* icon.png */,
 				AC27B5D61A1B3E680024379E /* M60pt@3x.png */,
 				AC27B5D41A1B3D960024379E /* M60pt@2x.png */,
@@ -684,6 +690,7 @@
 				AC38701B1A19E26B004723B1 /* introduction@2x.png in Resources */,
 				ACC04B8D1A10682F00AE4F0E /* 展开.png in Resources */,
 				DA10DA7D1A0463FA000A2EFA /* Images.xcassets in Resources */,
+				AC0198631A37CD19008E6C3E /* 60@2x.png in Resources */,
 				AC27B5CE1A1B3A1F0024379E /* M60pt.png in Resources */,
 				ACE1869D1A046FA000B24ACA /* technology.png in Resources */,
 				ACC04B9F1A10B1E800AE4F0E /* 语言.png in Resources */,
@@ -692,6 +699,7 @@
 				ACE186821A0468D700B24ACA /* ProductsViewController.xib in Resources */,
 				AC27B5CC1A1B3A1F0024379E /* M29pt.png in Resources */,
 				AC38701F1A19F1BB004723B1 /* 开机1.png in Resources */,
+				AC0198641A37CD19008E6C3E /* 60@3x.png in Resources */,
 				AC60F8801A2D93D000F5D628 /* AlterViewController.xib in Resources */,
 				AC27B5D91A1B3EB00024379E /* icon.png in Resources */,
 				ACE1867D1A0468AF00B24ACA /* IntroductionViewController.xib in Resources */,
@@ -869,7 +877,7 @@
 		DA10DA941A0463FA000A2EFA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -884,7 +892,7 @@
 		DA10DA951A0463FA000A2EFA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

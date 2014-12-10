@@ -30,7 +30,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    sleep(2);
+    sleep(1);
     NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]);
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]==nil) {
         selectlanguage=@"cn";
