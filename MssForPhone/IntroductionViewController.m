@@ -16,6 +16,7 @@
 #import "IntroductionCell.h"
 #import "CNdetailViewController.h"
 #import "ProductsViewController.h"
+#import "ASIFormDataRequest.h"
 
 #define mywidth  self.view.bounds.size.width
 #define myheight  self.view.bounds.size.height
@@ -216,7 +217,17 @@ BOOL isopen;
     [requestversion setDidFailSelector:@selector(requestFailed:)];
     [requestversion startAsynchronous];
 
-    
+    //----------------------------------登陆日志-----------------------------------
+    UIDevice *device = [[UIDevice alloc]init];
+    NSString *tmpudid =[NSString stringWithFormat:@"%@",device.identifierForVendor.UUIDString];
+    NSString *uid= [tmpudid stringByReplacingOccurrencesOfString:@"-" withString:@""];
+
+    ASIFormDataRequest *postlog=[ASIFormDataRequest requestWithURL:[NSURL URLWithString:HTTP_log]];
+    [postlog setPostValue:@"minimss" forKey:@"app_name"];
+    [postlog setPostValue:uid forKey:@"uid"];
+    [postlog setPostValue:@"login" forKey:@"action"];
+    [postlog startAsynchronous];
+
 }
 
 -(void)initlabel

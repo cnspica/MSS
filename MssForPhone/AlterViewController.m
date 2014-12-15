@@ -8,6 +8,7 @@
 
 #import "AlterViewController.h"
 #import "ASIFormDataRequest.h"
+#import "API.h"
 
 @interface AlterViewController ()
 {
@@ -51,7 +52,7 @@
     str=reasontext.text;
     NSLog(@"%@",reasontext.text);
     if (![str isEqualToString:@""]) {
-        ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:[NSURL URLWithString:@"http://58.210.127.156/contact/api/setUid"]];
+        ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:[NSURL URLWithString:HTTP_setUid]];
         NSString *poststring=[NSString stringWithFormat:@"%@_minimss_%@",reasontext.text,model];
         [request addPostValue:uuid forKey:@"uuid"];
         [request addPostValue:poststring forKey:@"reason"];

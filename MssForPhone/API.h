@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface API : NSObject
+extern NSString *HTTP_checkUser;
+extern NSString *HTTP_setUid;
 extern NSString *HTTP_getlanguages;
 extern NSString *HTTP_yudoinfo;
 extern NSString *HTTP_productslist;
@@ -22,4 +24,6 @@ extern NSString *HTTP_technologyinfo;
 extern NSString *HTTP_applicationinfo;
 extern NSString *HTTP_preferencelist;
 extern NSString *HTTP_version;
+extern NSString *HTTP_log;
+
 @end

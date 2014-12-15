@@ -9,6 +9,8 @@
 #import "API.h"
 
 @implementation API
+NSString *HTTP_checkUser=@"http://58.210.127.156/contact/api/checkUser";
+NSString *HTTP_setUid=@"http://58.210.127.156/contact/api/setUid";
 NSString *HTTP_getlanguages=@"http://58.210.127.156/minimss/api/languages";
 NSString *HTTP_yudoinfo=@"http://58.210.127.156/minimss/api/yudoinfo";
 NSString *HTTP_productslist=@"http://58.210.127.156/minimss/api/productslist";
@@ -22,5 +24,6 @@ NSString *HTTP_technologyinfo=@"http://58.210.127.156/minimss/api/technologyinfo
 NSString *HTTP_applicationinfo=@"http://58.210.127.156/minimss/api/applicationinfo";
 NSString *HTTP_preferencelist=@"http://58.210.127.156/minimss/api/preferencelist";
 NSString *HTTP_version=@"http://58.210.127.156/useradmin/api/checkUpdate?app=minimss&plantform=iphone";
+NSString *HTTP_log=@"http://58.210.127.156/useradmin/api/log";
 
 @end

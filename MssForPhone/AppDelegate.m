@@ -15,6 +15,7 @@
 #import "ASIFormDataRequest.h"
 #import "AlterViewController.h"
 #import "ReferenceViewController.h"
+#import "API.h"
 
 @implementation AppDelegate
 {
@@ -73,7 +74,7 @@
     
     
     //网络请求
-    ASIFormDataRequest *requestuid=[ASIFormDataRequest requestWithURL:[NSURL URLWithString:@"http://58.210.127.156/contact/api/checkUser"]];
+    ASIFormDataRequest *requestuid=[ASIFormDataRequest requestWithURL:[NSURL URLWithString:HTTP_checkUser]];
     [requestuid setPostValue:serviceuuid forKey:@"uid"];
     [requestuid startSynchronous];
     NSData *data=[requestuid responseData];
