@@ -255,7 +255,7 @@
 		ACE1869C1A046FA000B24ACA /* technology@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "technology@2x.png"; sourceTree = "<group>"; };
 		ACE1869F1A04720200B24ACA /* marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker.png; sourceTree = "<group>"; };
 		ACE186A01A04720200B24ACA /* market@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "market@2x.png"; sourceTree = "<group>"; };
-		DA10DA671A0463FA000A2EFA /* Mss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mss.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA10DA671A0463FA000A2EFA /* MSS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MSS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA10DA6A1A0463FA000A2EFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DA10DA6C1A0463FA000A2EFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		DA10DA6E1A0463FA000A2EFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -473,7 +473,7 @@
 		DA10DA681A0463FA000A2EFA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA10DA671A0463FA000A2EFA /* Mss.app */,
+				DA10DA671A0463FA000A2EFA /* MSS.app */,
 				DA10DA821A0463FA000A2EFA /* MssForPhoneTests.xctest */,
 			);
 			name = Products;
@@ -597,7 +597,7 @@
 			);
 			name = MssForPhone;
 			productName = MssForPhone;
-			productReference = DA10DA671A0463FA000A2EFA /* Mss.app */;
+			productReference = DA10DA671A0463FA000A2EFA /* MSS.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DA10DA811A0463FA000A2EFA /* MssForPhoneTests */ = {
@@ -884,7 +884,7 @@
 				GCC_PREFIX_HEADER = "MssForPhone/MssForPhone-Prefix.pch";
 				INFOPLIST_FILE = "MssForPhone/MssForPhone-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = Mss;
+				PRODUCT_NAME = MSS;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -899,7 +899,7 @@
 				GCC_PREFIX_HEADER = "MssForPhone/MssForPhone-Prefix.pch";
 				INFOPLIST_FILE = "MssForPhone/MssForPhone-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = Mss;
+				PRODUCT_NAME = MSS;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

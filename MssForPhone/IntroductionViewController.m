@@ -154,15 +154,15 @@ BOOL isopen;
     [self.view addSubview:myscroller];
 
     
-    myimageview1=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, mywidth, 910/2)];
-    [myscroller addSubview:myimageview1];
-    
-    infolabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 910/2, mywidth, 49)];
-    infolabel.text=historystring;
-    infolabel.backgroundColor=[UIColor whiteColor];
-    infolabel.font=[UIFont fontWithName:@"Heiti TC" size:15];
-    infolabel.textAlignment=YES;
-    [myscroller addSubview:infolabel];
+//    myimageview1=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, mywidth, 910/2)];
+//    [myscroller addSubview:myimageview1];
+//    
+//    infolabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 910/2, mywidth, 49)];
+//    infolabel.text=historystring;
+//    infolabel.backgroundColor=[UIColor whiteColor];
+//    infolabel.font=[UIFont fontWithName:@"Heiti TC" size:15];
+//    infolabel.textAlignment=YES;
+//    [myscroller addSubview:infolabel];
 
 
     yudotable=[[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
@@ -283,8 +283,8 @@ BOOL isopen;
         infodic=object;
         NSLog(@"%@",infodic);
 
-        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[[infodic objectForKey:@"data"]objectForKey:@"top_images"] objectAtIndex:0]objectForKey:@"file"]]];
-        [myimageview1 sd_setImageWithURL:url];
+//        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[[[infodic objectForKey:@"data"]objectForKey:@"top_images"] objectAtIndex:0]objectForKey:@"file"]]];
+//        [myimageview1 sd_setImageWithURL:url];
         
         
         float scale=[[NSString stringWithFormat:@"%@",[[[[infodic objectForKey:@"data"]objectForKey:@"top_images"] objectAtIndex:1]objectForKey:@"width"]] floatValue]/myheight;
@@ -298,7 +298,7 @@ BOOL isopen;
         companynumber=[[[infodic objectForKey:@"data"] objectForKey:@"companies"]count];
         networknumber=[[[infodic objectForKey:@"data"] objectForKey:@"net"]count];
         
-        [yudotable setFrame:CGRectMake(0, 910/2+49, mywidth, 56*3+44*7)];
+        [yudotable setFrame:CGRectMake(0, 0, mywidth, 56*3+44*5)];
         
         url_buttomvideo=[[[[infodic objectForKey:@"data"] objectForKey:@"bottom_video"]objectAtIndex:0] objectForKey:@"file"];
         infodic_finished=YES;
@@ -327,7 +327,7 @@ BOOL isopen;
 
 
     if (languagedic_finished&&infodic_finished) {
-        myscroller.contentSize=CGSizeMake(mywidth, 910/2+49+56*3+44*7+20);
+        myscroller.contentSize=CGSizeMake(mywidth,56*3+44*5);
         [activityindicator stopAnimating];
     }
     
