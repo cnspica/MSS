@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShowMovieViewController">
             <connections>
                 <outlet property="cachelabel" destination="Gxd-kj-sFs" id="sb1-5r-7Th"/>
                 <outlet property="myactivityindicator" destination="5v3-fE-uEi" id="Vne-2s-MhF"/>
+                <outlet property="progressview" destination="tkD-Pc-ff0" id="OX6-i7-lbK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,11 +19,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="5v3-fE-uEi">
-                    <rect key="frame" x="150" y="250" width="20" height="20"/>
+                    <rect key="frame" x="110" y="286" width="20" height="20"/>
                     <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </activityIndicatorView>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tkD-Pc-ff0">
+                    <rect key="frame" x="85" y="334" width="150" height="2"/>
+                </progressView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在缓冲..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gxd-kj-sFs">
-                    <rect key="frame" x="119" y="288" width="83" height="21"/>
+                    <rect key="frame" x="138" y="286" width="83" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -30,10 +34,13 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Gxd-kj-sFs" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9Nz-IV-gyw"/>
-                <constraint firstItem="5v3-fE-uEi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="250" id="bwb-WT-AMZ"/>
-                <constraint firstItem="5v3-fE-uEi" firstAttribute="centerX" secondItem="Gxd-kj-sFs" secondAttribute="centerX" id="edc-ca-tlX"/>
-                <constraint firstItem="Gxd-kj-sFs" firstAttribute="top" secondItem="5v3-fE-uEi" secondAttribute="bottom" constant="18" id="gVw-IT-J7a"/>
+                <constraint firstAttribute="bottom" secondItem="tkD-Pc-ff0" secondAttribute="bottom" constant="232" id="0rD-VU-uew"/>
+                <constraint firstAttribute="trailing" secondItem="Gxd-kj-sFs" secondAttribute="trailing" constant="99" id="FJe-RT-RFi"/>
+                <constraint firstItem="tkD-Pc-ff0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="85" id="GQ2-nP-MqF"/>
+                <constraint firstItem="tkD-Pc-ff0" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="I8G-If-ekx"/>
+                <constraint firstItem="tkD-Pc-ff0" firstAttribute="top" secondItem="Gxd-kj-sFs" secondAttribute="bottom" constant="27" id="fcn-Et-vuh"/>
+                <constraint firstItem="5v3-fE-uEi" firstAttribute="top" secondItem="Gxd-kj-sFs" secondAttribute="top" id="i0D-4P-Wye"/>
+                <constraint firstItem="Gxd-kj-sFs" firstAttribute="leading" secondItem="5v3-fE-uEi" secondAttribute="trailing" constant="8" symbolic="YES" id="yHn-BL-o1w"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

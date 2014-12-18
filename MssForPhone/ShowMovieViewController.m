@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "ASIHTTPRequest.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "ASIProgressDelegate.h"
 
 #define mywidth     320
 #define myheight    568
@@ -27,7 +28,7 @@
 @synthesize navtitle;
 @synthesize myactivityindicator;
 @synthesize cachelabel;
-
+@synthesize progressview;
 
 - (void)viewDidAppear:(BOOL)animated {
     // Do any additional setup after loading the view from its nib.
@@ -73,11 +74,13 @@
     //设置缓存数据存储策略，这里采取的是如果无更新或无法联网就读取缓存数据
     [requestmovie setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
     [requestmovie setDidFinishSelector:@selector(requestFinished:)];
+    [requestmovie setDownloadProgressDelegate:progressview];//进度条
     requestmovie.delegate = self;
     requestmovie.tag=1;
     [requestmovie startAsynchronous];
     
 }
+
 
 //md5加密
 - (NSString *)md5:(NSString *)str
@@ -125,12 +128,14 @@
             [moviePlayer play];
             [myactivityindicator stopAnimating];
             cachelabel.hidden=YES;
+            progressview.progress=100;
             
         }else
         {
             NSLog(@"来自网络");
             [myactivityindicator stopAnimating];
             cachelabel.hidden=YES;
+            progressview.hidden=YES;
 
         }
         

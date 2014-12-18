@@ -13,5 +13,6 @@
 @property(nonatomic,retain)NSString *navtitle;
 @property(nonatomic,retain)IBOutlet UILabel *cachelabel;
 @property(nonatomic,retain)IBOutlet UIActivityIndicatorView *myactivityindicator;
+@property(nonatomic,retain)IBOutlet UIProgressView *progressview;
 
 @end
