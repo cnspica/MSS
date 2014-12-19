@@ -12,6 +12,7 @@
 #import "ASIHTTPRequest.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "ASIProgressDelegate.h"
+#import "UINavigationController+SGProgress.h"
 
 #define mywidth     320
 #define myheight    568
@@ -20,6 +21,8 @@
 {
     MPMoviePlayerController *moviePlayer;
     ASIHTTPRequest *requestmovie;
+    NSTimer *mytimer;
+    float percent;
 }
 @end
 
@@ -51,6 +54,9 @@
     UIDevice *device = [UIDevice currentDevice]; //Get the device object
     [nc removeObserver:self name:UIDeviceOrientationDidChangeNotification object:device];
     [requestmovie cancel];
+    [mytimer setFireDate:[NSDate distantFuture]];//定时器停止
+    percent=100;
+    [self.navigationController setSGProgressPercentage:percent];
 
 }
 
@@ -79,8 +85,31 @@
     requestmovie.tag=1;
     [requestmovie startAsynchronous];
     
+    mytimer=[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(progresschange) userInfo:progressview repeats:YES];
+    [mytimer setFireDate:[NSDate date]];//定时器开始
+
+    [self performSelectorInBackground:@selector(runPercentageLoop) withObject:nil];
 }
 
+-(void)progresschange
+{
+    percent=progressview.progress*100;
+}
+
+- (void)runPercentageLoop
+{
+    
+    while (percent <= 100)
+    {
+        NSLog(@"%f", percent);
+        [self.navigationController setSGProgressPercentage:percent];
+        if(percent == 100)
+        {
+            return;
+        }
+        
+    }
+}
 
 //md5加密
 - (NSString *)md5:(NSString *)str

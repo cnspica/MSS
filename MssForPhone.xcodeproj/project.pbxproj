@@ -52,6 +52,7 @@
 		AC60F8801A2D93D000F5D628 /* AlterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC60F87E1A2D93D000F5D628 /* AlterViewController.xib */; };
 		AC819F181A1DD10F00F4E8DA /* DataDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC819F161A1DD10F00F4E8DA /* DataDetailViewController.m */; };
 		AC819F191A1DD10F00F4E8DA /* DataDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC819F171A1DD10F00F4E8DA /* DataDetailViewController.xib */; };
+		AC86098C1A43B35000AF5CD2 /* UINavigationController+SGProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = AC86098B1A43B35000AF5CD2 /* UINavigationController+SGProgress.m */; };
 		AC9B13191A1C2DFE004AD196 /* 语言2.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9B13181A1C2DFE004AD196 /* 语言2.png */; };
 		AC9B13211A1C8348004AD196 /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B131F1A1C8348004AD196 /* DataViewController.m */; };
 		AC9B13221A1C8348004AD196 /* DataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC9B13201A1C8348004AD196 /* DataViewController.xib */; };
@@ -189,6 +190,8 @@
 		AC819F151A1DD10F00F4E8DA /* DataDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataDetailViewController.h; sourceTree = "<group>"; };
 		AC819F161A1DD10F00F4E8DA /* DataDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataDetailViewController.m; sourceTree = "<group>"; };
 		AC819F171A1DD10F00F4E8DA /* DataDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataDetailViewController.xib; sourceTree = "<group>"; };
+		AC86098A1A43B35000AF5CD2 /* UINavigationController+SGProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+SGProgress.h"; sourceTree = "<group>"; };
+		AC86098B1A43B35000AF5CD2 /* UINavigationController+SGProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+SGProgress.m"; sourceTree = "<group>"; };
 		AC9B13181A1C2DFE004AD196 /* 语言2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "语言2.png"; sourceTree = "<group>"; };
 		AC9B131E1A1C8348004AD196 /* DataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataViewController.h; sourceTree = "<group>"; };
 		AC9B131F1A1C8348004AD196 /* DataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataViewController.m; sourceTree = "<group>"; };
@@ -384,6 +387,15 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		AC8609891A43B35000AF5CD2 /* UINavigationController+SGProgress */ = {
+			isa = PBXGroup;
+			children = (
+				AC86098A1A43B35000AF5CD2 /* UINavigationController+SGProgress.h */,
+				AC86098B1A43B35000AF5CD2 /* UINavigationController+SGProgress.m */,
+			);
+			path = "UINavigationController+SGProgress";
+			sourceTree = "<group>";
+		};
 		ACC04B051A105DB600AE4F0E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,6 +469,7 @@
 		DA10DA5E1A0463FA000A2EFA = {
 			isa = PBXGroup;
 			children = (
+				AC8609891A43B35000AF5CD2 /* UINavigationController+SGProgress */,
 				AC27B5C71A1B3A0C0024379E /* icon */,
 				AC3B0AA01A1199C700A11681 /* SDWebImage */,
 				ACC04B051A105DB600AE4F0E /* Classes */,
@@ -760,6 +773,7 @@
 				ACC04B5E1A105DB600AE4F0E /* ASIDataDecompressor.m in Sources */,
 				ACE1867C1A0468AF00B24ACA /* IntroductionViewController.m in Sources */,
 				ACC66FAF1A0C9DE000D4DD1D /* Cell.m in Sources */,
+				AC86098C1A43B35000AF5CD2 /* UINavigationController+SGProgress.m in Sources */,
 				AC3B0AD11A1199C700A11681 /* UIView+WebCacheOperation.m in Sources */,
 				AC3B0ACF1A1199C700A11681 /* UIImageView+HighlightedWebCache.m in Sources */,
 				ACC04B811A105DB600AE4F0E /* Reachability.m in Sources */,
