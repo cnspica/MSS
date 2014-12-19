@@ -25,5 +25,8 @@ extern NSString *HTTP_applicationinfo;
 extern NSString *HTTP_preferencelist;
 extern NSString *HTTP_version;
 extern NSString *HTTP_log;
+extern NSString *HTTP_menu;
+extern NSString *HTTP_menuinfo;
+
 
 @end

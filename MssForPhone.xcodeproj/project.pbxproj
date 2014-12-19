@@ -53,6 +53,15 @@
 		AC819F181A1DD10F00F4E8DA /* DataDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC819F161A1DD10F00F4E8DA /* DataDetailViewController.m */; };
 		AC819F191A1DD10F00F4E8DA /* DataDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC819F171A1DD10F00F4E8DA /* DataDetailViewController.xib */; };
 		AC86098C1A43B35000AF5CD2 /* UINavigationController+SGProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = AC86098B1A43B35000AF5CD2 /* UINavigationController+SGProgress.m */; };
+		AC8609901A43C9D400AF5CD2 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC86098E1A43C9D400AF5CD2 /* MenuViewController.m */; };
+		AC8609911A43C9D400AF5CD2 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC86098F1A43C9D400AF5CD2 /* MenuViewController.xib */; };
+		AC8609951A43CFBC00AF5CD2 /* MenuDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8609931A43CFBC00AF5CD2 /* MenuDetailViewController.m */; };
+		AC8609961A43CFBC00AF5CD2 /* MenuDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC8609941A43CFBC00AF5CD2 /* MenuDetailViewController.xib */; };
+		AC8609991A43D9FD00AF5CD2 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = AC8609971A43D9FD00AF5CD2 /* menu.png */; };
+		AC86099C1A43DA6300AF5CD2 /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC86099B1A43DA6300AF5CD2 /* menu@2x.png */; };
+		AC86099E1A44039900AF5CD2 /* sales.png in Resources */ = {isa = PBXBuildFile; fileRef = AC86099D1A44039900AF5CD2 /* sales.png */; };
+		AC8609A61A440DD300AF5CD2 /* sales-black.png in Resources */ = {isa = PBXBuildFile; fileRef = AC8609A51A440DD300AF5CD2 /* sales-black.png */; };
+		AC8609AA1A4418CC00AF5CD2 /* 国旗切换.png in Resources */ = {isa = PBXBuildFile; fileRef = AC8609A91A4418CC00AF5CD2 /* 国旗切换.png */; };
 		AC9B13191A1C2DFE004AD196 /* 语言2.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9B13181A1C2DFE004AD196 /* 语言2.png */; };
 		AC9B13211A1C8348004AD196 /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B131F1A1C8348004AD196 /* DataViewController.m */; };
 		AC9B13221A1C8348004AD196 /* DataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC9B13201A1C8348004AD196 /* DataViewController.xib */; };
@@ -192,6 +201,17 @@
 		AC819F171A1DD10F00F4E8DA /* DataDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataDetailViewController.xib; sourceTree = "<group>"; };
 		AC86098A1A43B35000AF5CD2 /* UINavigationController+SGProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+SGProgress.h"; sourceTree = "<group>"; };
 		AC86098B1A43B35000AF5CD2 /* UINavigationController+SGProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+SGProgress.m"; sourceTree = "<group>"; };
+		AC86098D1A43C9D400AF5CD2 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		AC86098E1A43C9D400AF5CD2 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		AC86098F1A43C9D400AF5CD2 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		AC8609921A43CFBC00AF5CD2 /* MenuDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuDetailViewController.h; sourceTree = "<group>"; };
+		AC8609931A43CFBC00AF5CD2 /* MenuDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuDetailViewController.m; sourceTree = "<group>"; };
+		AC8609941A43CFBC00AF5CD2 /* MenuDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuDetailViewController.xib; sourceTree = "<group>"; };
+		AC8609971A43D9FD00AF5CD2 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
+		AC86099B1A43DA6300AF5CD2 /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
+		AC86099D1A44039900AF5CD2 /* sales.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sales.png; sourceTree = "<group>"; };
+		AC8609A51A440DD300AF5CD2 /* sales-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sales-black.png"; sourceTree = "<group>"; };
+		AC8609A91A4418CC00AF5CD2 /* 国旗切换.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "国旗切换.png"; sourceTree = "<group>"; };
 		AC9B13181A1C2DFE004AD196 /* 语言2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "语言2.png"; sourceTree = "<group>"; };
 		AC9B131E1A1C8348004AD196 /* DataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataViewController.h; sourceTree = "<group>"; };
 		AC9B131F1A1C8348004AD196 /* DataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataViewController.m; sourceTree = "<group>"; };
@@ -309,6 +329,7 @@
 		AC2725181A074A33007E5E91 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				AC8609A91A4418CC00AF5CD2 /* 国旗切换.png */,
 				AC9B13181A1C2DFE004AD196 /* 语言2.png */,
 				AC3B0AD21A11F43F00A11681 /* down.png */,
 				AC3B0AD31A11F43F00A11681 /* up.png */,
@@ -341,6 +362,8 @@
 		AC38701C1A19F1AA004723B1 /* start */ = {
 			isa = PBXGroup;
 			children = (
+				AC8609A51A440DD300AF5CD2 /* sales-black.png */,
+				AC86099D1A44039900AF5CD2 /* sales.png */,
 				AC38701D1A19F1BB004723B1 /* 开机1.png */,
 				AC38701E1A19F1BB004723B1 /* 开机2.png */,
 			);
@@ -452,6 +475,8 @@
 		ACE1868E1A046BB200B24ACA /* tabbar */ = {
 			isa = PBXGroup;
 			children = (
+				AC8609971A43D9FD00AF5CD2 /* menu.png */,
+				AC86099B1A43DA6300AF5CD2 /* menu@2x.png */,
 				ACC432AF1A3018BB00CFB9E6 /* reference.png */,
 				ACC432B01A3018BB00CFB9E6 /* reference@2x.png */,
 				ACE1869F1A04720200B24ACA /* marker.png */,
@@ -555,6 +580,12 @@
 				ACC4329E1A3011BC00CFB9E6 /* ReferenceViewController.h */,
 				ACC4329F1A3011BC00CFB9E6 /* ReferenceViewController.m */,
 				ACC432A01A3011BC00CFB9E6 /* ReferenceViewController.xib */,
+				AC86098D1A43C9D400AF5CD2 /* MenuViewController.h */,
+				AC86098E1A43C9D400AF5CD2 /* MenuViewController.m */,
+				AC86098F1A43C9D400AF5CD2 /* MenuViewController.xib */,
+				AC8609921A43CFBC00AF5CD2 /* MenuDetailViewController.h */,
+				AC8609931A43CFBC00AF5CD2 /* MenuDetailViewController.m */,
+				AC8609941A43CFBC00AF5CD2 /* MenuDetailViewController.xib */,
 				AC3B0A9D1A1192A000A11681 /* API.h */,
 				AC3B0A9E1A1192A000A11681 /* API.m */,
 				AC22FF531A246C6D00CFA935 /* Localization.plist */,
@@ -681,6 +712,7 @@
 				ACC66FB01A0C9DE000D4DD1D /* Cell.xib in Resources */,
 				ACE186A21A04720200B24ACA /* market@2x.png in Resources */,
 				AC27B5CD1A1B3A1F0024379E /* M40pt.png in Resources */,
+				AC86099E1A44039900AF5CD2 /* sales.png in Resources */,
 				AC27B5D71A1B3E680024379E /* M60pt@3x.png in Resources */,
 				AC2724FA1A07343B007E5E91 /* ProductsDetailViewController.xib in Resources */,
 				AC3B0AD41A11F43F00A11681 /* down.png in Resources */,
@@ -695,12 +727,16 @@
 				AC27B5D51A1B3D960024379E /* M60pt@2x.png in Resources */,
 				ACE186871A0468E700B24ACA /* MarketViewController.xib in Resources */,
 				AC3B0AD51A11F43F00A11681 /* up.png in Resources */,
+				AC8609961A43CFBC00AF5CD2 /* MenuDetailViewController.xib in Resources */,
 				ACE186951A046F4900B24ACA /* product.png in Resources */,
+				AC8609911A43C9D400AF5CD2 /* MenuViewController.xib in Resources */,
 				ACC432A21A3011BC00CFB9E6 /* ReferenceViewController.xib in Resources */,
 				ACC432B21A3018BB00CFB9E6 /* reference@2x.png in Resources */,
 				ACE1869E1A046FA000B24ACA /* technology@2x.png in Resources */,
 				ACC04B8B1A10661900AE4F0E /* 收缩.png in Resources */,
+				AC8609A61A440DD300AF5CD2 /* sales-black.png in Resources */,
 				AC38701B1A19E26B004723B1 /* introduction@2x.png in Resources */,
+				AC8609991A43D9FD00AF5CD2 /* menu.png in Resources */,
 				ACC04B8D1A10682F00AE4F0E /* 展开.png in Resources */,
 				DA10DA7D1A0463FA000A2EFA /* Images.xcassets in Resources */,
 				AC0198631A37CD19008E6C3E /* 60@2x.png in Resources */,
@@ -710,7 +746,9 @@
 				AC27B5D31A1B3D340024379E /* M57pt@2x.png in Resources */,
 				AC27B5CF1A1B3A1F0024379E /* M72pt.png in Resources */,
 				ACE186821A0468D700B24ACA /* ProductsViewController.xib in Resources */,
+				AC8609AA1A4418CC00AF5CD2 /* 国旗切换.png in Resources */,
 				AC27B5CC1A1B3A1F0024379E /* M29pt.png in Resources */,
+				AC86099C1A43DA6300AF5CD2 /* menu@2x.png in Resources */,
 				AC38701F1A19F1BB004723B1 /* 开机1.png in Resources */,
 				AC0198641A37CD19008E6C3E /* 60@3x.png in Resources */,
 				AC60F8801A2D93D000F5D628 /* AlterViewController.xib in Resources */,
@@ -765,6 +803,7 @@
 				ACC04B5D1A105DB600AE4F0E /* ASIDataCompressor.m in Sources */,
 				DA10DA771A0463FA000A2EFA /* main.m in Sources */,
 				AC3B0ACA1A1199C700A11681 /* SDWebImagePrefetcher.m in Sources */,
+				AC8609901A43C9D400AF5CD2 /* MenuViewController.m in Sources */,
 				AC3B0ACE1A1199C700A11681 /* UIImage+WebP.m in Sources */,
 				AC3B0AC91A1199C700A11681 /* SDWebImageManager.m in Sources */,
 				AC3B0AC31A1199C700A11681 /* NSData+ImageContentType.m in Sources */,
@@ -777,6 +816,7 @@
 				AC3B0AD11A1199C700A11681 /* UIView+WebCacheOperation.m in Sources */,
 				AC3B0ACF1A1199C700A11681 /* UIImageView+HighlightedWebCache.m in Sources */,
 				ACC04B811A105DB600AE4F0E /* Reachability.m in Sources */,
+				AC8609951A43CFBC00AF5CD2 /* MenuDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

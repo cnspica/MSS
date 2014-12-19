@@ -117,7 +117,8 @@ BOOL zhankai;
     self.tabBarController.navigationItem.titleView=navcenter;
     self.navigationController.navigationBar.hidden=NO;
     self.tabBarController.navigationItem.rightBarButtonItem=nil;
-
+    self.tabBarController.navigationItem.leftBarButtonItem=nil;
+    
     AppDelegate *delegate=[[UIApplication sharedApplication]delegate];
     delegate.Orientations=NO;
     

@@ -17,6 +17,7 @@
 #import "CNdetailViewController.h"
 #import "ProductsViewController.h"
 #import "ASIFormDataRequest.h"
+#import "ReferenceViewController.h"
 
 #define mywidth  self.view.bounds.size.width
 #define myheight  self.view.bounds.size.height
@@ -99,11 +100,26 @@ BOOL isopen;
     delegate.Orientations=YES;
     
     //---------------------------------------------------------------------------
-    UIButton *languagebt = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
-    [languagebt addTarget:self action:@selector(selectlanguage) forControlEvents:UIControlEventTouchUpInside];
-    [languagebt setBackgroundImage:[UIImage imageNamed:@"语言2.png"] forState:UIControlStateNormal];
-    UIBarButtonItem *leftbt = [[UIBarButtonItem alloc]initWithCustomView:languagebt];
-    self.tabBarController.navigationItem.rightBarButtonItem=leftbt;
+//    UIButton *languagebt = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 25)];
+//    [languagebt addTarget:self action:@selector(selectlanguage) forControlEvents:UIControlEventTouchUpInside];
+//    [languagebt setBackgroundImage:[UIImage imageNamed:@"语言2.png"] forState:UIControlStateNormal];
+//    UIBarButtonItem *leftbt = [[UIBarButtonItem alloc]initWithCustomView:languagebt];
+//    self.tabBarController.navigationItem.rightBarButtonItem=leftbt;
+    
+    
+    UIButton *languagebt = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 20)];
+    [languagebt addTarget:self action:@selector(checklanguage) forControlEvents:UIControlEventTouchUpInside];
+    [languagebt setBackgroundImage:[UIImage imageNamed:@"国旗切换.png"] forState:UIControlStateNormal];
+    UIBarButtonItem *rightbt = [[UIBarButtonItem alloc]initWithCustomView:languagebt];
+    self.tabBarController.navigationItem.rightBarButtonItem=rightbt;
+    
+    UIButton *languagebt2 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
+    [languagebt2 addTarget:self action:@selector(toreferenceview) forControlEvents:UIControlEventTouchUpInside];
+    [languagebt2 setBackgroundImage:[UIImage imageNamed:@"语言2.png"] forState:UIControlStateNormal];
+    UIBarButtonItem *leftbt = [[UIBarButtonItem alloc]initWithCustomView:languagebt2];
+    self.tabBarController.navigationItem.leftBarButtonItem=leftbt;
+
+    
     //---------------------------------------------------------------------------
 
     api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
@@ -450,6 +466,82 @@ BOOL isopen;
     }
     
    
+}
+
+-(void)checklanguage
+{
+    NSString *nowlan=[[NSUserDefaults standardUserDefaults]objectForKey:@"lan"];
+    if ([nowlan isEqualToString:@"cn"]) {
+        api_language=@"en";
+        [[NSUserDefaults standardUserDefaults]setObject:api_language forKey:@"lan"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        //    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]);
+        [UIView animateWithDuration:0.3 animations:^{
+            [languageview setFrame:CGRectMake(mywidth, 64, 90, 40*number)];
+            languageview.alpha=0;
+        }];
+        isopen=YES;
+        
+        api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
+        apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_yudoinfo,api_language];
+        requestinfo=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
+        requestinfo.tag=2;
+        [requestinfo setDelegate:self];
+        [requestinfo setTimeOutSeconds:60];
+        [requestinfo setDidFinishSelector:@selector(requestFinished:)];
+        [requestinfo setDidFailSelector:@selector(requestFailed:)];
+        [requestinfo startAsynchronous];
+        
+        [self initlabel];
+        
+        self.tabBarItem.title=introduction;
+        self.tabBarController.title=introduction;
+        mylabel.text=introduction;
+        infolabel.text=historystring;
+        [yudotable reloadData];
+        
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"ChangeBaritemNotificaton" object:nil];
+
+    }else if([nowlan isEqualToString:@"en"])
+    {
+        api_language=@"cn";
+        [[NSUserDefaults standardUserDefaults]setObject:api_language forKey:@"lan"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        //    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]);
+        [UIView animateWithDuration:0.3 animations:^{
+            [languageview setFrame:CGRectMake(mywidth, 64, 90, 40*number)];
+            languageview.alpha=0;
+        }];
+        isopen=NO;
+        
+        api_language=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
+        apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_yudoinfo,api_language];
+        requestinfo=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
+        requestinfo.tag=2;
+        [requestinfo setDelegate:self];
+        [requestinfo setTimeOutSeconds:60];
+        [requestinfo setDidFinishSelector:@selector(requestFinished:)];
+        [requestinfo setDidFailSelector:@selector(requestFailed:)];
+        [requestinfo startAsynchronous];
+        
+        [self initlabel];
+        
+        self.tabBarItem.title=introduction;
+        self.tabBarController.title=introduction;
+        mylabel.text=introduction;
+        infolabel.text=historystring;
+        [yudotable reloadData];
+        
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"ChangeBaritemNotificaton" object:nil];
+
+    }
+    
+}
+
+-(void)toreferenceview
+{
+    ReferenceViewController *referencevc=[[ReferenceViewController alloc]initWithNibName:@"ReferenceViewController" bundle:nil];
+    [self.navigationController pushViewController:referencevc animated:YES];
 }
 
 - (void)orientationChanged:(NSNotification *)note  {

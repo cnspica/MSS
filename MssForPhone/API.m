@@ -25,5 +25,7 @@ NSString *HTTP_applicationinfo=@"http://58.210.127.156/minimss/api/applicationin
 NSString *HTTP_preferencelist=@"http://58.210.127.156/minimss/api/preferencelist";
 NSString *HTTP_version=@"http://58.210.127.156/useradmin/api/checkUpdate?app=minimss&plantform=iphone";
 NSString *HTTP_log=@"http://58.210.127.156/useradmin/api/log";
+NSString *HTTP_menu=@"http://58.210.127.156/minimss/api/menu";
+NSString *HTTP_menuinfo=@"http://58.210.127.156/minimss/api/menuinfo";
 
 @end

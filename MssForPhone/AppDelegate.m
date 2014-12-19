@@ -16,6 +16,7 @@
 #import "AlterViewController.h"
 #import "ReferenceViewController.h"
 #import "API.h"
+#import "MenuViewController.h"
 
 @implementation AppDelegate
 {
@@ -47,12 +48,12 @@
     ProductsViewController *productsvc=[[ProductsViewController alloc]initWithNibName:@"ProductsViewController" bundle:nil];
      MarketViewController *marketvc=[[MarketViewController alloc]initWithNibName:@"MarketViewController" bundle:nil];
     DataViewController *datavc=[[DataViewController alloc]initWithNibName:@"DataViewController" bundle:nil];
-    ReferenceViewController *referencevc=[[ReferenceViewController alloc]initWithNibName:@"ReferenceViewController" bundle:nil];
-
+//    ReferenceViewController *referencevc=[[ReferenceViewController alloc]initWithNibName:@"ReferenceViewController" bundle:nil];
+    MenuViewController *menuvc=[[MenuViewController alloc]initWithNibName:@"MenuViewController" bundle:nil];
     
     
     tarbarcontroller=[[UITabBarController alloc]init];
-    tarbarcontroller.viewControllers=@[introductionvc,productsvc,marketvc,datavc,referencevc];
+    tarbarcontroller.viewControllers=@[introductionvc,productsvc,marketvc,datavc,menuvc];
     UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:tarbarcontroller];
     
     ASIDownloadCache *cache = [[ASIDownloadCache alloc] init];

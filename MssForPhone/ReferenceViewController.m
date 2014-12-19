@@ -42,6 +42,7 @@
     if (self) {
         // Custom initialization
         [self initlabel];
+        self.title=Reference;
         [self.tabBarItem setImage:[UIImage imageNamed:@"reference.png"]];
         self.tabBarItem.title=Reference;
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeitem) name:@"ChangeBaritemNotificaton" object:nil];
