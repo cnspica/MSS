@@ -129,7 +129,7 @@
         referencetable.hidden=NO;
         [referencetable reloadData];
         [activityindicator stopAnimating];
-
+        [referencetable reloadData];
     }    
 }
 
@@ -161,7 +161,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return [[referencedic objectForKey:@"data"] count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

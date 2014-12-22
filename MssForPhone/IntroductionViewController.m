@@ -113,11 +113,11 @@ BOOL isopen;
     UIBarButtonItem *rightbt = [[UIBarButtonItem alloc]initWithCustomView:languagebt];
     self.tabBarController.navigationItem.rightBarButtonItem=rightbt;
     
-    UIButton *languagebt2 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
-    [languagebt2 addTarget:self action:@selector(toreferenceview) forControlEvents:UIControlEventTouchUpInside];
-    [languagebt2 setBackgroundImage:[UIImage imageNamed:@"语言2.png"] forState:UIControlStateNormal];
-    UIBarButtonItem *leftbt = [[UIBarButtonItem alloc]initWithCustomView:languagebt2];
-    self.tabBarController.navigationItem.leftBarButtonItem=leftbt;
+//    UIButton *languagebt2 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
+//    [languagebt2 addTarget:self action:@selector(toreferenceview) forControlEvents:UIControlEventTouchUpInside];
+//    [languagebt2 setBackgroundImage:[UIImage imageNamed:@"语言2.png"] forState:UIControlStateNormal];
+//    UIBarButtonItem *leftbt = [[UIBarButtonItem alloc]initWithCustomView:languagebt2];
+//    self.tabBarController.navigationItem.leftBarButtonItem=leftbt;
 
     
     //---------------------------------------------------------------------------

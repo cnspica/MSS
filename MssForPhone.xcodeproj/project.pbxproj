@@ -48,6 +48,7 @@
 		AC3B0DB51A088343000D886E /* ShowMovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC3B0DB31A088343000D886E /* ShowMovieViewController.xib */; };
 		AC54F9E21A15D0160036A696 /* CNdetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC54F9E01A15D0160036A696 /* CNdetailViewController.m */; };
 		AC54F9E31A15D0160036A696 /* CNdetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC54F9E11A15D0160036A696 /* CNdetailViewController.xib */; };
+		AC59408A1A4527AF002AC6C4 /* sales.png in Resources */ = {isa = PBXBuildFile; fileRef = AC5940891A4527AF002AC6C4 /* sales.png */; };
 		AC60F87F1A2D93D000F5D628 /* AlterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC60F87D1A2D93D000F5D628 /* AlterViewController.m */; };
 		AC60F8801A2D93D000F5D628 /* AlterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC60F87E1A2D93D000F5D628 /* AlterViewController.xib */; };
 		AC819F181A1DD10F00F4E8DA /* DataDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC819F161A1DD10F00F4E8DA /* DataDetailViewController.m */; };
@@ -59,8 +60,6 @@
 		AC8609961A43CFBC00AF5CD2 /* MenuDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC8609941A43CFBC00AF5CD2 /* MenuDetailViewController.xib */; };
 		AC8609991A43D9FD00AF5CD2 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = AC8609971A43D9FD00AF5CD2 /* menu.png */; };
 		AC86099C1A43DA6300AF5CD2 /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC86099B1A43DA6300AF5CD2 /* menu@2x.png */; };
-		AC86099E1A44039900AF5CD2 /* sales.png in Resources */ = {isa = PBXBuildFile; fileRef = AC86099D1A44039900AF5CD2 /* sales.png */; };
-		AC8609A61A440DD300AF5CD2 /* sales-black.png in Resources */ = {isa = PBXBuildFile; fileRef = AC8609A51A440DD300AF5CD2 /* sales-black.png */; };
 		AC8609AA1A4418CC00AF5CD2 /* 国旗切换.png in Resources */ = {isa = PBXBuildFile; fileRef = AC8609A91A4418CC00AF5CD2 /* 国旗切换.png */; };
 		AC9B13191A1C2DFE004AD196 /* 语言2.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9B13181A1C2DFE004AD196 /* 语言2.png */; };
 		AC9B13211A1C8348004AD196 /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B131F1A1C8348004AD196 /* DataViewController.m */; };
@@ -193,6 +192,7 @@
 		AC54F9DF1A15D0160036A696 /* CNdetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNdetailViewController.h; sourceTree = "<group>"; };
 		AC54F9E01A15D0160036A696 /* CNdetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNdetailViewController.m; sourceTree = "<group>"; };
 		AC54F9E11A15D0160036A696 /* CNdetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNdetailViewController.xib; sourceTree = "<group>"; };
+		AC5940891A4527AF002AC6C4 /* sales.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sales.png; sourceTree = "<group>"; };
 		AC60F87C1A2D93D000F5D628 /* AlterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlterViewController.h; sourceTree = "<group>"; };
 		AC60F87D1A2D93D000F5D628 /* AlterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlterViewController.m; sourceTree = "<group>"; };
 		AC60F87E1A2D93D000F5D628 /* AlterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlterViewController.xib; sourceTree = "<group>"; };
@@ -209,8 +209,6 @@
 		AC8609941A43CFBC00AF5CD2 /* MenuDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuDetailViewController.xib; sourceTree = "<group>"; };
 		AC8609971A43D9FD00AF5CD2 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
 		AC86099B1A43DA6300AF5CD2 /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
-		AC86099D1A44039900AF5CD2 /* sales.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sales.png; sourceTree = "<group>"; };
-		AC8609A51A440DD300AF5CD2 /* sales-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sales-black.png"; sourceTree = "<group>"; };
 		AC8609A91A4418CC00AF5CD2 /* 国旗切换.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "国旗切换.png"; sourceTree = "<group>"; };
 		AC9B13181A1C2DFE004AD196 /* 语言2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "语言2.png"; sourceTree = "<group>"; };
 		AC9B131E1A1C8348004AD196 /* DataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataViewController.h; sourceTree = "<group>"; };
@@ -362,8 +360,7 @@
 		AC38701C1A19F1AA004723B1 /* start */ = {
 			isa = PBXGroup;
 			children = (
-				AC8609A51A440DD300AF5CD2 /* sales-black.png */,
-				AC86099D1A44039900AF5CD2 /* sales.png */,
+				AC5940891A4527AF002AC6C4 /* sales.png */,
 				AC38701D1A19F1BB004723B1 /* 开机1.png */,
 				AC38701E1A19F1BB004723B1 /* 开机2.png */,
 			);
@@ -712,7 +709,6 @@
 				ACC66FB01A0C9DE000D4DD1D /* Cell.xib in Resources */,
 				ACE186A21A04720200B24ACA /* market@2x.png in Resources */,
 				AC27B5CD1A1B3A1F0024379E /* M40pt.png in Resources */,
-				AC86099E1A44039900AF5CD2 /* sales.png in Resources */,
 				AC27B5D71A1B3E680024379E /* M60pt@3x.png in Resources */,
 				AC2724FA1A07343B007E5E91 /* ProductsDetailViewController.xib in Resources */,
 				AC3B0AD41A11F43F00A11681 /* down.png in Resources */,
@@ -734,7 +730,6 @@
 				ACC432B21A3018BB00CFB9E6 /* reference@2x.png in Resources */,
 				ACE1869E1A046FA000B24ACA /* technology@2x.png in Resources */,
 				ACC04B8B1A10661900AE4F0E /* 收缩.png in Resources */,
-				AC8609A61A440DD300AF5CD2 /* sales-black.png in Resources */,
 				AC38701B1A19E26B004723B1 /* introduction@2x.png in Resources */,
 				AC8609991A43D9FD00AF5CD2 /* menu.png in Resources */,
 				ACC04B8D1A10682F00AE4F0E /* 展开.png in Resources */,
@@ -748,6 +743,7 @@
 				ACE186821A0468D700B24ACA /* ProductsViewController.xib in Resources */,
 				AC8609AA1A4418CC00AF5CD2 /* 国旗切换.png in Resources */,
 				AC27B5CC1A1B3A1F0024379E /* M29pt.png in Resources */,
+				AC59408A1A4527AF002AC6C4 /* sales.png in Resources */,
 				AC86099C1A43DA6300AF5CD2 /* menu@2x.png in Resources */,
 				AC38701F1A19F1BB004723B1 /* 开机1.png in Resources */,
 				AC0198641A37CD19008E6C3E /* 60@3x.png in Resources */,

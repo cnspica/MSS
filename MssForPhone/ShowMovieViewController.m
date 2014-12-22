@@ -62,6 +62,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    self.navigationController.navigationBar.hidden=NO;
     self.title=navtitle;
     AppDelegate *delegate=[[UIApplication sharedApplication]delegate];
     delegate.Orientations=YES;    

@@ -4,8 +4,8 @@
 <dict>
 	<key>cn</key>
 	<dict>
-		<key>menu</key>
-		<string>菜单</string>
+		<key>menual</key>
+		<string>使用手册</string>
 		<key>reference</key>
 		<string>相关</string>
 		<key>history</key>
@@ -33,8 +33,8 @@
 	</dict>
 	<key>en</key>
 	<dict>
-		<key>menu</key>
-		<string>Menu</string>
+		<key>menual</key>
+		<string>Manual</string>
 		<key>reference</key>
 		<string>reference</string>
 		<key>history</key>
@@ -62,8 +62,8 @@
 	</dict>
 	<key>it</key>
 	<dict>
-		<key>menu</key>
-		<string>Menu</string>
+		<key>menual</key>
+		<string>Manual</string>
 		<key>reference</key>
 		<string>Riferimento</string>
 		<key>history</key>
@@ -91,8 +91,8 @@
 	</dict>
 	<key>tur</key>
 	<dict>
-		<key>menu</key>
-		<string>Menü</string>
+		<key>menual</key>
+		<string>Manual</string>
 		<key>reference</key>
 		<string>Referans</string>
 		<key>history</key>
@@ -120,8 +120,8 @@
 	</dict>
 	<key>de</key>
 	<dict>
-		<key>menu</key>
-		<string>Menu</string>
+		<key>menual</key>
+		<string>Manual</string>
 		<key>reference</key>
 		<string>Referenz</string>
 		<key>history</key>
@@ -149,8 +149,8 @@
 	</dict>
 	<key>fr</key>
 	<dict>
-		<key>menu</key>
-		<string>Menu</string>
+		<key>menual</key>
+		<string>Manual</string>
 		<key>reference</key>
 		<string>Reference</string>
 		<key>history</key>
@@ -178,8 +178,8 @@
 	</dict>
 	<key>pt</key>
 	<dict>
-		<key>menu</key>
-		<string>Menu</string>
+		<key>menual</key>
+		<string>Manual</string>
 		<key>reference</key>
 		<string>Referencia</string>
 		<key>history</key>
@@ -207,8 +207,8 @@
 	</dict>
 	<key>es</key>
 	<dict>
-		<key>menu</key>
-		<string>menú</string>
+		<key>menual</key>
+		<string>Manual</string>
 		<key>reference</key>
 		<string>Reference</string>
 		<key>history</key>

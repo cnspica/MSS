@@ -12,6 +12,7 @@
 #import "API.h"
 #import "UIImageView+WebCache.h"
 #import "ASIHTTPRequest.h"
+#import "ShowMovieViewController.h"
 
 #define heightwidth (self.view.bounds.size.width/2-1)
 
@@ -21,9 +22,12 @@
     UIView *searchView;
     
     ASIHTTPRequest *requestdatas;
+    ASIHTTPRequest *requestreference;
     NSString *response;
     id object;
     NSDictionary *datadic;
+    NSDictionary *videodic;
+
     NSString *apistring;
     NSString *api_language;
     int numbers;
@@ -64,7 +68,7 @@
     NSDictionary *root=[[NSDictionary alloc]initWithContentsOfURL:plistURL];
     //    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]);
     NSDictionary *dic=[root objectForKey:[[NSUserDefaults standardUserDefaults] objectForKey:@"lan"]];
-    Menu=[dic objectForKey:@"menu"];
+    Menu=[dic objectForKey:@"menual"];
     
 }
 
@@ -91,6 +95,16 @@
     [requestdatas setDidFinishSelector:@selector(requestFinished:)];
     [requestdatas setDidFailSelector:@selector(requestFailed:)];
     [requestdatas startAsynchronous];
+    
+    apistring=[NSString stringWithFormat:@"%@?lang=%@",HTTP_preferencelist,api_language];
+    requestreference=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:apistring]];
+    requestreference.tag=2;
+    [requestreference setDelegate:self];
+    [requestreference setTimeOutSeconds:60];
+    [requestreference setDidFinishSelector:@selector(requestFinished:)];
+    [requestreference setDidFailSelector:@selector(requestFailed:)];
+    [requestreference startAsynchronous];
+
     
 }
 
@@ -137,6 +151,15 @@
         [self initscroller];
         
     }
+    if (request.tag==2) {
+        response=[request responseString];
+        
+        [self jsonStringToObject];
+        videodic=object;
+        NSLog(@"%@",videodic);
+        
+    }
+
     
     
 }
@@ -247,12 +270,22 @@
 //点击图片目标函数
 -(void)click:(UIButton *)sender
 {
-    MenuDetailViewController *menudetailvc=[[MenuDetailViewController alloc]initWithNibName:@"MenuDetailViewController" bundle:nil];
-    menudetailvc.idstring=[NSString stringWithFormat:@"%@",[[[datadic objectForKey:@"data"]objectAtIndex:(sender.tag-1)] objectForKey:@"id"]];
-    NSLog(@"DataDetailViewController id=%@",menudetailvc.idstring);
-    menudetailvc.navtitle=[NSString stringWithFormat:@"%@",[[[datadic objectForKey:@"data"]objectAtIndex:(sender.tag-1)] objectForKey:@"menu"]];
-    menudetailvc.api_language=api_language;
-    [self.navigationController pushViewController:menudetailvc animated:YES];
+    if (sender.tag<=[[videodic objectForKey:@"data"]count]) {
+        ShowMovieViewController *showmoviewvc=[[ShowMovieViewController alloc]initWithNibName:@"ShowMovieViewController" bundle:nil];
+        showmoviewvc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
+        showmoviewvc.videourl=[[[videodic objectForKey:@"data"] objectAtIndex:(sender.tag-1)] objectForKey:@"video"];
+        showmoviewvc.navtitle=[[[videodic objectForKey:@"data"] objectAtIndex:(sender.tag-1)] objectForKey:@"preference"];
+        [self.navigationController pushViewController:showmoviewvc animated:YES];
+
+    }else
+    {
+        MenuDetailViewController *menudetailvc=[[MenuDetailViewController alloc]initWithNibName:@"MenuDetailViewController" bundle:nil];
+        menudetailvc.idstring=[NSString stringWithFormat:@"%@",[[[datadic objectForKey:@"data"]objectAtIndex:(sender.tag-1)] objectForKey:@"id"]];
+        NSLog(@"DataDetailViewController id=%@",menudetailvc.idstring);
+        menudetailvc.navtitle=[NSString stringWithFormat:@"%@",[[[datadic objectForKey:@"data"]objectAtIndex:(sender.tag-1)] objectForKey:@"menu"]];
+        menudetailvc.api_language=api_language;
+        [self.navigationController pushViewController:menudetailvc animated:YES];
+    }
 }
 
 //搜索delegate
